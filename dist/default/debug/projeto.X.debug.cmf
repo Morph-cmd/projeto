@@ -1,0 +1,868 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta> <reloc>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$dist/default/debug\projeto.X.debug.o
+cinit CODE 0 7356 7356 36 1 2
+text0 CODE 0 72A0 72A0 28 1 2
+text1 CODE 0 752E 752E 7E 1 2
+text2 CODE 0 721C 721C A 1 2
+text3 CODE 0 7916 7916 13C 1 2
+text4 CODE 0 7320 7320 36 1 2
+text5 CODE 0 7720 7720 FA 1 2
+text6 CODE 0 7282 7282 1E 1 2
+text7 CODE 0 75AC 75AC B0 1 2
+text8 CODE 0 765C 765C C4 1 2
+text9 CODE 0 7212 7212 A 1 2
+text10 CODE 0 71F0 71F0 4 1 2
+text11 CODE 0 7208 7208 A 1 2
+text12 CODE 0 71EC 71EC 4 1 2
+text13 CODE 0 73D4 73D4 6A 1 2
+text14 CODE 0 71E8 71E8 4 1 2
+text15 CODE 0 7226 7226 C 1 2
+text16 CODE 0 7200 7200 8 1 2
+text17 CODE 0 7254 7254 16 1 2
+text18 CODE 0 7232 7232 E 1 2
+text19 CODE 0 74B6 74B6 78 1 2
+text20 CODE 0 738C 738C 48 1 2
+text21 CODE 0 743E 743E 78 1 2
+text22 CODE 0 71FA 71FA 6 1 2
+text23 CODE 0 726A 726A 18 1 2
+text24 CODE 0 72F2 72F2 2E 1 2
+text25 CODE 0 781A 781A FC 1 2
+text26 CODE 0 71F4 71F4 6 1 2
+text27 CODE 0 72C8 72C8 2A 1 2
+text28 CODE 0 7A52 7A52 24E 1 2
+idataCOMRAM CODE 0 7241 7241 13 1 1
+cstackCOMRAM COMRAM 1 21 21 19 1 1
+dataCOMRAM COMRAM 1 3A 3A 13 1 1
+bssCOMRAM COMRAM 1 1 1 20 1 1
+mediumconst MEDIUMCONST 0 7CA0 7CA0 A0 1 2
+config CONFIG 4 300000 300000 8 1 1
+$C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+init CODE 0 2 2 4 1 2
+reset_vec CODE 0 0 0 2 1 2
+config CONFIG 4 300000 300000 8 1 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 60-3EE 1
+RAM 400-7FF 1
+SFR F60-F9B 1
+SFR F9D-FD3 1
+SFR FD5-FDA 1
+SFR FE0-FE2 1
+SFR FE8-FEA 1
+SFR FF0-FFB 1
+BANK0 60-FF 1
+BANK1 100-1FF 1
+BANK2 200-2FF 1
+BANK3 300-3EE 1
+BANK4 400-4FF 1
+BANK5 500-5FF 1
+BANK6 600-6FF 1
+BANK7 700-7FF 1
+CONST 6-71E7 1
+CONST 7240-7240 1
+IDLOC 200000-200007 1
+SMALLCONST 800-71E7 1
+SMALLCONST 7240-7240 1
+CODE 6-71E7 1
+CODE 7240-7240 1
+BIGRAM 4D-3EE 1
+BIGRAM 400-7FF 1
+BIGSFR F60-F9B 1
+BIGSFR F9D-FD3 1
+BIGSFR FD5-FDA 1
+BIGSFR FE0-FE2 1
+BIGSFR FE8-FEA 1
+BIGSFR FF0-FFB 1
+COMRAM 4D-5F 1
+CONFIG 300008-30000D 1
+EEDATA F00000-F000FF 1
+MEDIUMCONST 800-71E7 1
+MEDIUMCONST 7240-7240 1
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/debug\projeto.X.debug.o
+7A52 text28 CODE >54:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7A52 text28 CODE >56:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7A6E text28 CODE >57:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7AA0 text28 CODE >58:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7AC2 text28 CODE >59:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7ADE text28 CODE >60:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7B14 text28 CODE >61:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7B3A text28 CODE >62:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7B56 text28 CODE >63:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7B8C text28 CODE >64:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7BB2 text28 CODE >65:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7BCE text28 CODE >66:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7C04 text28 CODE >67:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7C2A text28 CODE >68:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7C46 text28 CODE >69:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7C7C text28 CODE >70:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+7C9E text28 CODE >73:C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+72C8 text27 CODE >14:C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+72C8 text27 CODE >16:C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+72DC text27 CODE >17:C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+72F0 text27 CODE >18:C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+71F4 text26 CODE >17:C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+71F4 text26 CODE >18:C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+71F8 text26 CODE >19:C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+781A text25 CODE >33:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+781A text25 CODE >46:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+783A text25 CODE >47:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+784C text25 CODE >62:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7850 text25 CODE >63:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7890 text25 CODE >64:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78AC text25 CODE >65:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78B0 text25 CODE >66:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78CE text25 CODE >68:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78E0 text25 CODE >69:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78F2 text25 CODE >70:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78F4 text25 CODE >71:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78F8 text25 CODE >72:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+78FC text25 CODE >73:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7900 text25 CODE >74:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7900 text25 CODE >75:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7910 text25 CODE >76:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7914 text25 CODE >79:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+72F2 text24 CODE >41:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+72F2 text24 CODE >43:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+72F6 text24 CODE >44:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+731E text24 CODE >45:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+726A text23 CODE >36:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+726A text23 CODE >38:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7280 text23 CODE >39:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+71FA text22 CODE >47:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+71FA text22 CODE >48:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+71FC text22 CODE >49:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+71FE text22 CODE >50:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+743E text21 CODE >52:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7440 text21 CODE >54:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7450 text21 CODE >55:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7452 text21 CODE >56:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7456 text21 CODE >57:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7458 text21 CODE >63:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7466 text21 CODE >64:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7468 text21 CODE >65:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+746C text21 CODE >66:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+746E text21 CODE >70:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+747C text21 CODE >71:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+747E text21 CODE >72:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7482 text21 CODE >73:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7484 text21 CODE >77:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7492 text21 CODE >78:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7494 text21 CODE >79:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7498 text21 CODE >80:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+749A text21 CODE >84:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74A8 text21 CODE >85:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74AA text21 CODE >86:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74AE text21 CODE >87:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74B0 text21 CODE >90:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74B4 text21 CODE >91:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+738C text20 CODE >93:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+738E text20 CODE >95:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7398 text20 CODE >96:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+73A4 text20 CODE >99:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+73C6 text20 CODE >100:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+73CA text20 CODE >102:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+73CE text20 CODE >103:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+73D2 text20 CODE >106:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74B6 text19 CODE >117:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74B6 text19 CODE >120:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74B8 text19 CODE >121:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74BA text19 CODE >122:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74BC text19 CODE >123:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74BE text19 CODE >124:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74C0 text19 CODE >125:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74C2 text19 CODE >132:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74C6 text19 CODE >133:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74DC text19 CODE >137:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74E6 text19 CODE >138:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74EA text19 CODE >141:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74F4 text19 CODE >142:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+74F8 text19 CODE >145:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7502 text19 CODE >146:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7506 text19 CODE >149:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7510 text19 CODE >150:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7514 text19 CODE >153:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+751A text19 CODE >154:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7520 text19 CODE >156:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7526 text19 CODE >157:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+752C text19 CODE >166:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7232 text18 CODE >81:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7232 text18 CODE >82:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7234 text18 CODE >83:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7236 text18 CODE >84:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+723A text18 CODE >87:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+723E text18 CODE >89:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+7254 text17 CODE >15:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7254 text17 CODE >16:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7258 text17 CODE >18:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7260 text17 CODE >19:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7268 text17 CODE >20:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7200 text16 CODE >19:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7202 text16 CODE >20:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7206 text16 CODE >21:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7226 text15 CODE >8:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7226 text15 CODE >9:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+722C text15 CODE >10:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7230 text15 CODE >11:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+71E8 text14 CODE >29:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+71E8 text14 CODE >30:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+71EA text14 CODE >31:C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+73D4 text13 CODE >28:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+73D4 text13 CODE >30:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+73DC text13 CODE >31:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+73E8 text13 CODE >32:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7400 text13 CODE >33:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+740E text13 CODE >34:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7416 text13 CODE >37:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7424 text13 CODE >38:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+742C text13 CODE >44:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+742C text13 CODE >46:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+7434 text13 CODE >47:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+743C text13 CODE >76:C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+71EC text12 CODE >16:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+71EC text12 CODE >17:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+71EE text12 CODE >18:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7208 text11 CODE >32:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7208 text11 CODE >33:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7210 text11 CODE >34:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+71F0 text10 CODE >40:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+71F0 text10 CODE >41:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+71F2 text10 CODE >42:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7212 text9 CODE >24:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7212 text9 CODE >25:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+721A text9 CODE >26:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+765C text8 CODE >7:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+765C text8 CODE >13:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7660 text8 CODE >14:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+766E text8 CODE >15:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7676 text8 CODE >16:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+767A text8 CODE >18:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7688 text8 CODE >19:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7690 text8 CODE >20:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7694 text8 CODE >22:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+769C text8 CODE >23:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76AE text8 CODE >24:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76B2 text8 CODE >25:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76B6 text8 CODE >26:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76BC text8 CODE >27:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76BE text8 CODE >25:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76CC text8 CODE >30:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76D2 text8 CODE >31:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76E8 text8 CODE >32:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76F0 text8 CODE >33:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76F2 text8 CODE >35:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76F8 text8 CODE >36:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+76FE text8 CODE >38:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+770E text8 CODE >39:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+7716 text8 CODE >40:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+771E text8 CODE >41:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+75AC text7 CODE >7:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75AC text7 CODE >12:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75B0 text7 CODE >13:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75BE text7 CODE >14:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75C6 text7 CODE >15:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75CA text7 CODE >17:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75D8 text7 CODE >18:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75E0 text7 CODE >19:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75F2 text7 CODE >20:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75F6 text7 CODE >21:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+75FA text7 CODE >22:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7600 text7 CODE >23:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7602 text7 CODE >21:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7610 text7 CODE >26:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7626 text7 CODE >27:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+762E text7 CODE >28:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7634 text7 CODE >29:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+763A text7 CODE >31:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+764A text7 CODE >32:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7652 text7 CODE >33:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+765A text7 CODE >34:C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+7282 text6 CODE >108:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7284 text6 CODE >109:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+728E text6 CODE >110:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+729A text6 CODE >113:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+729E text6 CODE >115:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7720 text5 CODE >174:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7720 text5 CODE >175:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+772E text5 CODE >176:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7736 text5 CODE >177:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+773C text5 CODE >179:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+776C text5 CODE >180:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+779C text5 CODE >181:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+77CC text5 CODE >182:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+77FC text5 CODE >183:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7818 text5 CODE >185:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7320 text4 CODE >168:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7320 text4 CODE >169:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7324 text4 CODE >170:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7338 text4 CODE >169:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7354 text4 CODE >172:C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+7916 text3 CODE >20:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7916 text3 CODE >22:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7928 text3 CODE >23:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+792E text3 CODE >24:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7950 text3 CODE >25:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7956 text3 CODE >26:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7966 text3 CODE >27:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7972 text3 CODE >29:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7984 text3 CODE >30:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+798A text3 CODE >31:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79AC text3 CODE >32:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79B2 text3 CODE >33:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79C2 text3 CODE >34:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79CE text3 CODE >36:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79E2 text3 CODE >37:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+79E8 text3 CODE >38:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A0A text3 CODE >39:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A10 text3 CODE >40:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A24 text3 CODE >41:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A30 text3 CODE >43:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A44 text3 CODE >44:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+7A50 text3 CODE >49:C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+721C text2 CODE >43:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+721E text2 CODE >46:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+7224 text2 CODE >47:C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+752E text1 CODE >13:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+752E text1 CODE >17:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7536 text1 CODE >19:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+753A text1 CODE >22:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+754A text1 CODE >24:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7556 text1 CODE >28:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7566 text1 CODE >29:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7576 text1 CODE >70:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+757C text1 CODE >70:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+7586 text1 CODE >71:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+75AA text1 CODE >72:C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+72A0 text0 CODE >22:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72A0 text0 CODE >25:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72A4 text0 CODE >26:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72A8 text0 CODE >27:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72AC text0 CODE >28:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72B0 text0 CODE >29:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72B4 text0 CODE >30:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72B8 text0 CODE >33:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+72BC text0 CODE >35:C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+7356 cinit CODE >1385:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7356 cinit CODE >1387:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7356 cinit CODE >1390:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7356 cinit CODE >1461:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7358 cinit CODE >1462:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+735A cinit CODE >1463:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+735C cinit CODE >1464:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+735E cinit CODE >1465:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7360 cinit CODE >1466:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7362 cinit CODE >1467:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7366 cinit CODE >1468:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+736A cinit CODE >1469:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+736A cinit CODE >1470:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+736C cinit CODE >1471:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7370 cinit CODE >1472:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7372 cinit CODE >1473:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7374 cinit CODE >1474:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7376 cinit CODE >1478:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+737A cinit CODE >1479:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+737C cinit CODE >1480:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+737C cinit CODE >1481:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+737E cinit CODE >1482:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7380 cinit CODE >1483:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7382 cinit CODE >1489:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7382 cinit CODE >1492:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7384 cinit CODE >1493:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7386 cinit CODE >1494:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+7388 cinit CODE >1495:C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_1.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+___awdiv@counter 25 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Lmediumconst 7CA0 0 MEDIUMCONST 0 mediumconst dist/default/debug\projeto.X.debug.o
+_pulseEnable 71FA 0 CODE 0 text22 dist/default/debug\projeto.X.debug.o
+__Hspace_0 7D40 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Hspace_1 4D 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Hspace_2 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Hspace_4 600008 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__end_of_lcdString 7356 0 CODE 0 text4 dist/default/debug\projeto.X.debug.o
+__Hibigdata 0 0 CODE 0 ibigdata dist/default/debug\projeto.X.debug.o
+__mediumconst 7CA0 0 MEDIUMCONST 0 mediumconst C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+__Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\projeto.X.debug.o
+_language 14 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_de 1C 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_v0 19 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_v1 18 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_v2 17 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_v3 16 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__L__absolute__ 0 0 ABS 0 __absolute__ dist/default/debug\projeto.X.debug.o
+__Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/debug\projeto.X.debug.o
+_LATA F89 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+___sp 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+_main 72A0 0 CODE 0 text0 dist/default/debug\projeto.X.debug.o
+_msgs 3A 0 COMRAM 1 dataCOMRAM dist/default/debug\projeto.X.debug.o
+_time 8 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+___stack_hi 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___stack_lo 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+start 2 0 CODE 0 init C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+__HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_lcdString 7320 0 CODE 0 text4 dist/default/debug\projeto.X.debug.o
+_getTime 7212 0 CODE 0 text9 dist/default/debug\projeto.X.debug.o
+kpDebounce@j 2E 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+setState@newState 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hpowerup 2 0 CODE 0 powerup dist/default/debug\projeto.X.debug.o
+outputPrint@numTela 31 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+lcdCommand4bits@data 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+_kpDebounce 781A 0 CODE 0 text25 dist/default/debug\projeto.X.debug.o
+___awmod@sign 2E 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\projeto.X.debug.o
+__accesstop 60 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+intlevel0 0 0 CODE 0 text C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+intlevel1 0 0 CODE 0 text C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+intlevel2 0 0 CODE 0 text C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+intlevel3 0 0 CODE 0 text C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+_setLanguage 721C 0 CODE 0 text2 dist/default/debug\projeto.X.debug.o
+__LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\projeto.X.debug.o
+kpDebounce@tempo 1F 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\projeto.X.debug.o
+__Hifardata 0 0 CODE 0 ifardata dist/default/debug\projeto.X.debug.o
+___awdiv@sign 26 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hclrtext 0 0 ABS 0 clrtext dist/default/debug\projeto.X.debug.o
+__pidataCOMRAM 7241 0 CODE 0 idataCOMRAM dist/default/debug\projeto.X.debug.o
+kpDebounce@F15 46 0 COMRAM 1 dataCOMRAM dist/default/debug\projeto.X.debug.o
+Delay2ms@j 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+Delay2ms@k 22 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_Delay40us 7282 0 CODE 0 text23 dist/default/debug\projeto.X.debug.o
+__end_of_lcdData 72A0 0 CODE 0 text6 dist/default/debug\projeto.X.debug.o
+__end_of_lcdInit 752E 0 CODE 0 text19 dist/default/debug\projeto.X.debug.o
+___awdiv@dividend 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+__LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\projeto.X.debug.o
+kpDebounce@valorAntigo 1D 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+?_getTime 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+_i2cInit 72C8 0 CODE 0 text27 dist/default/debug\projeto.X.debug.o
+_display 1A 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__Hintcode_body 0 0 ABS 0 intcode_body dist/default/debug\projeto.X.debug.o
+lcdInit@i 24 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\projeto.X.debug.o
+lcdInt@val 2F 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hmediumconst 7D40 0 MEDIUMCONST 0 mediumconst dist/default/debug\projeto.X.debug.o
+__end_of_kpDebounce 7916 0 CODE 0 text25 dist/default/debug\projeto.X.debug.o
+__Hintcodelo 2 0 CODE 0 intcodelo dist/default/debug\projeto.X.debug.o
+___awdiv@divisor 23 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of___awdiv 7720 0 CODE 0 text8 dist/default/debug\projeto.X.debug.o
+__end_of___awmod 765C 0 CODE 0 text7 dist/default/debug\projeto.X.debug.o
+_Delay40us 726A 0 CODE 0 text23 dist/default/debug\projeto.X.debug.o
+__end_of_dsInit 71FA 0 CODE 0 text26 dist/default/debug\projeto.X.debug.o
+__end_of_getLanguage 71F4 0 CODE 0 text10 dist/default/debug\projeto.X.debug.o
+_key_ant 10 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/debug\projeto.X.debug.o
+__Lintcodelo 2 0 CODE 0 intcodelo dist/default/debug\projeto.X.debug.o
+_Delay2ms 72F2 0 CODE 0 text24 dist/default/debug\projeto.X.debug.o
+start_initialization 7356 0 CODE 0 cinit dist/default/debug\projeto.X.debug.o
+__HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\projeto.X.debug.o
+setLanguage@newLanguage 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_kpInit 7240 0 CODE 0 text18 dist/default/debug\projeto.X.debug.o
+__end_of_kpRead 71EC 0 CODE 0 text14 dist/default/debug\projeto.X.debug.o
+smLoop@evento 39 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_Delay2ms 7320 0 CODE 0 text24 dist/default/debug\projeto.X.debug.o
+__end_of_lcdInt 781A 0 CODE 0 text5 dist/default/debug\projeto.X.debug.o
+___rparam_used 1 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+pinMode@pin 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+isa$xinst 0 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+eventRead@key 26 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_smInit 7232 0 CODE 0 text15 dist/default/debug\projeto.X.debug.o
+__end_of_smLoop 75AC 0 CODE 0 text1 dist/default/debug\projeto.X.debug.o
+__Hbank0 0 0 ABS 0 bank0 dist/default/debug\projeto.X.debug.o
+__Hbank1 0 0 ABS 0 bank1 dist/default/debug\projeto.X.debug.o
+__Hbank2 0 0 ABS 0 bank2 dist/default/debug\projeto.X.debug.o
+__Hbank3 0 0 ABS 0 bank3 dist/default/debug\projeto.X.debug.o
+__Hbank4 0 0 ABS 0 bank4 dist/default/debug\projeto.X.debug.o
+__Hbank5 0 0 ABS 0 bank5 dist/default/debug\projeto.X.debug.o
+__Hbank6 0 0 ABS 0 bank6 dist/default/debug\projeto.X.debug.o
+__Hbank7 0 0 ABS 0 bank7 dist/default/debug\projeto.X.debug.o
+__end_of_pulseEnable 7200 0 CODE 0 text22 dist/default/debug\projeto.X.debug.o
+__Hcinit 0 0 ABS 0 cinit dist/default/debug\projeto.X.debug.o
+__Hconst 0 0 CONST 0 const dist/default/debug\projeto.X.debug.o
+outputPrint@idioma 33 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hidata 0 0 CODE 0 idata dist/default/debug\projeto.X.debug.o
+__Hidloc 0 0 ABS 0 idloc dist/default/debug\projeto.X.debug.o
+__Hnvbit 0 0 COMRAM 1 nvbit dist/default/debug\projeto.X.debug.o
+__Hparam 0 0 COMRAM 1 rparam dist/default/debug\projeto.X.debug.o
+__Hrdata 0 0 COMRAM 1 rdata dist/default/debug\projeto.X.debug.o
+__Hstack 0 0 STACK 2 stack dist/default/debug\projeto.X.debug.o
+__Htext0 0 0 ABS 0 text0 dist/default/debug\projeto.X.debug.o
+__Htext1 0 0 ABS 0 text1 dist/default/debug\projeto.X.debug.o
+__Htext2 0 0 ABS 0 text2 dist/default/debug\projeto.X.debug.o
+__Htext3 0 0 ABS 0 text3 dist/default/debug\projeto.X.debug.o
+__Htext4 0 0 ABS 0 text4 dist/default/debug\projeto.X.debug.o
+__Htext5 0 0 ABS 0 text5 dist/default/debug\projeto.X.debug.o
+__Htext6 0 0 ABS 0 text6 dist/default/debug\projeto.X.debug.o
+__Htext7 0 0 ABS 0 text7 dist/default/debug\projeto.X.debug.o
+__Htext8 0 0 ABS 0 text8 dist/default/debug\projeto.X.debug.o
+__Htext9 0 0 ABS 0 text9 dist/default/debug\projeto.X.debug.o
+__Hbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\projeto.X.debug.o
+__Hbigram 0 0 ABS 0 bigram dist/default/debug\projeto.X.debug.o
+__Hbigsfr 0 0 ABS 0 bigsfr dist/default/debug\projeto.X.debug.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+?_getAlarmLevel 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+kpDebounce@bits 24 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hcomram 0 0 ABS 0 comram dist/default/debug\projeto.X.debug.o
+__Hconfig 300008 0 CONFIG 4 config dist/default/debug\projeto.X.debug.o
+__end_of_lcdCommand4bits 74B6 0 CODE 0 text21 dist/default/debug\projeto.X.debug.o
+eventRead@ev 24 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Lbank0 0 0 ABS 0 bank0 dist/default/debug\projeto.X.debug.o
+__Lbank1 0 0 ABS 0 bank1 dist/default/debug\projeto.X.debug.o
+__Lbank2 0 0 ABS 0 bank2 dist/default/debug\projeto.X.debug.o
+__Lbank3 0 0 ABS 0 bank3 dist/default/debug\projeto.X.debug.o
+__Lbank4 0 0 ABS 0 bank4 dist/default/debug\projeto.X.debug.o
+__Lbank5 0 0 ABS 0 bank5 dist/default/debug\projeto.X.debug.o
+__Lbank6 0 0 ABS 0 bank6 dist/default/debug\projeto.X.debug.o
+__Lbank7 0 0 ABS 0 bank7 dist/default/debug\projeto.X.debug.o
+__Lcinit 0 0 ABS 0 cinit dist/default/debug\projeto.X.debug.o
+__Lconst 0 0 CONST 0 const dist/default/debug\projeto.X.debug.o
+__Lidata 0 0 CODE 0 idata dist/default/debug\projeto.X.debug.o
+__Lidloc 0 0 ABS 0 idloc dist/default/debug\projeto.X.debug.o
+__Lnvbit 0 0 COMRAM 1 nvbit dist/default/debug\projeto.X.debug.o
+__Lparam 0 0 COMRAM 1 rparam dist/default/debug\projeto.X.debug.o
+__Lrdata 0 0 COMRAM 1 rdata dist/default/debug\projeto.X.debug.o
+__Lstack 0 0 STACK 2 stack dist/default/debug\projeto.X.debug.o
+__Ltext0 0 0 ABS 0 text0 dist/default/debug\projeto.X.debug.o
+__Ltext1 0 0 ABS 0 text1 dist/default/debug\projeto.X.debug.o
+__Ltext2 0 0 ABS 0 text2 dist/default/debug\projeto.X.debug.o
+__Ltext3 0 0 ABS 0 text3 dist/default/debug\projeto.X.debug.o
+__Ltext4 0 0 ABS 0 text4 dist/default/debug\projeto.X.debug.o
+__Ltext5 0 0 ABS 0 text5 dist/default/debug\projeto.X.debug.o
+__Ltext6 0 0 ABS 0 text6 dist/default/debug\projeto.X.debug.o
+__Ltext7 0 0 ABS 0 text7 dist/default/debug\projeto.X.debug.o
+__Ltext8 0 0 ABS 0 text8 dist/default/debug\projeto.X.debug.o
+__Ltext9 0 0 ABS 0 text9 dist/default/debug\projeto.X.debug.o
+__Hfarbss 0 0 FARRAM 0 farbss dist/default/debug\projeto.X.debug.o
+__Lintcode_body 0 0 ABS 0 intcode_body dist/default/debug\projeto.X.debug.o
+lcdCommand4bits@cmd 22 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_pinMode 7CA0 0 CODE 0 text28 dist/default/debug\projeto.X.debug.o
+__Habs1 0 0 ABS 0 abs1 dist/default/debug\projeto.X.debug.o
+__Hdata 0 0 ABS 0 data dist/default/debug\projeto.X.debug.o
+__Hheap 0 0 HEAP 7 heap dist/default/debug\projeto.X.debug.o
+__Hinit 6 0 CODE 0 init dist/default/debug\projeto.X.debug.o
+__Hrbit 0 0 COMRAM 1 rbit dist/default/debug\projeto.X.debug.o
+__Hrbss 0 0 COMRAM 1 rbss dist/default/debug\projeto.X.debug.o
+__Htemp 0 0 COMRAM 1 temp dist/default/debug\projeto.X.debug.o
+__Htext 0 0 ABS 0 text dist/default/debug\projeto.X.debug.o
+__Labs1 0 0 ABS 0 abs1 dist/default/debug\projeto.X.debug.o
+__Ldata 0 0 ABS 0 data dist/default/debug\projeto.X.debug.o
+__Lheap 0 0 HEAP 7 heap dist/default/debug\projeto.X.debug.o
+__Linit 2 0 CODE 0 init dist/default/debug\projeto.X.debug.o
+__Lrbit 0 0 COMRAM 1 rbit dist/default/debug\projeto.X.debug.o
+__Lrbss 0 0 COMRAM 1 rbss dist/default/debug\projeto.X.debug.o
+__Ltemp 0 0 COMRAM 1 temp dist/default/debug\projeto.X.debug.o
+__Ltext 0 0 ABS 0 text dist/default/debug\projeto.X.debug.o
+kpDebounce@valorNovo 1E 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+Delay40us@j 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hintret 0 0 ABS 0 intret dist/default/debug\projeto.X.debug.o
+__Hirdata 0 0 CODE 0 irdata dist/default/debug\projeto.X.debug.o
+__S0 7D40 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__S1 4D 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__S4 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__S5 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_key E 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+?_eventRead 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+_dsInit 71F4 0 CODE 0 text26 dist/default/debug\projeto.X.debug.o
+__HidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/debug\projeto.X.debug.o
+__Lbigdata 0 0 BIGRAM 1 bigdata dist/default/debug\projeto.X.debug.o
+__Hnvrram 0 0 COMRAM 1 nvrram dist/default/debug\projeto.X.debug.o
+__end_of_setLanguage 7226 0 CODE 0 text2 dist/default/debug\projeto.X.debug.o
+_ev_ant 12 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_lcdCommand4bits 743E 0 CODE 0 text21 dist/default/debug\projeto.X.debug.o
+__Lintentry 0 0 ABS 0 intentry dist/default/debug\projeto.X.debug.o
+_lcdData 7282 0 CODE 0 text6 dist/default/debug\projeto.X.debug.o
+_lcdInit 74B6 0 CODE 0 text19 dist/default/debug\projeto.X.debug.o
+__Hramtop 800 0 RAM 0 ramtop dist/default/debug\projeto.X.debug.o
+__Hrparam 0 0 COMRAM 1 rparam dist/default/debug\projeto.X.debug.o
+_smLoop$1348 37 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__activetblptr 2 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Hstruct 0 0 COMRAM 1 struct dist/default/debug\projeto.X.debug.o
+__Htext10 0 0 ABS 0 text10 dist/default/debug\projeto.X.debug.o
+__Htext11 0 0 ABS 0 text11 dist/default/debug\projeto.X.debug.o
+__Htext12 0 0 ABS 0 text12 dist/default/debug\projeto.X.debug.o
+__Htext13 0 0 ABS 0 text13 dist/default/debug\projeto.X.debug.o
+__Htext14 0 0 ABS 0 text14 dist/default/debug\projeto.X.debug.o
+__Htext15 0 0 ABS 0 text15 dist/default/debug\projeto.X.debug.o
+__Htext16 0 0 ABS 0 text16 dist/default/debug\projeto.X.debug.o
+__Htext17 0 0 ABS 0 text17 dist/default/debug\projeto.X.debug.o
+__Htext18 0 0 ABS 0 text18 dist/default/debug\projeto.X.debug.o
+__Htext19 0 0 ABS 0 text19 dist/default/debug\projeto.X.debug.o
+__Htext20 0 0 ABS 0 text20 dist/default/debug\projeto.X.debug.o
+__Htext21 0 0 ABS 0 text21 dist/default/debug\projeto.X.debug.o
+__Htext22 0 0 ABS 0 text22 dist/default/debug\projeto.X.debug.o
+__Htext23 0 0 ABS 0 text23 dist/default/debug\projeto.X.debug.o
+__Htext24 0 0 ABS 0 text24 dist/default/debug\projeto.X.debug.o
+__Htext25 0 0 ABS 0 text25 dist/default/debug\projeto.X.debug.o
+__Htext26 0 0 ABS 0 text26 dist/default/debug\projeto.X.debug.o
+__Htext27 0 0 ABS 0 text27 dist/default/debug\projeto.X.debug.o
+__Htext28 0 0 ABS 0 text28 dist/default/debug\projeto.X.debug.o
+_kpInit 7232 0 CODE 0 text18 dist/default/debug\projeto.X.debug.o
+_kpRead 71E8 0 CODE 0 text14 dist/default/debug\projeto.X.debug.o
+_outputPrint 7916 0 CODE 0 text3 dist/default/debug\projeto.X.debug.o
+_lcdInt 7720 0 CODE 0 text5 dist/default/debug\projeto.X.debug.o
+___awmod@counter 2D 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+_valor@ssd$F308 7CA1 0 MEDIUMCONST 0 mediumconst dist/default/debug\projeto.X.debug.o
+__ptext10 71F0 0 CODE 0 text10 dist/default/debug\projeto.X.debug.o
+__ptext11 7208 0 CODE 0 text11 dist/default/debug\projeto.X.debug.o
+__ptext12 71EC 0 CODE 0 text12 dist/default/debug\projeto.X.debug.o
+__ptext13 73D4 0 CODE 0 text13 dist/default/debug\projeto.X.debug.o
+__ptext14 71E8 0 CODE 0 text14 dist/default/debug\projeto.X.debug.o
+__ptext15 7226 0 CODE 0 text15 dist/default/debug\projeto.X.debug.o
+__ptext16 7200 0 CODE 0 text16 dist/default/debug\projeto.X.debug.o
+__ptext17 7254 0 CODE 0 text17 dist/default/debug\projeto.X.debug.o
+__ptext18 7232 0 CODE 0 text18 dist/default/debug\projeto.X.debug.o
+__ptext19 74B6 0 CODE 0 text19 dist/default/debug\projeto.X.debug.o
+__ptext20 738C 0 CODE 0 text20 dist/default/debug\projeto.X.debug.o
+__ptext21 743E 0 CODE 0 text21 dist/default/debug\projeto.X.debug.o
+__ptext22 71FA 0 CODE 0 text22 dist/default/debug\projeto.X.debug.o
+__ptext23 726A 0 CODE 0 text23 dist/default/debug\projeto.X.debug.o
+__ptext24 72F2 0 CODE 0 text24 dist/default/debug\projeto.X.debug.o
+__ptext25 781A 0 CODE 0 text25 dist/default/debug\projeto.X.debug.o
+__ptext26 71F4 0 CODE 0 text26 dist/default/debug\projeto.X.debug.o
+__ptext27 72C8 0 CODE 0 text27 dist/default/debug\projeto.X.debug.o
+__ptext28 7A52 0 CODE 0 text28 dist/default/debug\projeto.X.debug.o
+___awdiv 765C 0 CODE 0 text8 dist/default/debug\projeto.X.debug.o
+___awmod 75AC 0 CODE 0 text7 dist/default/debug\projeto.X.debug.o
+__Lbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\projeto.X.debug.o
+__Lbigram 0 0 ABS 0 bigram dist/default/debug\projeto.X.debug.o
+__Lbigsfr 0 0 ABS 0 bigsfr dist/default/debug\projeto.X.debug.o
+__Lcomram 0 0 ABS 0 comram dist/default/debug\projeto.X.debug.o
+__Lconfig 0 0 CONFIG 4 config dist/default/debug\projeto.X.debug.o
+_lcdCommand 738C 0 CODE 0 text20 dist/default/debug\projeto.X.debug.o
+__Lsivt_hi 2 0 CODE 0 sivt_hi dist/default/debug\projeto.X.debug.o
+__Lsivt_lo 2 0 CODE 0 sivt_lo dist/default/debug\projeto.X.debug.o
+__Lfarbss 0 0 FARRAM 0 farbss dist/default/debug\projeto.X.debug.o
+___inthi_stack_hi 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___inthi_stack_lo 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+_smInit 7226 0 CODE 0 text15 dist/default/debug\projeto.X.debug.o
+_smLoop 752E 0 CODE 0 text1 dist/default/debug\projeto.X.debug.o
+__Lfardata 0 0 FARRAM 0 fardata dist/default/debug\projeto.X.debug.o
+isa$std 1 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+stackhi 0 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+stacklo 0 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+_getState 71EC 0 CODE 0 text12 dist/default/debug\projeto.X.debug.o
+pinMode@type 23 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Lintcode 2 0 CODE 0 intcode dist/default/debug\projeto.X.debug.o
+__Lintret 0 0 ABS 0 intret dist/default/debug\projeto.X.debug.o
+__Lirdata 0 0 CODE 0 irdata dist/default/debug\projeto.X.debug.o
+_getAlarmLevel 7208 0 CODE 0 text11 dist/default/debug\projeto.X.debug.o
+__Lspace_0 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Lspace_1 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Lspace_2 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Lspace_4 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__pbssCOMRAM 1 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_getState 71F0 0 CODE 0 text12 dist/default/debug\projeto.X.debug.o
+__end_of_getTime 721C 0 CODE 0 text9 dist/default/debug\projeto.X.debug.o
+__LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_valor@ssd$F308 7CB1 0 MEDIUMCONST 0 mediumconst dist/default/debug\projeto.X.debug.o
+end_of_initialization 7382 0 CODE 0 cinit dist/default/debug\projeto.X.debug.o
+__Lnvrram 0 0 COMRAM 1 nvrram dist/default/debug\projeto.X.debug.o
+__Hintentry 0 0 ABS 0 intentry dist/default/debug\projeto.X.debug.o
+___awdiv@quotient 27 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+?___awdiv 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+?___awmod 29 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Hreset_vec 2 0 CODE 0 reset_vec dist/default/debug\projeto.X.debug.o
+_setState 7200 0 CODE 0 text16 dist/default/debug\projeto.X.debug.o
+___awmod@dividend 29 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Lramtop 800 0 RAM 0 ramtop dist/default/debug\projeto.X.debug.o
+__Lrparam 0 0 COMRAM 1 rparam dist/default/debug\projeto.X.debug.o
+__pcinit 7356 0 CODE 0 cinit dist/default/debug\projeto.X.debug.o
+__end_of_lcdCommand 73D4 0 CODE 0 text20 dist/default/debug\projeto.X.debug.o
+__ptext0 72A0 0 CODE 0 text0 dist/default/debug\projeto.X.debug.o
+__ptext1 752E 0 CODE 0 text1 dist/default/debug\projeto.X.debug.o
+__ptext2 721C 0 CODE 0 text2 dist/default/debug\projeto.X.debug.o
+__ptext3 7916 0 CODE 0 text3 dist/default/debug\projeto.X.debug.o
+__ptext4 7320 0 CODE 0 text4 dist/default/debug\projeto.X.debug.o
+__ptext5 7720 0 CODE 0 text5 dist/default/debug\projeto.X.debug.o
+__ptext6 7282 0 CODE 0 text6 dist/default/debug\projeto.X.debug.o
+__ptext7 75AC 0 CODE 0 text7 dist/default/debug\projeto.X.debug.o
+__ptext8 765C 0 CODE 0 text8 dist/default/debug\projeto.X.debug.o
+__ptext9 7212 0 CODE 0 text9 dist/default/debug\projeto.X.debug.o
+__Lstruct 0 0 COMRAM 1 struct dist/default/debug\projeto.X.debug.o
+__end_of_setState 7208 0 CODE 0 text16 dist/default/debug\projeto.X.debug.o
+kpDebounce@portes 29 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Ltext10 0 0 ABS 0 text10 dist/default/debug\projeto.X.debug.o
+__Ltext11 0 0 ABS 0 text11 dist/default/debug\projeto.X.debug.o
+__Ltext12 0 0 ABS 0 text12 dist/default/debug\projeto.X.debug.o
+__Ltext13 0 0 ABS 0 text13 dist/default/debug\projeto.X.debug.o
+__Ltext14 0 0 ABS 0 text14 dist/default/debug\projeto.X.debug.o
+__Ltext15 0 0 ABS 0 text15 dist/default/debug\projeto.X.debug.o
+__Ltext16 0 0 ABS 0 text16 dist/default/debug\projeto.X.debug.o
+__Ltext17 0 0 ABS 0 text17 dist/default/debug\projeto.X.debug.o
+__Ltext18 0 0 ABS 0 text18 dist/default/debug\projeto.X.debug.o
+__Ltext19 0 0 ABS 0 text19 dist/default/debug\projeto.X.debug.o
+__Ltext20 0 0 ABS 0 text20 dist/default/debug\projeto.X.debug.o
+__Ltext21 0 0 ABS 0 text21 dist/default/debug\projeto.X.debug.o
+__Ltext22 0 0 ABS 0 text22 dist/default/debug\projeto.X.debug.o
+__Ltext23 0 0 ABS 0 text23 dist/default/debug\projeto.X.debug.o
+__Ltext24 0 0 ABS 0 text24 dist/default/debug\projeto.X.debug.o
+__Ltext25 0 0 ABS 0 text25 dist/default/debug\projeto.X.debug.o
+__Ltext26 0 0 ABS 0 text26 dist/default/debug\projeto.X.debug.o
+__Ltext27 0 0 ABS 0 text27 dist/default/debug\projeto.X.debug.o
+__Ltext28 0 0 ABS 0 text28 dist/default/debug\projeto.X.debug.o
+__ramtop 800 0 RAM 0 ramtop C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+__Lpowerup 2 0 CODE 0 powerup dist/default/debug\projeto.X.debug.o
+__Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\projeto.X.debug.o
+__H__absolute__ 0 0 ABS 0 __absolute__ dist/default/debug\projeto.X.debug.o
+__Lreset_vec 0 0 CODE 0 reset_vec dist/default/debug\projeto.X.debug.o
+_started 1B 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_pinMode 7A52 0 CODE 0 text28 dist/default/debug\projeto.X.debug.o
+___heap_hi 0 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___heap_lo 0 0 ABS 0 - C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___param_bank 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+___intlo_stack_hi 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+___intlo_stack_lo 0 0 STACK 2 stack C:\Users\Pessoal\AppData\Local\Temp\xcAscf4.\driver_tmp_9.o
+__Hbigdata 0 0 BIGRAM 1 bigdata dist/default/debug\projeto.X.debug.o
+__end_of__initialization 7382 0 CODE 0 cinit dist/default/debug\projeto.X.debug.o
+lcdString@str 24 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+___awmod@divisor 2B 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__Libigdata 0 0 CODE 0 ibigdata dist/default/debug\projeto.X.debug.o
+__end_of_i2cInit 72F2 0 CODE 0 text27 dist/default/debug\projeto.X.debug.o
+__Lclrtext 0 0 ABS 0 clrtext dist/default/debug\projeto.X.debug.o
+__pcstackCOMRAM 21 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+_getLanguage 71F0 0 CODE 0 text10 dist/default/debug\projeto.X.debug.o
+__pmediumconst 7CA0 0 MEDIUMCONST 0 mediumconst dist/default/debug\projeto.X.debug.o
+_alarmLevel 6 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+lcdCommand@cmd 23 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_main 72C8 0 CODE 0 text0 dist/default/debug\projeto.X.debug.o
+__end_of_eventInit 726A 0 CODE 0 text17 dist/default/debug\projeto.X.debug.o
+__end_of_eventRead 743E 0 CODE 0 text13 dist/default/debug\projeto.X.debug.o
+_PORTA F80 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_PORTB F81 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_PORTC F82 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_PORTD F83 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_PORTE F84 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_TRISA F92 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_TRISB F93 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_TRISC F94 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_TRISD F95 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+_TRISE F96 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__HRAM 0 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Hbss 0 0 RAM 1 bss dist/default/debug\projeto.X.debug.o
+__Hram 0 0 ABS 0 ram dist/default/debug\projeto.X.debug.o
+__Hsfr 0 0 ABS 0 sfr dist/default/debug\projeto.X.debug.o
+__LRAM 1 0 ABS 0 - dist/default/debug\projeto.X.debug.o
+__Lbss 0 0 RAM 1 bss dist/default/debug\projeto.X.debug.o
+__Lram 0 0 ABS 0 ram dist/default/debug\projeto.X.debug.o
+__Lsfr 0 0 ABS 0 sfr dist/default/debug\projeto.X.debug.o
+_state 15 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+_valor 20 0 COMRAM 1 bssCOMRAM dist/default/debug\projeto.X.debug.o
+__Hsivt_hi 2 0 CODE 0 sivt_hi dist/default/debug\projeto.X.debug.o
+__Hsivt_lo 2 0 CODE 0 sivt_lo dist/default/debug\projeto.X.debug.o
+__initialization 7356 0 CODE 0 cinit dist/default/debug\projeto.X.debug.o
+__pdataCOMRAM 3A 0 COMRAM 1 dataCOMRAM dist/default/debug\projeto.X.debug.o
+__Hfardata 0 0 FARRAM 0 fardata dist/default/debug\projeto.X.debug.o
+__end_of_getAlarmLevel 7212 0 CODE 0 text11 dist/default/debug\projeto.X.debug.o
+_eventInit 7254 0 CODE 0 text17 dist/default/debug\projeto.X.debug.o
+_eventRead 73D4 0 CODE 0 text13 dist/default/debug\projeto.X.debug.o
+__Hsmallconst 0 0 SMALLCONST 0 smallconst dist/default/debug\projeto.X.debug.o
+__Lifardata 0 0 CODE 0 ifardata dist/default/debug\projeto.X.debug.o
+lcdData@valor 23 0 COMRAM 1 cstackCOMRAM dist/default/debug\projeto.X.debug.o
+__end_of_outputPrint 7A52 0 CODE 0 text3 dist/default/debug\projeto.X.debug.o
+__Hintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\projeto.X.debug.o
+__Hintcode 2 0 CODE 0 intcode dist/default/debug\projeto.X.debug.o
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cinit 0 7356 7356 36 1
+text0 0 72A0 72A0 28 1
+text1 0 752E 752E 7E 1
+text2 0 721C 721C A 1
+text3 0 7916 7916 13C 1
+text4 0 7320 7320 36 1
+text5 0 7720 7720 FA 1
+text6 0 7282 7282 1E 1
+text7 0 75AC 75AC B0 1
+text8 0 765C 765C C4 1
+text9 0 7212 7212 A 1
+text10 0 71F0 71F0 4 1
+text11 0 7208 7208 A 1
+text12 0 71EC 71EC 4 1
+text13 0 73D4 73D4 6A 1
+text14 0 71E8 71E8 4 1
+text15 0 7226 7226 C 1
+text16 0 7200 7200 8 1
+text17 0 7254 7254 16 1
+text18 0 7232 7232 E 1
+text19 0 74B6 74B6 78 1
+text20 0 738C 738C 48 1
+text21 0 743E 743E 78 1
+text22 0 71FA 71FA 6 1
+text23 0 726A 726A 18 1
+text24 0 72F2 72F2 2E 1
+text25 0 781A 781A FC 1
+text26 0 71F4 71F4 6 1
+text27 0 72C8 72C8 2A 1
+text28 0 7A52 7A52 24E 1
+idataCOMRAM 0 7241 7241 13 1
+reset_vec 0 0 0 6 1
+bssCOMRAM 1 1 1 4C 1
+mediumconst 0 7CA0 7CA0 A0 1
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES

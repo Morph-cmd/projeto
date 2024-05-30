@@ -1,0 +1,63 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"27 adc.c
+[; ;adc.c: 27:  void adcInit(void)
+[v _adcInit `(v ~T0 @X0 1 ef ]
+"28
+[; ;adc.c: 28: {
+{
+[e :U _adcInit ]
+[f ]
+"29
+[; ;adc.c: 29:  (((*(volatile __near unsigned char*)0xF92)) |= (1<<0));
+[e =| *U -> -> 3986 `i `*VNuc -> << -> 1 `i -> 0 `i `uc ]
+"31
+[; ;adc.c: 31:  (*(volatile __near unsigned char*)0xFC2) = 0b00000001;
+[e = *U -> -> 4034 `i `*VNuc -> -> 1 `i `uc ]
+"32
+[; ;adc.c: 32:  (*(volatile __near unsigned char*)0xFC1) = 0b00001110;
+[e = *U -> -> 4033 `i `*VNuc -> -> 14 `i `uc ]
+"33
+[; ;adc.c: 33:  (*(volatile __near unsigned char*)0xFC0) = 0b10101010;
+[e = *U -> -> 4032 `i `*VNuc -> -> 170 `i `uc ]
+"34
+[; ;adc.c: 34: }
+[e :UE 1 ]
+}
+"36
+[; ;adc.c: 36: int adcRead(void)
+[v _adcRead `(i ~T0 @X0 1 ef ]
+"37
+[; ;adc.c: 37: {
+{
+[e :U _adcRead ]
+[f ]
+"38
+[; ;adc.c: 38:  unsigned int ADvalor;
+[v _ADvalor `ui ~T0 @X0 1 a ]
+"39
+[; ;adc.c: 39:  (*(volatile __near unsigned char*)0xFC2) |= 0b00000010;
+[e =| *U -> -> 4034 `i `*VNuc -> -> 2 `i `uc ]
+"41
+[; ;adc.c: 41:  while((((*(volatile __near unsigned char*)0xFC2)) & (1<<1)));
+[e $U 3  ]
+[e :U 4 ]
+[e :U 3 ]
+[e $ != & -> *U -> -> 4034 `i `*VNuc `i << -> 1 `i -> 1 `i -> 0 `i 4  ]
+[e :U 5 ]
+"43
+[; ;adc.c: 43:  ADvalor = (*(volatile __near unsigned char*)0xFC4) ;
+[e = _ADvalor -> *U -> -> 4036 `i `*VNuc `ui ]
+"44
+[; ;adc.c: 44:  ADvalor <<= 8;
+[e =<< _ADvalor -> -> 8 `i `ui ]
+"45
+[; ;adc.c: 45:  ADvalor += (*(volatile __near unsigned char*)0xFC3);
+[e =+ _ADvalor -> *U -> -> 4035 `i `*VNuc `ui ]
+"46
+[; ;adc.c: 46:  return ADvalor;
+[e ) -> _ADvalor `i ]
+[e $UE 2  ]
+"47
+[; ;adc.c: 47: }
+[e :UE 2 ]
+}

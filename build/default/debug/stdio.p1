@@ -1,0 +1,36 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"26 ./lcd.h
+[; ;./lcd.h: 26:  void lcdData(unsigned char valor);
+[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
+"3 stdio.c
+[; ;stdio.c: 3: void printf(char txt[16]) {
+[v _printf `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _printf ]
+[v _txt `*uc ~T0 @X0 1 r1 ]
+[f ]
+"4
+[; ;stdio.c: 4:     int i;
+[v _i `i ~T0 @X0 1 a ]
+"5
+[; ;stdio.c: 5:     for (i = 0; i < 16; i++) {
+{
+[e = _i -> 0 `i ]
+[e $ < _i -> 16 `i 2  ]
+[e $U 3  ]
+[e :U 2 ]
+{
+"6
+[; ;stdio.c: 6:         lcdData(txt[i]);
+[e ( _lcdData (1 -> *U + _txt * -> _i `x -> -> # *U _txt `i `x `uc ]
+"7
+[; ;stdio.c: 7:     }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 16 `i 2  ]
+[e :U 3 ]
+}
+"8
+[; ;stdio.c: 8: }
+[e :UE 1 ]
+}

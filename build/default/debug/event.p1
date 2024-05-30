@@ -1,0 +1,152 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"25 ./keypad.h
+[; ;./keypad.h: 25:  void kpInit(void);
+[v _kpInit `(v ~T0 @X0 0 ef ]
+"30 event.c
+[; ;event.c: 30:     int ev = EV_5;
+[c E5 0 1 2 3 4 5 .. ]
+[n E5 . EV_0 EV_1 EV_2 EV_3 EV_4 EV_5  ]
+"23 ./keypad.h
+[; ;./keypad.h: 23:  unsigned char kpRead(void);
+[v _kpRead `(uc ~T0 @X0 0 ef ]
+"8 event.c
+[; ;event.c: 8: static unsigned int ev_ant;
+[v _ev_ant `ui ~T0 @X0 1 s ]
+"9
+[; ;event.c: 9: static unsigned int key_ant;
+[v _key_ant `ui ~T0 @X0 1 s ]
+"10
+[; ;event.c: 10: static unsigned int key;
+[v _key `ui ~T0 @X0 1 s ]
+"11
+[; ;event.c: 11: static unsigned int dTimer;
+[v _dTimer `ui ~T0 @X0 1 s ]
+"12
+[; ;event.c: 12: static unsigned int dTimerMax;
+[v _dTimerMax `ui ~T0 @X0 1 s ]
+"13
+[; ;event.c: 13: static unsigned int ev = 'b';
+[v _ev `ui ~T0 @X0 1 s ]
+[i _ev
+-> 98 `ui
+]
+"15
+[; ;event.c: 15: void eventInit(void) {
+[v _eventInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _eventInit ]
+[f ]
+"16
+[; ;event.c: 16:     kpInit();
+[e ( _kpInit ..  ]
+"18
+[; ;event.c: 18:     ev_ant = 0;
+[e = _ev_ant -> -> 0 `i `ui ]
+"19
+[; ;event.c: 19:     key = 1;
+[e = _key -> -> 1 `i `ui ]
+"20
+[; ;event.c: 20: }
+[e :UE 1 ]
+}
+"22
+[; ;event.c: 22: void delay2ms(void) {
+[v _delay2ms `(v ~T0 @X0 1 ef ]
+{
+[e :U _delay2ms ]
+[f ]
+"23
+[; ;event.c: 23:     unsigned char j, k;
+[v _j `uc ~T0 @X0 1 a ]
+[v _k `uc ~T0 @X0 1 a ]
+"24
+[; ;event.c: 24:     for (j = 0; j < 20; j++)
+{
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 20 `i 3  ]
+[e $U 4  ]
+[e :U 3 ]
+"25
+[; ;event.c: 25:         for (k = 0; k < 178; k++);
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 178 `i 6  ]
+[e $U 7  ]
+[e :U 6 ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 178 `i 6  ]
+[e :U 7 ]
+}
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 20 `i 3  ]
+[e :U 4 ]
+}
+"26
+[; ;event.c: 26: }
+[e :UE 2 ]
+}
+"28
+[; ;event.c: 28: unsigned int eventRead(void) {
+[v _eventRead `(ui ~T0 @X0 1 ef ]
+{
+[e :U _eventRead ]
+[f ]
+"29
+[; ;event.c: 29:     int key;
+[v _key `i ~T0 @X0 1 a ]
+"30
+[; ;event.c: 30:     int ev = EV_5;
+[v _ev `i ~T0 @X0 1 a ]
+[e = _ev -> . `E5 5 `i ]
+"31
+[; ;event.c: 31:     key = kpRead();
+[e = _key -> ( _kpRead ..  `i ]
+"32
+[; ;event.c: 32:     if (key != key_ant) {
+[e $ ! != -> _key `ui _key_ant 10  ]
+{
+"33
+[; ;event.c: 33:         if (((key) & (1<<0))) {
+[e $ ! != & _key << -> 1 `i -> 0 `i -> 0 `i 11  ]
+{
+"34
+[; ;event.c: 34:             ev = EV_0;
+[e = _ev -> . `E5 0 `i ]
+"35
+[; ;event.c: 35:         }
+}
+[e :U 11 ]
+"37
+[; ;event.c: 37:         if (((key) & (1<<1))) {
+[e $ ! != & _key << -> 1 `i -> 1 `i -> 0 `i 12  ]
+{
+"38
+[; ;event.c: 38:             ev = EV_1;
+[e = _ev -> . `E5 1 `i ]
+"39
+[; ;event.c: 39:         }
+}
+[e :U 12 ]
+"41
+[; ;event.c: 41:         if (((key) & (1<<2))) {
+[e $ ! != & _key << -> 1 `i -> 2 `i -> 0 `i 13  ]
+{
+"43
+[; ;event.c: 43:         }
+}
+[e :U 13 ]
+"44
+[; ;event.c: 44:     }
+}
+[e :U 10 ]
+"46
+[; ;event.c: 46:     key_ant = key;
+[e = _key_ant -> _key `ui ]
+"47
+[; ;event.c: 47:     return ev;
+[e ) -> _ev `ui ]
+[e $UE 9  ]
+"76
+[; ;event.c: 76: }
+[e :UE 9 ]
+}

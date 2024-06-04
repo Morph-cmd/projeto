@@ -8,6 +8,10 @@
 #ifndef VAR_H
 #define	VAR_H
 
+#define PROT_TAM 4
+
+char prot_ready;
+
 void varInit(void);
 
 char getState(void);
@@ -18,4 +22,9 @@ int getAlarmLevel(void);
 void setAlarmLevel(int newAlarmLevel);
 char getLanguage(void);
 void setLanguage(char newLanguage);
+void getProt(unsigned char[]);
+void setProt(char newLanguage);
+void resetProt();
+
+
 #endif	/* VAR_H */

@@ -8,12 +8,13 @@
 #ifndef EVENT_H
 #define	EVENT_H
 enum{
-    EV_0,
-    EV_1,
-    EV_2,
-    EV_3,
-    EV_4,
-    EV_5 //NOEVENT
+    EV_B_0,
+    EV_B_1,
+    EV_B_2,
+    EV_B_3,
+    EV_B_4,
+    EV_PROT_SERIAL,
+    EV_NOEVENT //NOEVENT
 };
 void eventInit(void);
 unsigned int eventRead(void);

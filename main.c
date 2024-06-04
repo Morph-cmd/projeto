@@ -11,6 +11,7 @@
 #include "pic18f4520.h"
 #include <pic18f4550.h>
 #include "lcd.h"
+#include "serial.h"
 #include "bits.h"
 #include "keypad.h"
 #include "soft_i2c.h"
@@ -26,6 +27,7 @@ void main(void) {
     lcdInit();
     dsInit();
     smInit();
+    serialInit();
     TRISA = 0x00;
     LATA = 0x00;
     //dsWriteData(0x80,SEC);

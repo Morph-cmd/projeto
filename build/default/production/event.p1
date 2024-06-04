@@ -1,0 +1,306 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"25 ./keypad.h
+[; ;./keypad.h: 25:  void kpInit(void);
+[v _kpInit `(v ~T0 @X0 0 ef ]
+"34 event.c
+[; ;event.c: 34:     int ev = EV_NOEVENT;
+[c E5 0 1 2 3 4 5 6 .. ]
+[n E5 . EV_B_0 EV_B_1 EV_B_2 EV_B_3 EV_B_4 EV_PROT_SERIAL EV_NOEVENT  ]
+"23 ./keypad.h
+[; ;./keypad.h: 23:  unsigned char kpRead(void);
+[v _kpRead `(uc ~T0 @X0 0 ef ]
+"24 ./serial.h
+[; ;./serial.h: 24:  unsigned char serialRead(void);
+[v _serialRead `(uc ~T0 @X0 0 ef ]
+"23
+[; ;./serial.h: 23:  void serialSend(unsigned char c);
+[v _serialSend `(v ~T0 @X0 0 ef1`uc ]
+"25 ./var.h
+[; ;./var.h: 25: void getProt(unsigned char[]);
+[v _getProt `(v ~T0 @X0 0 ef1`*uc ]
+"26
+[; ;./var.h: 26: void setProt(char newLanguage);
+[v _setProt `(v ~T0 @X0 0 ef1`uc ]
+"26 ./lcd.h
+[; ;./lcd.h: 26:  void lcdData(unsigned char valor);
+[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
+"13 ./var.h
+[; ;./var.h: 13: char prot_ready;
+[v _prot_ready `uc ~T0 @X0 1 e ]
+"11 event.c
+[; ;event.c: 11: static unsigned int ev_ant;
+[v _ev_ant `ui ~T0 @X0 1 s ]
+"12
+[; ;event.c: 12: static unsigned int key_ant;
+[v _key_ant `ui ~T0 @X0 1 s ]
+"13
+[; ;event.c: 13: static unsigned int key;
+[v _key `ui ~T0 @X0 1 s ]
+"14
+[; ;event.c: 14: static unsigned int dTimer;
+[v _dTimer `ui ~T0 @X0 1 s ]
+"15
+[; ;event.c: 15: static unsigned int dTimerMax;
+[v _dTimerMax `ui ~T0 @X0 1 s ]
+"16
+[; ;event.c: 16: static unsigned int ev = 'b';
+[v _ev `ui ~T0 @X0 1 s ]
+[i _ev
+-> 98 `ui
+]
+"19
+[; ;event.c: 19: void eventInit(void) {
+[v _eventInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _eventInit ]
+[f ]
+"20
+[; ;event.c: 20:     kpInit();
+[e ( _kpInit ..  ]
+"22
+[; ;event.c: 22:     ev_ant = 0;
+[e = _ev_ant -> -> 0 `i `ui ]
+"23
+[; ;event.c: 23:     key = 1;
+[e = _key -> -> 1 `i `ui ]
+"24
+[; ;event.c: 24: }
+[e :UE 1 ]
+}
+"26
+[; ;event.c: 26: void delay2ms(void) {
+[v _delay2ms `(v ~T0 @X0 1 ef ]
+{
+[e :U _delay2ms ]
+[f ]
+"27
+[; ;event.c: 27:     unsigned char j, k;
+[v _j `uc ~T0 @X0 1 a ]
+[v _k `uc ~T0 @X0 1 a ]
+"28
+[; ;event.c: 28:     for (j = 0; j < 20; j++)
+{
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 20 `i 3  ]
+[e $U 4  ]
+[e :U 3 ]
+"29
+[; ;event.c: 29:         for (k = 0; k < 178; k++);
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 178 `i 6  ]
+[e $U 7  ]
+[e :U 6 ]
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 178 `i 6  ]
+[e :U 7 ]
+}
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 20 `i 3  ]
+[e :U 4 ]
+}
+"30
+[; ;event.c: 30: }
+[e :UE 2 ]
+}
+"32
+[; ;event.c: 32: unsigned int eventRead(void) {
+[v _eventRead `(ui ~T0 @X0 1 ef ]
+{
+[e :U _eventRead ]
+[f ]
+"33
+[; ;event.c: 33:     int key;
+[v _key `i ~T0 @X0 1 a ]
+"34
+[; ;event.c: 34:     int ev = EV_NOEVENT;
+[v _ev `i ~T0 @X0 1 a ]
+[e = _ev -> . `E5 6 `i ]
+"35
+[; ;event.c: 35:     key = kpRead();
+[e = _key -> ( _kpRead ..  `i ]
+"36
+[; ;event.c: 36:     if (key != key_ant) {
+[e $ ! != -> _key `ui _key_ant 10  ]
+{
+"37
+[; ;event.c: 37:         if (((key) & (1<<0))) {
+[e $ ! != & _key << -> 1 `i -> 0 `i -> 0 `i 11  ]
+{
+"38
+[; ;event.c: 38:             ev = EV_B_0;
+[e = _ev -> . `E5 0 `i ]
+"39
+[; ;event.c: 39:         }
+}
+[e :U 11 ]
+"41
+[; ;event.c: 41:         if (((key) & (1<<1))) {
+[e $ ! != & _key << -> 1 `i -> 1 `i -> 0 `i 12  ]
+{
+"42
+[; ;event.c: 42:             ev = EV_B_1;
+[e = _ev -> . `E5 1 `i ]
+"43
+[; ;event.c: 43:         }
+}
+[e :U 12 ]
+"45
+[; ;event.c: 45:         if (((key) & (1<<2))) {
+[e $ ! != & _key << -> 1 `i -> 2 `i -> 0 `i 13  ]
+{
+"47
+[; ;event.c: 47:         }
+}
+[e :U 13 ]
+"48
+[; ;event.c: 48:     }
+}
+[e :U 10 ]
+"50
+[; ;event.c: 50:     key_ant = key;
+[e = _key_ant -> _key `ui ]
+"53
+[; ;event.c: 53:     unsigned char data = serialRead();
+[v _data `uc ~T0 @X0 1 a ]
+[e = _data ( _serialRead ..  ]
+"54
+[; ;event.c: 54:     unsigned char prot[4];
+[v _prot `uc ~T0 @X0 -> 4 `i a ]
+"55
+[; ;event.c: 55:     if (data != 0) {
+[e $ ! != -> _data `i -> 0 `i 14  ]
+{
+"56
+[; ;event.c: 56:         serialSend(data);
+[e ( _serialSend (1 _data ]
+"57
+[; ;event.c: 57:         getProt(prot);
+[e ( _getProt (1 &U _prot ]
+"58
+[; ;event.c: 58:         if (prot[0] == 0) {
+[e $ ! == -> *U + &U _prot * -> -> -> 0 `i `ui `ux -> -> # *U &U _prot `ui `ux `i -> 0 `i 15  ]
+{
+"59
+[; ;event.c: 59:             switch (data) {
+[e $U 17  ]
+{
+"60
+[; ;event.c: 60:                 case '0':
+[e :U 18 ]
+"61
+[; ;event.c: 61:                     ev = EV_B_0;
+[e = _ev -> . `E5 0 `i ]
+"62
+[; ;event.c: 62:                     break;
+[e $U 16  ]
+"63
+[; ;event.c: 63:                 case '1':
+[e :U 19 ]
+"64
+[; ;event.c: 64:                     ev = EV_B_1;
+[e = _ev -> . `E5 1 `i ]
+"65
+[; ;event.c: 65:                     break;
+[e $U 16  ]
+"66
+[; ;event.c: 66:                 case '2':
+[e :U 20 ]
+"67
+[; ;event.c: 67:                     ev = EV_B_2;
+[e = _ev -> . `E5 2 `i ]
+"68
+[; ;event.c: 68:                     break;
+[e $U 16  ]
+"69
+[; ;event.c: 69:                 case '3':
+[e :U 21 ]
+"70
+[; ;event.c: 70:                     ev = EV_B_3;
+[e = _ev -> . `E5 3 `i ]
+"71
+[; ;event.c: 71:                     break;
+[e $U 16  ]
+"72
+[; ;event.c: 72:                 case '4':
+[e :U 22 ]
+"73
+[; ;event.c: 73:                     ev = EV_B_4;
+[e = _ev -> . `E5 4 `i ]
+"74
+[; ;event.c: 74:                     break;
+[e $U 16  ]
+"75
+[; ;event.c: 75:                 case 'P': case'p':
+[e :U 23 ]
+[e :U 24 ]
+"76
+[; ;event.c: 76:                     ev = EV_NOEVENT;
+[e = _ev -> . `E5 6 `i ]
+"77
+[; ;event.c: 77:                     setProt('p');
+[e ( _setProt (1 -> -> 112 `ui `uc ]
+"79
+[; ;event.c: 79:                     break;
+[e $U 16  ]
+"80
+[; ;event.c: 80:                 default:
+[e :U 25 ]
+"81
+[; ;event.c: 81:                     break;
+[e $U 16  ]
+"82
+[; ;event.c: 82:             }
+}
+[e $U 16  ]
+[e :U 17 ]
+[e [\ _data , $ -> -> 48 `ui `i 18
+ , $ -> -> 49 `ui `i 19
+ , $ -> -> 50 `ui `i 20
+ , $ -> -> 51 `ui `i 21
+ , $ -> -> 52 `ui `i 22
+ , $ -> -> 80 `ui `i 23
+ , $ -> -> 112 `ui `i 24
+ 25 ]
+[e :U 16 ]
+"83
+[; ;event.c: 83:         } else {
+}
+[e $U 26  ]
+[e :U 15 ]
+{
+"84
+[; ;event.c: 84:             setProt(data);
+[e ( _setProt (1 -> _data `uc ]
+"86
+[; ;event.c: 86:             if(prot_ready)
+[e $ ! != -> _prot_ready `i -> 0 `i 27  ]
+"87
+[; ;event.c: 87:             {
+{
+"88
+[; ;event.c: 88:                 ev = EV_PROT_SERIAL;
+[e = _ev -> . `E5 5 `i ]
+"89
+[; ;event.c: 89:                 lcdData('k');
+[e ( _lcdData (1 -> -> 107 `ui `uc ]
+"90
+[; ;event.c: 90:             }
+}
+[e :U 27 ]
+"91
+[; ;event.c: 91:         }
+}
+[e :U 26 ]
+"92
+[; ;event.c: 92:     }
+}
+[e :U 14 ]
+"95
+[; ;event.c: 95:     return ev;
+[e ) -> _ev `ui ]
+[e $UE 9  ]
+"98
+[; ;event.c: 98: }
+[e :UE 9 ]
+}

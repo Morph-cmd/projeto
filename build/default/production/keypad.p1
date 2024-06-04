@@ -1,0 +1,170 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"26 keypad.c
+[; ;keypad.c: 26: static unsigned char valor = 0x00;
+[v _valor `uc ~T0 @X0 1 s ]
+[i _valor
+-> -> 0 `i `uc
+]
+"29
+[; ;keypad.c: 29: unsigned char kpRead(void) {
+[v _kpRead `(uc ~T0 @X0 1 ef ]
+{
+[e :U _kpRead ]
+[f ]
+"30
+[; ;keypad.c: 30:     return valor;
+[e ) _valor ]
+[e $UE 1  ]
+"31
+[; ;keypad.c: 31: }
+[e :UE 1 ]
+}
+"33
+[; ;keypad.c: 33: void kpDebounce(void) {
+[v _kpDebounce `(v ~T0 @X0 1 ef ]
+{
+[e :U _kpDebounce ]
+[f ]
+"42
+[; ;keypad.c: 42:     unsigned char i, j;
+[v _i `uc ~T0 @X0 1 a ]
+[v _j `uc ~T0 @X0 1 a ]
+"43
+[; ;keypad.c: 43:     static unsigned char tempo;
+[v F10 `uc ~T0 @X0 1 s tempo ]
+"44
+[; ;keypad.c: 44:     static unsigned char valorNovo = 0x00000;
+[v F11 `uc ~T0 @X0 1 s valorNovo ]
+[i F11
+-> -> 0 `i `uc
+]
+"45
+[; ;keypad.c: 45:     static unsigned char valorAntigo = 0x00000;
+[v F12 `uc ~T0 @X0 1 s valorAntigo ]
+[i F12
+-> -> 0 `i `uc
+]
+[v F13 `uc ~T0 @X0 -> 5 `i s ]
+[i F13
+:U ..
+"46
+[; ;keypad.c: 46:     char portes[5] = {(*(volatile __near unsigned char*)0xF81), (*(volatile __near unsigned char*)0xF81), (*(volatile __near unsigned char*)0xF81), (*(volatile __near unsigned char*)0xF81), (*(volatile __near unsigned char*)0xF84)};
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+[v _portes `uc ~T0 @X0 -> 5 `i a ]
+[e = _portes F13 ]
+[e ; = *U + &U _portes * -> -> -> 0 `i `ui `ux -> -> # *U &U _portes `ui `ux -> *U -> -> 3969 `i `*VNuc `uc ; = *U + &U _portes * -> -> -> 1 `i `ui `ux -> -> # *U &U _portes `ui `ux -> *U -> -> 3969 `i `*VNuc `uc ; = *U + &U _portes * -> -> -> 2 `i `ui `ux -> -> # *U &U _portes `ui `ux -> *U -> -> 3969 `i `*VNuc `uc ; = *U + &U _portes * -> -> -> 3 `i `ui `ux -> -> # *U &U _portes `ui `ux -> *U -> -> 3969 `i `*VNuc `uc = *U + &U _portes * -> -> -> 4 `i `ui `ux -> -> # *U &U _portes `ui `ux -> *U -> -> 3972 `i `*VNuc `uc ]
+[v F15 `uc ~T0 @X0 -> 5 `i s ]
+[i F15
+:U ..
+"47
+[; ;keypad.c: 47:     char bits[5] = {2, 3, 5, 4, 1};
+-> -> 2 `i `uc
+-> -> 3 `i `uc
+-> -> 5 `i `uc
+-> -> 4 `i `uc
+-> -> 1 `i `uc
+..
+]
+[v _bits `uc ~T0 @X0 -> 5 `i a ]
+[e = _bits F15 ]
+"62
+[; ;keypad.c: 62:     for (j = 0; j < 5; j++) {
+{
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 5 `i 3  ]
+[e $U 4  ]
+[e :U 3 ]
+{
+"63
+[; ;keypad.c: 63:             if (!((portes[j]) & (1<<bits[j]))) {
+[e $ ! ! != & -> *U + &U _portes * -> _j `ux -> -> # *U &U _portes `ui `ux `i << -> 1 `i -> *U + &U _bits * -> _j `ux -> -> # *U &U _bits `ui `ux `i -> 0 `i 6  ]
+{
+"64
+[; ;keypad.c: 64:                 ((valorNovo) |= (1<<j));
+[e =| F11 -> << -> 1 `i -> _j `i `uc ]
+"65
+[; ;keypad.c: 65:             } else {
+}
+[e $U 7  ]
+[e :U 6 ]
+{
+"66
+[; ;keypad.c: 66:                 ((valorNovo) &= ~(1<<j));
+[e =& F11 -> ~ << -> 1 `i -> _j `i `uc ]
+"67
+[; ;keypad.c: 67:             }
+}
+[e :U 7 ]
+"68
+[; ;keypad.c: 68:         }
+}
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 5 `i 3  ]
+[e :U 4 ]
+}
+"69
+[; ;keypad.c: 69:     if (valorAntigo == valorNovo) {
+[e $ ! == -> F12 `i -> F11 `i 8  ]
+{
+"70
+[; ;keypad.c: 70:         tempo--;
+[e -- F10 -> -> 1 `i `uc ]
+"71
+[; ;keypad.c: 71:     } else {
+}
+[e $U 9  ]
+[e :U 8 ]
+{
+"72
+[; ;keypad.c: 72:         tempo = 10;
+[e = F10 -> -> 10 `i `uc ]
+"73
+[; ;keypad.c: 73:         valorAntigo = valorNovo;
+[e = F12 F11 ]
+"74
+[; ;keypad.c: 74:     }
+}
+[e :U 9 ]
+"75
+[; ;keypad.c: 75:     if (tempo == 0) {
+[e $ ! == -> F10 `i -> 0 `i 10  ]
+{
+"76
+[; ;keypad.c: 76:         valor = valorAntigo;
+[e = _valor F12 ]
+"77
+[; ;keypad.c: 77:     }
+}
+[e :U 10 ]
+"79
+[; ;keypad.c: 79: }
+[e :UE 2 ]
+}
+"81
+[; ;keypad.c: 81: void kpInit(void) {
+[v _kpInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _kpInit ]
+[f ]
+"82
+[; ;keypad.c: 82:     (*(volatile __near unsigned char*)0xF93) = 0xFF;
+[e = *U -> -> 3987 `i `*VNuc -> -> 255 `i `uc ]
+"83
+[; ;keypad.c: 83:     (((*(volatile __near unsigned char*)0xFF1)) &= ~(1<<7));
+[e =& *U -> -> 4081 `i `*VNuc -> ~ << -> 1 `i -> 7 `i `uc ]
+"84
+[; ;keypad.c: 84:     (*(volatile __near unsigned char*)0xFC1) = 0b00001110;
+[e = *U -> -> 4033 `i `*VNuc -> -> 14 `i `uc ]
+"87
+[; ;keypad.c: 87:     (*(volatile __near unsigned char*)0xF63) = 0x00;
+[e = *U -> -> 3939 `i `*VNuc -> -> 0 `i `uc ]
+"89
+[; ;keypad.c: 89: }
+[e :UE 11 ]
+}

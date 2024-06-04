@@ -19,14 +19,27 @@ void smLoop(void) {
     switch (getState()) {
         case STATE_ALARME:
             //execução de atividade
-            if (evento == EV_0) {
+            if (evento == EV_B_0) {
                 //setAlarmLevel(getAlarmLevel() + 1);
                 setLanguage(getLanguage() + 1);
                 
             }
             
-            if (evento == EV_1) {
+            if (evento == EV_B_1) {
                 setLanguage(getLanguage() - 1);
+            }
+            
+            if(evento == EV_PROT_SERIAL)
+            {
+                lcdData('s');
+                unsigned char prot[4];
+                getProt(prot);
+                
+                for(int i = 0; i < 4; i++)
+                {
+                    lcdData(prot[i]);
+                }
+                resetProt();
             }
             /*
             //gestão da maquina de estado
@@ -68,5 +81,5 @@ void smLoop(void) {
              * */
 
     }
-    outputPrint(getState(), getLanguage());
+    //outputPrint(getState(), getLanguage());
 }

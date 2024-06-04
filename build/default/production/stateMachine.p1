@@ -1,0 +1,151 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"18 ./var.h
+[; ;./var.h: 18: void setState(char newState);
+[v _setState `(v ~T0 @X0 0 ef1`uc ]
+"9 stateMachine.c
+[; ;stateMachine.c: 9:     setState(STATE_ALARME);
+[c E21 0 1 2 3 .. ]
+[n E21 . STATE_ALARME STATE_TEMPO STATE_IDIOMA STATE_FIM  ]
+"19 ./event.h
+[; ;./event.h: 19: void eventInit(void);
+[v _eventInit `(v ~T0 @X0 0 ef ]
+"20
+[; ;./event.h: 20: unsigned int eventRead(void);
+[v _eventRead `(ui ~T0 @X0 0 ef ]
+"22 stateMachine.c
+[; ;stateMachine.c: 22:             if (evento == EV_B_0) {
+[c E28 0 1 2 3 4 5 6 .. ]
+[n E28 . EV_B_0 EV_B_1 EV_B_2 EV_B_3 EV_B_4 EV_PROT_SERIAL EV_NOEVENT  ]
+"24 ./var.h
+[; ;./var.h: 24: void setLanguage(char newLanguage);
+[v _setLanguage `(v ~T0 @X0 0 ef1`uc ]
+"23
+[; ;./var.h: 23: char getLanguage(void);
+[v _getLanguage `(uc ~T0 @X0 0 ef ]
+"26 ./lcd.h
+[; ;./lcd.h: 26:  void lcdData(unsigned char valor);
+[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
+"25 ./var.h
+[; ;./var.h: 25: void getProt(unsigned char[]);
+[v _getProt `(v ~T0 @X0 0 ef1`*uc ]
+"27
+[; ;./var.h: 27: void resetProt();
+[v _resetProt `(v ~T0 @X0 0 e? ]
+"17
+[; ;./var.h: 17: char getState(void);
+[v _getState `(uc ~T0 @X0 0 ef ]
+"13 ./var.h
+[; ;./var.h: 13: char prot_ready;
+[v _prot_ready `uc ~T0 @X0 1 e ]
+"8 stateMachine.c
+[; ;stateMachine.c: 8: void smInit(void) {
+[v _smInit `(v ~T0 @X0 1 ef ]
+{
+[e :U _smInit ]
+[f ]
+"9
+[; ;stateMachine.c: 9:     setState(STATE_ALARME);
+[e ( _setState (1 -> . `E21 0 `uc ]
+"10
+[; ;stateMachine.c: 10:     eventInit();
+[e ( _eventInit ..  ]
+"11
+[; ;stateMachine.c: 11: }
+[e :UE 1 ]
+}
+"13
+[; ;stateMachine.c: 13: void smLoop(void) {
+[v _smLoop `(v ~T0 @X0 1 ef ]
+{
+[e :U _smLoop ]
+[f ]
+"14
+[; ;stateMachine.c: 14:     unsigned char evento;
+[v _evento `uc ~T0 @X0 1 a ]
+"17
+[; ;stateMachine.c: 17:     evento = eventRead();
+[e = _evento -> ( _eventRead ..  `uc ]
+"19
+[; ;stateMachine.c: 19:     switch (getState()) {
+[e $U 4  ]
+{
+"20
+[; ;stateMachine.c: 20:         case STATE_ALARME:
+[e :U 5 ]
+"22
+[; ;stateMachine.c: 22:             if (evento == EV_B_0) {
+[e $ ! == -> _evento `i -> . `E28 0 `i 6  ]
+{
+"24
+[; ;stateMachine.c: 24:                 setLanguage(getLanguage() + 1);
+[e ( _setLanguage (1 -> + -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"26
+[; ;stateMachine.c: 26:             }
+}
+[e :U 6 ]
+"28
+[; ;stateMachine.c: 28:             if (evento == EV_B_1) {
+[e $ ! == -> _evento `i -> . `E28 1 `i 7  ]
+{
+"29
+[; ;stateMachine.c: 29:                 setLanguage(getLanguage() - 1);
+[e ( _setLanguage (1 -> - -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"30
+[; ;stateMachine.c: 30:             }
+}
+[e :U 7 ]
+"32
+[; ;stateMachine.c: 32:             if(evento == EV_PROT_SERIAL)
+[e $ ! == -> _evento `i -> . `E28 5 `i 8  ]
+"33
+[; ;stateMachine.c: 33:             {
+{
+"34
+[; ;stateMachine.c: 34:                 lcdData('s');
+[e ( _lcdData (1 -> -> 115 `ui `uc ]
+"35
+[; ;stateMachine.c: 35:                 unsigned char prot[4];
+[v _prot `uc ~T0 @X0 -> 4 `i a ]
+"36
+[; ;stateMachine.c: 36:                 getProt(prot);
+[e ( _getProt (1 &U _prot ]
+"38
+[; ;stateMachine.c: 38:                 for(int i = 0; i < 4; i++)
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 4 `i 9  ]
+[e $U 10  ]
+[e :U 9 ]
+"39
+[; ;stateMachine.c: 39:                 {
+{
+"40
+[; ;stateMachine.c: 40:                     lcdData(prot[i]);
+[e ( _lcdData (1 *U + &U _prot * -> -> _i `ui `ux -> -> # *U &U _prot `ui `ux ]
+"41
+[; ;stateMachine.c: 41:                 }
+}
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 4 `i 9  ]
+[e :U 10 ]
+}
+"42
+[; ;stateMachine.c: 42:                 resetProt();
+[e ( _resetProt ..  ]
+"43
+[; ;stateMachine.c: 43:             }
+}
+[e :U 8 ]
+"83
+[; ;stateMachine.c: 83:     }
+}
+[e $U 3  ]
+[e :U 4 ]
+[e [\ ( _getState ..  , $ . `E21 0 5
+ 3 ]
+[e :U 3 ]
+"85
+[; ;stateMachine.c: 85: }
+[e :UE 2 ]
+}

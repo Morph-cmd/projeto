@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/var.h</file>
+            <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/ds1307.h</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/event.h</file>
+            <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/stateMachine.h</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/main.c</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/event.c</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/keypad.c</file>
@@ -12,6 +14,7 @@
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/stateMachine.c</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/output.c</file>
             <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/serial.c</file>
+            <file>file:/C:/Users/Pessoal/MPLABXProjects/projeto.X/ds1307.c</file>
         </group>
     </open-files>
 </project-private>

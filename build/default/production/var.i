@@ -21,7 +21,7 @@ int getAlarmLevel(void);
 void setAlarmLevel(int newAlarmLevel);
 char getLanguage(void);
 void setLanguage(char newLanguage);
-void getProt(unsigned char[]);
+unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
 # 1 "var.c" 2
@@ -45,6 +45,7 @@ static char state;
 static char language;
 static int time;
 static int alarmLevel;
+static char index=0;
 static unsigned char prot[4];
 
 
@@ -88,29 +89,26 @@ void setLanguage(char newLanguage) {
     language = newLanguage % 2;
 }
 
-void getProt(unsigned char p[4]) {
+unsigned char* getProt() {
 
-    char i;
-    while (i < 4)
-    {
-        p[i] = prot[i];
-        i++;
-    }
+    return prot;
 }
 
 void setProt(char newChar) {
-    char i = 0;
-    while (prot[i] != 0) i++;
-    prot[i] = newChar;
 
-    if(i == 4 - 1) prot_ready = 1;
+    prot[index++] = newChar;
+
+    if(index == 4) prot_ready = 1;
 }
 
 void resetProt()
 {
-    char i;
+    char i = 0;
     while (i < 4)
     {
         prot[i] = 0;
+        i++;
     }
+    prot_ready = 0;
+    index = 0;
 }

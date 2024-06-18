@@ -2,18 +2,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "18 ./var.h
 [; ;./var.h: 18: void setState(char newState);
 [v _setState `(v ~T0 @X0 0 ef1`uc ]
-"9 stateMachine.c
-[; ;stateMachine.c: 9:     setState(STATE_ALARME);
-[c E21 0 1 2 3 .. ]
-[n E21 . STATE_ALARME STATE_TEMPO STATE_IDIOMA STATE_FIM  ]
+"11 stateMachine.c
+[; ;stateMachine.c: 11:     setState(STATE_ALARME);
+[c E20 0 1 2 3 4 .. ]
+[n E20 . STATE_ALARME STATE_TEMPO STATE_IDIOMA STATE_HORA STATE_FIM  ]
 "19 ./event.h
 [; ;./event.h: 19: void eventInit(void);
 [v _eventInit `(v ~T0 @X0 0 ef ]
 "20
 [; ;./event.h: 20: unsigned int eventRead(void);
 [v _eventRead `(ui ~T0 @X0 0 ef ]
-"22 stateMachine.c
-[; ;stateMachine.c: 22:             if (evento == EV_B_0) {
+"23 stateMachine.c
+[; ;stateMachine.c: 23:             if (evento == EV_B_2) {
 [c E28 0 1 2 3 4 5 6 .. ]
 [n E28 . EV_B_0 EV_B_1 EV_B_2 EV_B_3 EV_B_4 EV_PROT_SERIAL EV_NOEVENT  ]
 "24 ./var.h
@@ -22,130 +22,257 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;./var.h: 23: char getLanguage(void);
 [v _getLanguage `(uc ~T0 @X0 0 ef ]
-"26 ./lcd.h
-[; ;./lcd.h: 26:  void lcdData(unsigned char valor);
-[v _lcdData `(v ~T0 @X0 0 ef1`uc ]
-"25 ./var.h
-[; ;./var.h: 25: void getProt(unsigned char[]);
-[v _getProt `(v ~T0 @X0 0 ef1`*uc ]
+"25
+[; ;./var.h: 25: unsigned char* getProt();
+[v _getProt `(*uc ~T0 @X0 0 e? ]
 "27
 [; ;./var.h: 27: void resetProt();
 [v _resetProt `(v ~T0 @X0 0 e? ]
 "17
 [; ;./var.h: 17: char getState(void);
 [v _getState `(uc ~T0 @X0 0 ef ]
+"11 ./output.h
+[; ;./output.h: 11: void outputPrint(int numTela, int idioma);
+[v _outputPrint `(v ~T0 @X0 0 ef2`i`i ]
 "13 ./var.h
 [; ;./var.h: 13: char prot_ready;
 [v _prot_ready `uc ~T0 @X0 1 e ]
 "8 stateMachine.c
-[; ;stateMachine.c: 8: void smInit(void) {
+[; ;stateMachine.c: 8: char estado_ant;
+[v _estado_ant `uc ~T0 @X0 1 e ]
+"10
+[; ;stateMachine.c: 10: void smInit(void) {
 [v _smInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _smInit ]
 [f ]
-"9
-[; ;stateMachine.c: 9:     setState(STATE_ALARME);
-[e ( _setState (1 -> . `E21 0 `uc ]
-"10
-[; ;stateMachine.c: 10:     eventInit();
-[e ( _eventInit ..  ]
 "11
-[; ;stateMachine.c: 11: }
+[; ;stateMachine.c: 11:     setState(STATE_ALARME);
+[e ( _setState (1 -> . `E20 0 `uc ]
+"12
+[; ;stateMachine.c: 12:     eventInit();
+[e ( _eventInit ..  ]
+"13
+[; ;stateMachine.c: 13: }
 [e :UE 1 ]
 }
-"13
-[; ;stateMachine.c: 13: void smLoop(void) {
+"15
+[; ;stateMachine.c: 15: void smLoop(void) {
 [v _smLoop `(v ~T0 @X0 1 ef ]
 {
 [e :U _smLoop ]
 [f ]
-"14
-[; ;stateMachine.c: 14:     unsigned char evento;
+"16
+[; ;stateMachine.c: 16:     unsigned char evento;
 [v _evento `uc ~T0 @X0 1 a ]
-"17
-[; ;stateMachine.c: 17:     evento = eventRead();
-[e = _evento -> ( _eventRead ..  `uc ]
 "19
-[; ;stateMachine.c: 19:     switch (getState()) {
+[; ;stateMachine.c: 19:     evento = eventRead();
+[e = _evento -> ( _eventRead ..  `uc ]
+"21
+[; ;stateMachine.c: 21:     switch (getState()) {
 [e $U 4  ]
 {
-"20
-[; ;stateMachine.c: 20:         case STATE_ALARME:
-[e :U 5 ]
 "22
-[; ;stateMachine.c: 22:             if (evento == EV_B_0) {
-[e $ ! == -> _evento `i -> . `E28 0 `i 6  ]
+[; ;stateMachine.c: 22:         case STATE_ALARME:
+[e :U 5 ]
+"23
+[; ;stateMachine.c: 23:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E28 2 `i 6  ]
 {
 "24
-[; ;stateMachine.c: 24:                 setLanguage(getLanguage() + 1);
-[e ( _setLanguage (1 -> + -> ( _getLanguage ..  `i -> 1 `i `uc ]
-"26
-[; ;stateMachine.c: 26:             }
+[; ;stateMachine.c: 24:                 setState(STATE_IDIOMA);
+[e ( _setState (1 -> . `E20 2 `uc ]
+"25
+[; ;stateMachine.c: 25:             }
 }
 [e :U 6 ]
-"28
-[; ;stateMachine.c: 28:             if (evento == EV_B_1) {
-[e $ ! == -> _evento `i -> . `E28 1 `i 7  ]
+"27
+[; ;stateMachine.c: 27:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E28 3 `i 7  ]
 {
+"28
+[; ;stateMachine.c: 28:                 setState(STATE_TEMPO);
+[e ( _setState (1 -> . `E20 1 `uc ]
 "29
-[; ;stateMachine.c: 29:                 setLanguage(getLanguage() - 1);
-[e ( _setLanguage (1 -> - -> ( _getLanguage ..  `i -> 1 `i `uc ]
-"30
-[; ;stateMachine.c: 30:             }
+[; ;stateMachine.c: 29:             }
 }
 [e :U 7 ]
+"31
+[; ;stateMachine.c: 31:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E28 4 `i 8  ]
 "32
-[; ;stateMachine.c: 32:             if(evento == EV_PROT_SERIAL)
-[e $ ! == -> _evento `i -> . `E28 5 `i 8  ]
+[; ;stateMachine.c: 32:             {
+{
 "33
-[; ;stateMachine.c: 33:             {
-{
+[; ;stateMachine.c: 33:                 setState(STATE_HORA);
+[e ( _setState (1 -> . `E20 3 `uc ]
 "34
-[; ;stateMachine.c: 34:                 lcdData('s');
-[e ( _lcdData (1 -> -> 115 `ui `uc ]
-"35
-[; ;stateMachine.c: 35:                 unsigned char prot[4];
-[v _prot `uc ~T0 @X0 -> 4 `i a ]
-"36
-[; ;stateMachine.c: 36:                 getProt(prot);
-[e ( _getProt (1 &U _prot ]
-"38
-[; ;stateMachine.c: 38:                 for(int i = 0; i < 4; i++)
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 4 `i 9  ]
-[e $U 10  ]
-[e :U 9 ]
-"39
-[; ;stateMachine.c: 39:                 {
-{
-"40
-[; ;stateMachine.c: 40:                     lcdData(prot[i]);
-[e ( _lcdData (1 *U + &U _prot * -> -> _i `ui `ux -> -> # *U &U _prot `ui `ux ]
-"41
-[; ;stateMachine.c: 41:                 }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 4 `i 9  ]
-[e :U 10 ]
-}
-"42
-[; ;stateMachine.c: 42:                 resetProt();
-[e ( _resetProt ..  ]
-"43
-[; ;stateMachine.c: 43:             }
+[; ;stateMachine.c: 34:             }
 }
 [e :U 8 ]
-"83
-[; ;stateMachine.c: 83:     }
+"35
+[; ;stateMachine.c: 35:             break;
+[e $U 3  ]
+"36
+[; ;stateMachine.c: 36:         case STATE_IDIOMA:
+[e :U 9 ]
+"38
+[; ;stateMachine.c: 38:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E28 2 `i 10  ]
+{
+"39
+[; ;stateMachine.c: 39:                 setState(STATE_TEMPO);
+[e ( _setState (1 -> . `E20 1 `uc ]
+"40
+[; ;stateMachine.c: 40:             }
+}
+[e :U 10 ]
+"42
+[; ;stateMachine.c: 42:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E28 3 `i 11  ]
+{
+"43
+[; ;stateMachine.c: 43:                 setState(STATE_ALARME);
+[e ( _setState (1 -> . `E20 0 `uc ]
+"44
+[; ;stateMachine.c: 44:             }
+}
+[e :U 11 ]
+"46
+[; ;stateMachine.c: 46:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E28 4 `i 12  ]
+"47
+[; ;stateMachine.c: 47:             {
+{
+"48
+[; ;stateMachine.c: 48:                 setState(STATE_HORA);
+[e ( _setState (1 -> . `E20 3 `uc ]
+"49
+[; ;stateMachine.c: 49:             }
+}
+[e :U 12 ]
+"51
+[; ;stateMachine.c: 51:             if (evento == EV_B_0) {
+[e $ ! == -> _evento `i -> . `E28 0 `i 13  ]
+{
+"53
+[; ;stateMachine.c: 53:                 setLanguage(getLanguage() + 1);
+[e ( _setLanguage (1 -> + -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"55
+[; ;stateMachine.c: 55:             }
+}
+[e :U 13 ]
+"57
+[; ;stateMachine.c: 57:             if (evento == EV_B_1) {
+[e $ ! == -> _evento `i -> . `E28 1 `i 14  ]
+{
+"58
+[; ;stateMachine.c: 58:                 setLanguage(getLanguage() - 1);
+[e ( _setLanguage (1 -> - -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"59
+[; ;stateMachine.c: 59:             }
+}
+[e :U 14 ]
+"61
+[; ;stateMachine.c: 61:             if (evento == EV_PROT_SERIAL) {
+[e $ ! == -> _evento `i -> . `E28 5 `i 15  ]
+{
+"62
+[; ;stateMachine.c: 62:                 unsigned char* prot;
+[v _prot `*uc ~T0 @X0 1 a ]
+"63
+[; ;stateMachine.c: 63:                 prot = getProt();
+[e = _prot ( _getProt ..  ]
+"65
+[; ;stateMachine.c: 65:                 if (prot[1] == 'l') {
+[e $ ! == -> *U + _prot * -> -> 1 `i `x -> -> # *U _prot `i `x `ui -> 108 `ui 16  ]
+{
+"66
+[; ;stateMachine.c: 66:                     setLanguage(prot[3]);
+[e ( _setLanguage (1 -> *U + _prot * -> -> 3 `i `x -> -> # *U _prot `i `x `uc ]
+"67
+[; ;stateMachine.c: 67:                 }
+}
+[e :U 16 ]
+"69
+[; ;stateMachine.c: 69:                 resetProt();
+[e ( _resetProt ..  ]
+"70
+[; ;stateMachine.c: 70:             }
+}
+[e :U 15 ]
+"71
+[; ;stateMachine.c: 71:             break;
+[e $U 3  ]
+"72
+[; ;stateMachine.c: 72:         case STATE_TEMPO:
+[e :U 17 ]
+"76
+[; ;stateMachine.c: 76:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E28 2 `i 18  ]
+{
+"77
+[; ;stateMachine.c: 77:                 setState(STATE_ALARME);
+[e ( _setState (1 -> . `E20 0 `uc ]
+"78
+[; ;stateMachine.c: 78:             }
+}
+[e :U 18 ]
+"80
+[; ;stateMachine.c: 80:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E28 3 `i 19  ]
+{
+"81
+[; ;stateMachine.c: 81:                 setState(STATE_IDIOMA);
+[e ( _setState (1 -> . `E20 2 `uc ]
+"82
+[; ;stateMachine.c: 82:             }
+}
+[e :U 19 ]
+"84
+[; ;stateMachine.c: 84:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E28 4 `i 20  ]
+"85
+[; ;stateMachine.c: 85:             {
+{
+"86
+[; ;stateMachine.c: 86:                 setState(STATE_HORA);
+[e ( _setState (1 -> . `E20 3 `uc ]
+"87
+[; ;stateMachine.c: 87:             }
+}
+[e :U 20 ]
+"89
+[; ;stateMachine.c: 89:             break;
+[e $U 3  ]
+"90
+[; ;stateMachine.c: 90:         case STATE_HORA:
+[e :U 21 ]
+"91
+[; ;stateMachine.c: 91:             if(evento != EV_B_4)
+[e $ ! != -> _evento `i -> . `E28 4 `i 22  ]
+"92
+[; ;stateMachine.c: 92:                 setState(STATE_ALARME);
+[e ( _setState (1 -> . `E20 0 `uc ]
+[e :U 22 ]
+"93
+[; ;stateMachine.c: 93:             break;
+[e $U 3  ]
+"94
+[; ;stateMachine.c: 94:     }
 }
 [e $U 3  ]
 [e :U 4 ]
-[e [\ ( _getState ..  , $ . `E21 0 5
+[e [\ ( _getState ..  , $ . `E20 0 5
+ , $ . `E20 2 9
+ , $ . `E20 1 17
+ , $ . `E20 3 21
  3 ]
 [e :U 3 ]
-"85
-[; ;stateMachine.c: 85: }
+"95
+[; ;stateMachine.c: 95:     outputPrint(getState(), getLanguage());
+[e ( _outputPrint (2 , -> ( _getState ..  `i -> ( _getLanguage ..  `i ]
+"96
+[; ;stateMachine.c: 96: }
 [e :UE 2 ]
 }

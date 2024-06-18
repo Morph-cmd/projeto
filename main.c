@@ -30,6 +30,11 @@ void main(void) {
     serialInit();
     TRISA = 0x00;
     LATA = 0x00;
+    
+    setSeconds(0);
+    setMinutes(0);
+    setHours(0);
+    
     //dsWriteData(0x80,SEC);
     while (1) {
         kpDebounce();

@@ -15,235 +15,218 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;var.c: 10: static int alarmLevel;
 [v _alarmLevel `i ~T0 @X0 1 s ]
 "11
-[; ;var.c: 11: static unsigned char prot[4];
+[; ;var.c: 11: static char index=0;
+[v _index `uc ~T0 @X0 1 s ]
+[i _index
+-> -> 0 `i `uc
+]
+"12
+[; ;var.c: 12: static unsigned char prot[4];
 [v _prot `uc ~T0 @X0 -> 4 `i s ]
-"14
-[; ;var.c: 14: void varInit(void) {
+"15
+[; ;var.c: 15: void varInit(void) {
 [v _varInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _varInit ]
 [f ]
-"15
-[; ;var.c: 15:     state = 0;
-[e = _state -> -> 0 `i `uc ]
 "16
-[; ;var.c: 16:     time = 1000;
-[e = _time -> 1000 `i ]
+[; ;var.c: 16:     state = 0;
+[e = _state -> -> 0 `i `uc ]
 "17
-[; ;var.c: 17:     alarmLevel = 512;
-[e = _alarmLevel -> 512 `i ]
+[; ;var.c: 17:     time = 1000;
+[e = _time -> 1000 `i ]
 "18
-[; ;var.c: 18: }
+[; ;var.c: 18:     alarmLevel = 512;
+[e = _alarmLevel -> 512 `i ]
+"19
+[; ;var.c: 19: }
 [e :UE 1 ]
 }
-"20
-[; ;var.c: 20: char getState(void) {
+"21
+[; ;var.c: 21: char getState(void) {
 [v _getState `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getState ]
 [f ]
-"21
-[; ;var.c: 21:     return state;
+"22
+[; ;var.c: 22:     return state;
 [e ) _state ]
 [e $UE 2  ]
-"22
-[; ;var.c: 22: }
+"23
+[; ;var.c: 23: }
 [e :UE 2 ]
 }
-"24
-[; ;var.c: 24: void setState(char newState) {
+"25
+[; ;var.c: 25: void setState(char newState) {
 [v _setState `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setState ]
 [v _newState `uc ~T0 @X0 1 r1 ]
 [f ]
-"25
-[; ;var.c: 25:     state = newState;
-[e = _state _newState ]
 "26
-[; ;var.c: 26: }
+[; ;var.c: 26:     state = newState;
+[e = _state _newState ]
+"27
+[; ;var.c: 27: }
 [e :UE 3 ]
 }
-"28
-[; ;var.c: 28: int getTime(void) {
+"29
+[; ;var.c: 29: int getTime(void) {
 [v _getTime `(i ~T0 @X0 1 ef ]
 {
 [e :U _getTime ]
 [f ]
-"29
-[; ;var.c: 29:     return time;
+"30
+[; ;var.c: 30:     return time;
 [e ) _time ]
 [e $UE 4  ]
-"30
-[; ;var.c: 30: }
+"31
+[; ;var.c: 31: }
 [e :UE 4 ]
 }
-"32
-[; ;var.c: 32: void setTime(int newTime) {
+"33
+[; ;var.c: 33: void setTime(int newTime) {
 [v _setTime `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _setTime ]
 [v _newTime `i ~T0 @X0 1 r1 ]
 [f ]
-"33
-[; ;var.c: 33:     time = newTime;
-[e = _time _newTime ]
 "34
-[; ;var.c: 34: }
+[; ;var.c: 34:     time = newTime;
+[e = _time _newTime ]
+"35
+[; ;var.c: 35: }
 [e :UE 5 ]
 }
-"36
-[; ;var.c: 36: int getAlarmLevel(void) {
+"37
+[; ;var.c: 37: int getAlarmLevel(void) {
 [v _getAlarmLevel `(i ~T0 @X0 1 ef ]
 {
 [e :U _getAlarmLevel ]
 [f ]
-"37
-[; ;var.c: 37:     return alarmLevel;
+"38
+[; ;var.c: 38:     return alarmLevel;
 [e ) _alarmLevel ]
 [e $UE 6  ]
-"38
-[; ;var.c: 38: }
+"39
+[; ;var.c: 39: }
 [e :UE 6 ]
 }
-"40
-[; ;var.c: 40: void setAlarmLevel(int newAlarmLevel) {
+"41
+[; ;var.c: 41: void setAlarmLevel(int newAlarmLevel) {
 [v _setAlarmLevel `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _setAlarmLevel ]
 [v _newAlarmLevel `i ~T0 @X0 1 r1 ]
 [f ]
-"41
-[; ;var.c: 41:     alarmLevel = newAlarmLevel;
-[e = _alarmLevel _newAlarmLevel ]
 "42
-[; ;var.c: 42: }
+[; ;var.c: 42:     alarmLevel = newAlarmLevel;
+[e = _alarmLevel _newAlarmLevel ]
+"43
+[; ;var.c: 43: }
 [e :UE 7 ]
 }
-"44
-[; ;var.c: 44: char getLanguage(void) {
+"45
+[; ;var.c: 45: char getLanguage(void) {
 [v _getLanguage `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getLanguage ]
 [f ]
-"45
-[; ;var.c: 45:     return language;
+"46
+[; ;var.c: 46:     return language;
 [e ) _language ]
 [e $UE 8  ]
-"46
-[; ;var.c: 46: }
+"47
+[; ;var.c: 47: }
 [e :UE 8 ]
 }
-"48
-[; ;var.c: 48: void setLanguage(char newLanguage) {
+"49
+[; ;var.c: 49: void setLanguage(char newLanguage) {
 [v _setLanguage `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setLanguage ]
 [v _newLanguage `uc ~T0 @X0 1 r1 ]
 [f ]
-"51
-[; ;var.c: 51:     language = newLanguage % 2;
-[e = _language -> % -> _newLanguage `i -> 2 `i `uc ]
 "52
-[; ;var.c: 52: }
+[; ;var.c: 52:     language = newLanguage % 2;
+[e = _language -> % -> _newLanguage `i -> 2 `i `uc ]
+"53
+[; ;var.c: 53: }
 [e :UE 9 ]
 }
-"54
-[; ;var.c: 54: void getProt(unsigned char p[4]) {
-[v _getProt `(v ~T0 @X0 1 ef1`*uc ]
+"55
+[; ;var.c: 55: unsigned char* getProt() {
+[v _getProt `(*uc ~T0 @X0 1 ef ]
 {
 [e :U _getProt ]
-[v _p `*uc ~T0 @X0 1 r1 ]
 [f ]
-"56
-[; ;var.c: 56:     char i;
-[v _i `uc ~T0 @X0 1 a ]
 "57
-[; ;var.c: 57:     while (i < 4)
-[e $U 11  ]
-[e :U 12 ]
+[; ;var.c: 57:     return prot;
+[e ) &U _prot ]
+[e $UE 10  ]
 "58
-[; ;var.c: 58:     {
-{
-"59
-[; ;var.c: 59:         p[i] = prot[i];
-[e = *U + _p * -> _i `ux -> -> # *U _p `ui `ux *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux ]
-"60
-[; ;var.c: 60:         i++;
-[e ++ _i -> -> 1 `i `uc ]
-"61
-[; ;var.c: 61:     }
-}
-[e :U 11 ]
-"57
-[; ;var.c: 57:     while (i < 4)
-[e $ < -> _i `i -> 4 `i 12  ]
-[e :U 13 ]
-"62
-[; ;var.c: 62: }
+[; ;var.c: 58: }
 [e :UE 10 ]
 }
-"64
-[; ;var.c: 64: void setProt(char newChar) {
+"60
+[; ;var.c: 60: void setProt(char newChar) {
 [v _setProt `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setProt ]
 [v _newChar `uc ~T0 @X0 1 r1 ]
 [f ]
-"65
-[; ;var.c: 65:     char i = 0;
-[v _i `uc ~T0 @X0 1 a ]
-[e = _i -> -> 0 `i `uc ]
-"66
-[; ;var.c: 66:     while (prot[i] != 0) i++;
-[e $U 15  ]
-[e :U 16 ]
-[e ++ _i -> -> 1 `i `uc ]
-[e :U 15 ]
-[e $ != -> *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux `i -> 0 `i 16  ]
-[e :U 17 ]
-"67
-[; ;var.c: 67:     prot[i] = newChar;
-[e = *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux -> _newChar `uc ]
-"69
-[; ;var.c: 69:     if(i == 4 - 1) prot_ready = 1;
-[e $ ! == -> _i `i - -> 4 `i -> 1 `i 18  ]
+"62
+[; ;var.c: 62:     prot[index++] = newChar;
+[e = *U + &U _prot * -> ++ _index -> -> 1 `i `uc `ux -> -> # *U &U _prot `ui `ux -> _newChar `uc ]
+"64
+[; ;var.c: 64:     if(index == 4) prot_ready = 1;
+[e $ ! == -> _index `i -> 4 `i 12  ]
 [e = _prot_ready -> -> 1 `i `uc ]
-[e :U 18 ]
-"70
-[; ;var.c: 70: }
-[e :UE 14 ]
+[e :U 12 ]
+"65
+[; ;var.c: 65: }
+[e :UE 11 ]
 }
-"72
-[; ;var.c: 72: void resetProt()
+"67
+[; ;var.c: 67: void resetProt()
 [v _resetProt `(v ~T0 @X0 1 ef ]
-"73
-[; ;var.c: 73: {
+"68
+[; ;var.c: 68: {
 {
 [e :U _resetProt ]
 [f ]
-"74
-[; ;var.c: 74:     char i;
+"69
+[; ;var.c: 69:     char i = 0;
 [v _i `uc ~T0 @X0 1 a ]
-"75
-[; ;var.c: 75:     while (i < 4)
-[e $U 20  ]
-[e :U 21 ]
-"76
-[; ;var.c: 76:     {
+[e = _i -> -> 0 `i `uc ]
+"70
+[; ;var.c: 70:     while (i < 4)
+[e $U 14  ]
+[e :U 15 ]
+"71
+[; ;var.c: 71:     {
 {
-"77
-[; ;var.c: 77:         prot[i] = 0;
+"72
+[; ;var.c: 72:         prot[i] = 0;
 [e = *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux -> -> 0 `i `uc ]
-"78
-[; ;var.c: 78:     }
+"73
+[; ;var.c: 73:         i++;
+[e ++ _i -> -> 1 `i `uc ]
+"74
+[; ;var.c: 74:     }
 }
-[e :U 20 ]
+[e :U 14 ]
+"70
+[; ;var.c: 70:     while (i < 4)
+[e $ < -> _i `i -> 4 `i 15  ]
+[e :U 16 ]
 "75
-[; ;var.c: 75:     while (i < 4)
-[e $ < -> _i `i -> 4 `i 21  ]
-[e :U 22 ]
-"79
-[; ;var.c: 79: }
-[e :UE 19 ]
+[; ;var.c: 75:     prot_ready = 0;
+[e = _prot_ready -> -> 0 `i `uc ]
+"76
+[; ;var.c: 76:     index = 0;
+[e = _index -> -> 0 `i `uc ]
+"77
+[; ;var.c: 77: }
+[e :UE 13 ]
 }

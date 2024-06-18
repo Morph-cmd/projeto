@@ -3,4 +3,5 @@ output.c  \
 output.h  \
 lcd.h  \
 stateMachine.h  \
-var.h 
+var.h  \
+ds1307.h 

@@ -64,7 +64,7 @@ int getAlarmLevel(void);
 void setAlarmLevel(int newAlarmLevel);
 char getLanguage(void);
 void setLanguage(char newLanguage);
-void getProt(unsigned char[]);
+unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
 # 6 "event.c" 2
@@ -79,7 +79,6 @@ static unsigned int key;
 static unsigned int dTimer;
 static unsigned int dTimerMax;
 static unsigned int ev = 'b';
-
 
 void eventInit(void) {
     kpInit();
@@ -98,6 +97,9 @@ unsigned int eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
+    if (((key) & (1<<4))) {
+        ev = EV_B_4;
+    }
     if (key != key_ant) {
         if (((key) & (1<<0))) {
             ev = EV_B_0;
@@ -108,21 +110,26 @@ unsigned int eventRead(void) {
         }
 
         if (((key) & (1<<2))) {
-
+            ev = EV_B_2;
         }
+
+        if (((key) & (1<<3))) {
+            ev = EV_B_3;
+        }
+
     }
 
     key_ant = key;
 
 
     unsigned char data = serialRead();
-    unsigned char prot[4];
+    serialSend(data);
+    unsigned char* prot;
     if (data != 0) {
-        serialSend(data);
-        getProt(prot);
+        prot = getProt();
         if (prot[0] == 0) {
             switch (data) {
-                case '0':
+                case '9':
                     ev = EV_B_0;
                     break;
                 case '1':
@@ -148,10 +155,8 @@ unsigned int eventRead(void) {
         } else {
             setProt(data);
 
-            if(prot_ready)
-            {
+            if (prot_ready) {
                 ev = EV_PROT_SERIAL;
-                lcdData('k');
             }
         }
     }

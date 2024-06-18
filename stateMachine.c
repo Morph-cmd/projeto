@@ -5,6 +5,8 @@
 #include "lcd.h"
 #include "keypad.h"
 
+char estado_ant;
+
 void smInit(void) {
     setState(STATE_ALARME);
     eventInit();
@@ -18,68 +20,77 @@ void smLoop(void) {
 
     switch (getState()) {
         case STATE_ALARME:
+            if (evento == EV_B_2) {
+                setState(STATE_IDIOMA);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_TEMPO);
+            }
+            
+            if(evento == EV_B_4)
+            {
+                setState(STATE_HORA);
+            }
+            break;
+        case STATE_IDIOMA:
             //execução de atividade
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPO);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_ALARME);
+            }
+            
+            if(evento == EV_B_4)
+            {
+                setState(STATE_HORA);
+            }
+            
             if (evento == EV_B_0) {
                 //setAlarmLevel(getAlarmLevel() + 1);
                 setLanguage(getLanguage() + 1);
-                
+
             }
-            
+
             if (evento == EV_B_1) {
                 setLanguage(getLanguage() - 1);
             }
-            
-            if(evento == EV_PROT_SERIAL)
-            {
-                lcdData('s');
-                unsigned char prot[4];
-                getProt(prot);
-                
-                for(int i = 0; i < 4; i++)
-                {
-                    lcdData(prot[i]);
+
+            if (evento == EV_PROT_SERIAL) {
+                unsigned char* prot;
+                prot = getProt();
+
+                if (prot[1] == 'l') {
+                    setLanguage(prot[3]);
                 }
+
                 resetProt();
-            }
-            /*
-            //gestão da maquina de estado
-            if (evento == EV_ENTER) {
-                setState(STATE_TEMPO);
             }
             break;
         case STATE_TEMPO:
 
             //execução de atividade
-            if (evento == EV_RIGHT) {
-                setTime(getTime() + 1);
-            }
-            if (evento == EV_LEFT) {
-                setTime(getTime() - 1);
-            }
-
-            //gestão da maquina de estado
-            if (evento == EV_ENTER) {
-                setState(STATE_IDIOMA);
-            }
-            break;
-
-        case STATE_IDIOMA:
-
-            //execução de atividade
-            if (evento == EV_RIGHT) {
-                setLanguage(getLanguage() + 1);
-            }
-            if (evento == EV_LEFT) {
-                setLanguage(getLanguage() - 1);
-            }
-
-            //gestão da maquina de estado
-            if (evento == EV_ENTER) {
+            
+            if (evento == EV_B_2) {
                 setState(STATE_ALARME);
             }
-            break;
-             * */
 
+            if (evento == EV_B_3) {
+                setState(STATE_IDIOMA);
+            }
+            
+            if(evento == EV_B_4)
+            {
+                setState(STATE_HORA);
+            }
+            
+            break;
+        case STATE_HORA:
+            if(evento != EV_B_4)
+                setState(STATE_ALARME);
+            break;
     }
-    //outputPrint(getState(), getLanguage());
+    outputPrint(getState(), getLanguage());
 }

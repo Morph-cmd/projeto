@@ -22,7 +22,7 @@ int getAlarmLevel(void);
 void setAlarmLevel(int newAlarmLevel);
 char getLanguage(void);
 void setLanguage(char newLanguage);
-void getProt(unsigned char[]);
+unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
 

@@ -27,9 +27,10 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME,
+    STATE_ALARME = 0,
     STATE_TEMPO,
     STATE_IDIOMA,
+    STATE_HORA,
     STATE_FIM
 };
 
@@ -52,10 +53,21 @@ int getAlarmLevel(void);
 void setAlarmLevel(int newAlarmLevel);
 char getLanguage(void);
 void setLanguage(char newLanguage);
-void getProt(unsigned char[]);
+unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
 # 4 "output.c" 2
+
+# 1 "./ds1307.h" 1
+# 14 "./ds1307.h"
+ void dsInit(void);
+ void dsStartClock(void);
+ void dsStopClock(void);
+ int dec2bcd(int value);
+ int bcd2dec(int value);
+ void dsWriteData(unsigned char value, int address);
+ int dsReadData(int address);
+# 5 "output.c" 2
 
 
 
@@ -99,6 +111,16 @@ void outputPrint(int numTela, int idioma) {
             lcdString("English         ");
         }
 
+    }
+
+    if (numTela == STATE_HORA) {
+        lcdCommand(0x80);
+        lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)));
+        lcdData(':');
+        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)));
+        lcdData(':');
+        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)));
+        lcdData(':');
     }
 
 }

@@ -9,8 +9,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "14 ./ds1307.h
 [; ;./ds1307.h: 14:  void dsInit(void);
 [v _dsInit `(v ~T0 @X0 0 ef ]
-"22 ./stateMachine.h
-[; ;./stateMachine.h: 22: void smInit(void);
+"23 ./stateMachine.h
+[; ;./stateMachine.h: 23: void smInit(void);
 [v _smInit `(v ~T0 @X0 0 ef ]
 "25 ./serial.h
 [; ;./serial.h: 25:  void serialInit(void);
@@ -21,11 +21,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2973
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 2973: extern volatile unsigned char LATA __attribute__((address(0xF89)));
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"19 ./ds1307.h
+[; ;./ds1307.h: 19:  void dsWriteData(unsigned char value, int address);
+[v _dsWriteData `(v ~T0 @X0 0 ef2`uc`i ]
+"17
+[; ;./ds1307.h: 17:  int dec2bcd(int value);
+[v _dec2bcd `(i ~T0 @X0 0 ef1`i ]
 "24 ./keypad.h
 [; ;./keypad.h: 24:  void kpDebounce(void);
 [v _kpDebounce `(v ~T0 @X0 0 ef ]
-"23 ./stateMachine.h
-[; ;./stateMachine.h: 23: void smLoop(void);
+"24 ./stateMachine.h
+[; ;./stateMachine.h: 24: void smLoop(void);
 [v _smLoop `(v ~T0 @X0 0 ef ]
 "31 ./config.h
 [p x MCLRE=ON                 ]
@@ -574,22 +580,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 32:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
 "34
-[; ;main.c: 34:     while (1) {
+[; ;main.c: 34:     (dsWriteData(dec2bcd(0),0x00));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 -> 0 `i `uc -> 0 `i ]
+"35
+[; ;main.c: 35:     (dsWriteData(dec2bcd(0),0x01));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 -> 0 `i `uc -> 1 `i ]
+"36
+[; ;main.c: 36:     (dsWriteData(dec2bcd(0),0x02));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 -> 0 `i `uc -> 2 `i ]
+"39
+[; ;main.c: 39:     while (1) {
 [e :U 369 ]
 {
-"35
-[; ;main.c: 35:         kpDebounce();
+"40
+[; ;main.c: 40:         kpDebounce();
 [e ( _kpDebounce ..  ]
-"37
-[; ;main.c: 37:         smLoop();
+"42
+[; ;main.c: 42:         smLoop();
 [e ( _smLoop ..  ]
-"84
-[; ;main.c: 84:     }
+"89
+[; ;main.c: 89:     }
 }
 [e :U 368 ]
 [e $U 369  ]
 [e :U 370 ]
-"85
-[; ;main.c: 85: }
+"90
+[; ;main.c: 90: }
 [e :UE 367 ]
 }

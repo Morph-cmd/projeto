@@ -26,9 +26,10 @@
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME,
+    STATE_ALARME = 0,
     STATE_TEMPO,
     STATE_IDIOMA,
+    STATE_HORA,
     STATE_FIM
 };
 
@@ -5826,10 +5827,15 @@ void main(void) {
     TRISA = 0x00;
     LATA = 0x00;
 
+    (dsWriteData(dec2bcd(0),0x00));
+    (dsWriteData(dec2bcd(0),0x01));
+    (dsWriteData(dec2bcd(0),0x02));
+
+
     while (1) {
         kpDebounce();
 
         smLoop();
-# 84 "main.c"
+# 89 "main.c"
     }
 }

@@ -15,7 +15,6 @@ static unsigned int dTimer;
 static unsigned int dTimerMax;
 static unsigned int ev = 'b';
 
-
 void eventInit(void) {
     kpInit();
 
@@ -33,6 +32,9 @@ unsigned int eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
+    if (BitTst(key, 4)) {
+        ev = EV_B_4;
+    }
     if (key != key_ant) {
         if (BitTst(key, 0)) {
             ev = EV_B_0;
@@ -43,21 +45,26 @@ unsigned int eventRead(void) {
         }
 
         if (BitTst(key, 2)) {
-
+            ev = EV_B_2;
         }
+
+        if (BitTst(key, 3)) {
+            ev = EV_B_3;
+        }
+
     }
 
     key_ant = key;
 
 
     unsigned char data = serialRead();
-    unsigned char prot[PROT_TAM];
+    serialSend(data);
+    unsigned char* prot;
     if (data != 0) {
-        serialSend(data);
-        getProt(prot);
+        prot = getProt();
         if (prot[0] == 0) {
             switch (data) {
-                case '0':
+                case '9':
                     ev = EV_B_0;
                     break;
                 case '1':
@@ -75,18 +82,16 @@ unsigned int eventRead(void) {
                 case 'P': case'p':
                     ev = EV_NOEVENT;
                     setProt('p');
-                    
+
                     break;
                 default:
                     break;
             }
         } else {
             setProt(data);
-            
-            if(prot_ready)
-            {
+
+            if (prot_ready) {
                 ev = EV_PROT_SERIAL;
-                lcdData('k');
             }
         }
     }

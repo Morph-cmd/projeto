@@ -8,6 +8,7 @@ static char state;
 static char language;
 static int time;
 static int alarmLevel;
+static char index=0;
 static unsigned char prot[PROT_TAM];
 
 
@@ -51,29 +52,26 @@ void setLanguage(char newLanguage) {
     language = newLanguage % 2;
 }
 
-void getProt(unsigned char p[PROT_TAM]) {
+unsigned char* getProt() {
 
-    char i;
-    while (i < PROT_TAM)
-    {
-        p[i] = prot[i];
-        i++;
-    }
+    return prot;
 }
 
 void setProt(char newChar) {
-    char i = 0;
-    while (prot[i] != 0) i++;
-    prot[i] = newChar;
+    
+    prot[index++] = newChar;
     //lcdData(newChar);
-    if(i == PROT_TAM - 1) prot_ready = 1;
+    if(index == PROT_TAM) prot_ready = 1;
 }
 
 void resetProt()
 {
-    char i;
+    char i = 0;
     while (i < PROT_TAM)
     {
         prot[i] = 0;
+        i++;
     }
+    prot_ready = 0;
+    index = 0;
 }

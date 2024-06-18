@@ -2,6 +2,7 @@
 #include "lcd.h"
 #include "stateMachine.h"
 #include "var.h"
+#include "ds1307.h"
 
 #define NUM_IDIOMAS 2
 
@@ -24,14 +25,14 @@ void outputPrint(int numTela, int idioma) {
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
         lcdInt(getTime());
-        lcdString("           ");//para apagar os textos depois do numero
+        lcdString("           "); //para apagar os textos depois do numero
     }
     if (numTela == STATE_ALARME) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
         lcdInt(getAlarmLevel());
-        lcdString("           ");//para apagar os textos depois do numero
+        lcdString("           "); //para apagar os textos depois do numero
     }
     if (numTela == STATE_IDIOMA) {
         lcdCommand(0x80);
@@ -44,6 +45,16 @@ void outputPrint(int numTela, int idioma) {
             lcdString("English         ");
         }
 
+    }
+
+    if (numTela == STATE_HORA) {
+        lcdCommand(0x80);
+        lcdInt(getSeconds());
+        lcdData(':');
+        lcdInt(getMinutes());
+        lcdData(':');
+        lcdInt(getHours());
+        lcdData(':');
     }
 
 }

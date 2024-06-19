@@ -27,10 +27,11 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME = 0,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
-    STATE_HORA,
+    STATE_MAIN,
     STATE_FIM
 };
 
@@ -40,7 +41,7 @@ void smLoop(void);
 # 3 "output.c" 2
 
 # 1 "./var.h" 1
-# 13 "./var.h"
+# 15 "./var.h"
 char prot_ready;
 
 void varInit(void);
@@ -49,8 +50,8 @@ char getState(void);
 void setState(char newState);
 int getTime(void);
 void setTime(int newTime);
-int getAlarmLevel(void);
-void setAlarmLevel(int newAlarmLevel);
+int getAlarmLevel(int lh);
+void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
 void setLanguage(char newLanguage);
 unsigned char* getProt();
@@ -59,7 +60,7 @@ void resetProt();
 # 4 "output.c" 2
 
 # 1 "./ds1307.h" 1
-# 14 "./ds1307.h"
+# 15 "./ds1307.h"
  void dsInit(void);
  void dsStartClock(void);
  void dsStopClock(void);
@@ -75,6 +76,7 @@ void resetProt();
 
 
 static char * msgs[STATE_FIM][2] = {
+    {"Alterar alarme ", "Change alarm   "},
     {"Alterar alarme ", "Change alarm   "},
     {"Alterar tempo  ", "Change time    "},
     {"Alterar idioma ", "Change language"}
@@ -93,11 +95,18 @@ void outputPrint(int numTela, int idioma) {
         lcdInt(getTime());
         lcdString("           ");
     }
-    if (numTela == STATE_ALARME) {
+    if (numTela == STATE_ALARMEL) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getAlarmLevel());
+        lcdInt(getAlarmLevel(0));
+        lcdString("           ");
+    }
+    if (numTela == STATE_ALARMEH) {
+        lcdCommand(0x80);
+        lcdString(msgs[numTela][idioma]);
+        lcdCommand(0xC0);
+        lcdInt(getAlarmLevel(1));
         lcdString("           ");
     }
     if (numTela == STATE_IDIOMA) {
@@ -113,14 +122,21 @@ void outputPrint(int numTela, int idioma) {
 
     }
 
-    if (numTela == STATE_HORA) {
+    if (numTela == STATE_MAIN) {
         lcdCommand(0x80);
+        lcdData((((bcd2dec(dsReadData(0x02)& 0x7f)) % 100) / 10) + 48);
+        lcdData((((bcd2dec(dsReadData(0x02)& 0x7f)) % 100) % 10) + 48);
+        lcdData(':');
+        lcdData((((bcd2dec(dsReadData(0x01)& 0x7f)) % 100) / 10) + 48);
+        lcdData((((bcd2dec(dsReadData(0x01)& 0x7f)) % 100) % 10) + 48);
+        lcdString("           ");
+
         lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)));
-        lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)));
-        lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)));
-        lcdData(':');
+
+
+
+
+
     }
 
 }

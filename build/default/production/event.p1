@@ -2,8 +2,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./keypad.h
 [; ;./keypad.h: 25:  void kpInit(void);
 [v _kpInit `(v ~T0 @X0 0 ef ]
-"33 event.c
-[; ;event.c: 33:     int ev = EV_NOEVENT;
+"28 event.c
+[; ;event.c: 28:     int ev = EV_NOEVENT;
 [c E5 0 1 2 3 4 5 6 .. ]
 [n E5 . EV_B_0 EV_B_1 EV_B_2 EV_B_3 EV_B_4 EV_PROT_SERIAL EV_NOEVENT  ]
 "23 ./keypad.h
@@ -15,14 +15,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;./serial.h: 23:  void serialSend(unsigned char c);
 [v _serialSend `(v ~T0 @X0 0 ef1`uc ]
-"25 ./var.h
-[; ;./var.h: 25: unsigned char* getProt();
+"27 ./var.h
+[; ;./var.h: 27: unsigned char* getProt();
 [v _getProt `(*uc ~T0 @X0 0 e? ]
-"26
-[; ;./var.h: 26: void setProt(char newLanguage);
+"28
+[; ;./var.h: 28: void setProt(char newLanguage);
 [v _setProt `(v ~T0 @X0 0 ef1`uc ]
-"13 ./var.h
-[; ;./var.h: 13: char prot_ready;
+"15 ./var.h
+[; ;./var.h: 15: char prot_ready;
 [v _prot_ready `uc ~T0 @X0 1 e ]
 "11 event.c
 [; ;event.c: 11: static unsigned int ev_ant;
@@ -64,260 +64,224 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;event.c: 23: }
 [e :UE 1 ]
 }
-"25
-[; ;event.c: 25: void delay2ms(void) {
-[v _delay2ms `(v ~T0 @X0 1 ef ]
-{
-[e :U _delay2ms ]
-[f ]
 "26
-[; ;event.c: 26:     unsigned char j, k;
-[v _j `uc ~T0 @X0 1 a ]
-[v _k `uc ~T0 @X0 1 a ]
-"27
-[; ;event.c: 27:     for (j = 0; j < 20; j++)
-{
-[e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 20 `i 3  ]
-[e $U 4  ]
-[e :U 3 ]
-"28
-[; ;event.c: 28:         for (k = 0; k < 178; k++);
-{
-[e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 178 `i 6  ]
-[e $U 7  ]
-[e :U 6 ]
-[e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 178 `i 6  ]
-[e :U 7 ]
-}
-[e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 20 `i 3  ]
-[e :U 4 ]
-}
-"29
-[; ;event.c: 29: }
-[e :UE 2 ]
-}
-"31
-[; ;event.c: 31: unsigned int eventRead(void) {
+[; ;event.c: 26: unsigned int eventRead(void) {
 [v _eventRead `(ui ~T0 @X0 1 ef ]
 {
 [e :U _eventRead ]
 [f ]
-"32
-[; ;event.c: 32:     int key;
+"27
+[; ;event.c: 27:     int key;
 [v _key `i ~T0 @X0 1 a ]
-"33
-[; ;event.c: 33:     int ev = EV_NOEVENT;
+"28
+[; ;event.c: 28:     int ev = EV_NOEVENT;
 [v _ev `i ~T0 @X0 1 a ]
 [e = _ev -> . `E5 6 `i ]
-"34
-[; ;event.c: 34:     key = kpRead();
+"29
+[; ;event.c: 29:     key = kpRead();
 [e = _key -> ( _kpRead ..  `i ]
+"30
+[; ;event.c: 30:     if (key != key_ant) {
+[e $ ! != -> _key `ui _key_ant 3  ]
+{
+"31
+[; ;event.c: 31:         if (((key) & (1<<0))) {
+[e $ ! != & _key << -> 1 `i -> 0 `i -> 0 `i 4  ]
+{
+"32
+[; ;event.c: 32:             ev = EV_B_0;
+[e = _ev -> . `E5 0 `i ]
+"33
+[; ;event.c: 33:         }
+}
+[e :U 4 ]
 "35
-[; ;event.c: 35:     if (((key) & (1<<4))) {
-[e $ ! != & _key << -> 1 `i -> 4 `i -> 0 `i 10  ]
+[; ;event.c: 35:         if (((key) & (1<<1))) {
+[e $ ! != & _key << -> 1 `i -> 1 `i -> 0 `i 5  ]
 {
 "36
-[; ;event.c: 36:         ev = EV_B_4;
-[e = _ev -> . `E5 4 `i ]
+[; ;event.c: 36:             ev = EV_B_1;
+[e = _ev -> . `E5 1 `i ]
 "37
-[; ;event.c: 37:     }
+[; ;event.c: 37:         }
 }
-[e :U 10 ]
-"38
-[; ;event.c: 38:     if (key != key_ant) {
-[e $ ! != -> _key `ui _key_ant 11  ]
-{
+[e :U 5 ]
 "39
-[; ;event.c: 39:         if (((key) & (1<<0))) {
-[e $ ! != & _key << -> 1 `i -> 0 `i -> 0 `i 12  ]
+[; ;event.c: 39:         if (((key) & (1<<2))) {
+[e $ ! != & _key << -> 1 `i -> 2 `i -> 0 `i 6  ]
 {
 "40
-[; ;event.c: 40:             ev = EV_B_0;
-[e = _ev -> . `E5 0 `i ]
+[; ;event.c: 40:             ev = EV_B_2;
+[e = _ev -> . `E5 2 `i ]
 "41
 [; ;event.c: 41:         }
 }
-[e :U 12 ]
+[e :U 6 ]
 "43
-[; ;event.c: 43:         if (((key) & (1<<1))) {
-[e $ ! != & _key << -> 1 `i -> 1 `i -> 0 `i 13  ]
+[; ;event.c: 43:         if (((key) & (1<<3))) {
+[e $ ! != & _key << -> 1 `i -> 3 `i -> 0 `i 7  ]
 {
 "44
-[; ;event.c: 44:             ev = EV_B_1;
-[e = _ev -> . `E5 1 `i ]
+[; ;event.c: 44:             ev = EV_B_3;
+[e = _ev -> . `E5 3 `i ]
 "45
 [; ;event.c: 45:         }
 }
-[e :U 13 ]
+[e :U 7 ]
 "47
-[; ;event.c: 47:         if (((key) & (1<<2))) {
-[e $ ! != & _key << -> 1 `i -> 2 `i -> 0 `i 14  ]
+[; ;event.c: 47:         if (((key) & (1<<4))) {
+[e $ ! != & _key << -> 1 `i -> 4 `i -> 0 `i 8  ]
 {
 "48
-[; ;event.c: 48:             ev = EV_B_2;
-[e = _ev -> . `E5 2 `i ]
+[; ;event.c: 48:             ev = EV_B_4;
+[e = _ev -> . `E5 4 `i ]
 "49
 [; ;event.c: 49:         }
 }
-[e :U 14 ]
-"51
-[; ;event.c: 51:         if (((key) & (1<<3))) {
-[e $ ! != & _key << -> 1 `i -> 3 `i -> 0 `i 15  ]
-{
+[e :U 8 ]
+"50
+[; ;event.c: 50:     }
+}
+[e :U 3 ]
 "52
-[; ;event.c: 52:             ev = EV_B_3;
-[e = _ev -> . `E5 3 `i ]
-"53
-[; ;event.c: 53:         }
-}
-[e :U 15 ]
-"55
-[; ;event.c: 55:     }
-}
-[e :U 11 ]
-"57
-[; ;event.c: 57:     key_ant = key;
+[; ;event.c: 52:     key_ant = key;
 [e = _key_ant -> _key `ui ]
-"60
-[; ;event.c: 60:     unsigned char data = serialRead();
+"55
+[; ;event.c: 55:     unsigned char data = serialRead();
 [v _data `uc ~T0 @X0 1 a ]
 [e = _data ( _serialRead ..  ]
-"61
-[; ;event.c: 61:     serialSend(data);
+"56
+[; ;event.c: 56:     serialSend(data);
 [e ( _serialSend (1 _data ]
-"62
-[; ;event.c: 62:     unsigned char* prot;
+"57
+[; ;event.c: 57:     unsigned char* prot;
 [v _prot `*uc ~T0 @X0 1 a ]
-"63
-[; ;event.c: 63:     if (data != 0) {
-[e $ ! != -> _data `i -> 0 `i 16  ]
+"58
+[; ;event.c: 58:     if (data != 0) {
+[e $ ! != -> _data `i -> 0 `i 9  ]
 {
-"64
-[; ;event.c: 64:         prot = getProt();
+"59
+[; ;event.c: 59:         prot = getProt();
 [e = _prot ( _getProt ..  ]
-"65
-[; ;event.c: 65:         if (prot[0] == 0) {
-[e $ ! == -> *U + _prot * -> -> 0 `i `x -> -> # *U _prot `i `x `i -> 0 `i 17  ]
+"60
+[; ;event.c: 60:         if (prot[0] == 0) {
+[e $ ! == -> *U + _prot * -> -> 0 `i `x -> -> # *U _prot `i `x `i -> 0 `i 10  ]
 {
-"66
-[; ;event.c: 66:             switch (data) {
-[e $U 19  ]
+"61
+[; ;event.c: 61:             switch (data) {
+[e $U 12  ]
 {
-"67
-[; ;event.c: 67:                 case '9':
-[e :U 20 ]
-"68
-[; ;event.c: 68:                     ev = EV_B_0;
+"62
+[; ;event.c: 62:                 case '9':
+[e :U 13 ]
+"63
+[; ;event.c: 63:                     ev = EV_B_0;
 [e = _ev -> . `E5 0 `i ]
-"69
-[; ;event.c: 69:                     break;
-[e $U 18  ]
-"70
-[; ;event.c: 70:                 case '1':
-[e :U 21 ]
-"71
-[; ;event.c: 71:                     ev = EV_B_1;
+"64
+[; ;event.c: 64:                     break;
+[e $U 11  ]
+"65
+[; ;event.c: 65:                 case '1':
+[e :U 14 ]
+"66
+[; ;event.c: 66:                     ev = EV_B_1;
 [e = _ev -> . `E5 1 `i ]
-"72
-[; ;event.c: 72:                     break;
-[e $U 18  ]
-"73
-[; ;event.c: 73:                 case '2':
-[e :U 22 ]
-"74
-[; ;event.c: 74:                     ev = EV_B_2;
+"67
+[; ;event.c: 67:                     break;
+[e $U 11  ]
+"68
+[; ;event.c: 68:                 case '2':
+[e :U 15 ]
+"69
+[; ;event.c: 69:                     ev = EV_B_2;
 [e = _ev -> . `E5 2 `i ]
-"75
-[; ;event.c: 75:                     break;
-[e $U 18  ]
-"76
-[; ;event.c: 76:                 case '3':
-[e :U 23 ]
-"77
-[; ;event.c: 77:                     ev = EV_B_3;
+"70
+[; ;event.c: 70:                     break;
+[e $U 11  ]
+"71
+[; ;event.c: 71:                 case '3':
+[e :U 16 ]
+"72
+[; ;event.c: 72:                     ev = EV_B_3;
 [e = _ev -> . `E5 3 `i ]
-"78
-[; ;event.c: 78:                     break;
-[e $U 18  ]
-"79
-[; ;event.c: 79:                 case '4':
-[e :U 24 ]
-"80
-[; ;event.c: 80:                     ev = EV_B_4;
+"73
+[; ;event.c: 73:                     break;
+[e $U 11  ]
+"74
+[; ;event.c: 74:                 case '4':
+[e :U 17 ]
+"75
+[; ;event.c: 75:                     ev = EV_B_4;
 [e = _ev -> . `E5 4 `i ]
+"76
+[; ;event.c: 76:                     break;
+[e $U 11  ]
+"77
+[; ;event.c: 77:                 case 'P': case'p':
+[e :U 18 ]
+[e :U 19 ]
+"78
+[; ;event.c: 78:                     ev = EV_NOEVENT;
+[e = _ev -> . `E5 6 `i ]
+"79
+[; ;event.c: 79:                     setProt('p');
+[e ( _setProt (1 -> -> 112 `ui `uc ]
 "81
 [; ;event.c: 81:                     break;
-[e $U 18  ]
+[e $U 11  ]
 "82
-[; ;event.c: 82:                 case 'P': case'p':
-[e :U 25 ]
-[e :U 26 ]
+[; ;event.c: 82:                 default:
+[e :U 20 ]
 "83
-[; ;event.c: 83:                     ev = EV_NOEVENT;
-[e = _ev -> . `E5 6 `i ]
+[; ;event.c: 83:                     break;
+[e $U 11  ]
 "84
-[; ;event.c: 84:                     setProt('p');
-[e ( _setProt (1 -> -> 112 `ui `uc ]
+[; ;event.c: 84:             }
+}
+[e $U 11  ]
+[e :U 12 ]
+[e [\ _data , $ -> -> 57 `ui `i 13
+ , $ -> -> 49 `ui `i 14
+ , $ -> -> 50 `ui `i 15
+ , $ -> -> 51 `ui `i 16
+ , $ -> -> 52 `ui `i 17
+ , $ -> -> 80 `ui `i 18
+ , $ -> -> 112 `ui `i 19
+ 20 ]
+[e :U 11 ]
+"85
+[; ;event.c: 85:         } else {
+}
+[e $U 21  ]
+[e :U 10 ]
+{
 "86
-[; ;event.c: 86:                     break;
-[e $U 18  ]
-"87
-[; ;event.c: 87:                 default:
-[e :U 27 ]
-"88
-[; ;event.c: 88:                     break;
-[e $U 18  ]
-"89
-[; ;event.c: 89:             }
-}
-[e $U 18  ]
-[e :U 19 ]
-[e [\ _data , $ -> -> 57 `ui `i 20
- , $ -> -> 49 `ui `i 21
- , $ -> -> 50 `ui `i 22
- , $ -> -> 51 `ui `i 23
- , $ -> -> 52 `ui `i 24
- , $ -> -> 80 `ui `i 25
- , $ -> -> 112 `ui `i 26
- 27 ]
-[e :U 18 ]
-"90
-[; ;event.c: 90:         } else {
-}
-[e $U 28  ]
-[e :U 17 ]
-{
-"91
-[; ;event.c: 91:             setProt(data);
+[; ;event.c: 86:             setProt(data);
 [e ( _setProt (1 -> _data `uc ]
-"93
-[; ;event.c: 93:             if (prot_ready) {
-[e $ ! != -> _prot_ready `i -> 0 `i 29  ]
+"88
+[; ;event.c: 88:             if (prot_ready) {
+[e $ ! != -> _prot_ready `i -> 0 `i 22  ]
 {
-"94
-[; ;event.c: 94:                 ev = EV_PROT_SERIAL;
+"89
+[; ;event.c: 89:                 ev = EV_PROT_SERIAL;
 [e = _ev -> . `E5 5 `i ]
+"90
+[; ;event.c: 90:             }
+}
+[e :U 22 ]
+"91
+[; ;event.c: 91:         }
+}
+[e :U 21 ]
+"92
+[; ;event.c: 92:     }
+}
+[e :U 9 ]
 "95
-[; ;event.c: 95:             }
-}
-[e :U 29 ]
-"96
-[; ;event.c: 96:         }
-}
-[e :U 28 ]
-"97
-[; ;event.c: 97:     }
-}
-[e :U 16 ]
-"100
-[; ;event.c: 100:     return ev;
+[; ;event.c: 95:     return ev;
 [e ) -> _ev `ui ]
-[e $UE 9  ]
-"103
-[; ;event.c: 103: }
-[e :UE 9 ]
+[e $UE 2  ]
+"98
+[; ;event.c: 98: }
+[e :UE 2 ]
 }

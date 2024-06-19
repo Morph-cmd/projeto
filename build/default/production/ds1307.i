@@ -15,7 +15,7 @@
 # 1 "ds1307.c" 2
 
 # 1 "./ds1307.h" 1
-# 14 "./ds1307.h"
+# 15 "./ds1307.h"
  void dsInit(void);
  void dsStartClock(void);
  void dsStopClock(void);

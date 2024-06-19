@@ -26,10 +26,11 @@
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME = 0,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
-    STATE_HORA,
+    STATE_MAIN,
     STATE_FIM
 };
 
@@ -5533,7 +5534,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 # 17 "main.c" 2
 
 # 1 "./ds1307.h" 1
-# 14 "./ds1307.h"
+# 15 "./ds1307.h"
  void dsInit(void);
  void dsStartClock(void);
  void dsStopClock(void);
@@ -5827,9 +5828,9 @@ void main(void) {
     TRISA = 0x00;
     LATA = 0x00;
 
-    (dsWriteData(dec2bcd(0),0x00));
-    (dsWriteData(dec2bcd(0),0x01));
-    (dsWriteData(dec2bcd(0),0x02));
+
+
+
 
 
     while (1) {

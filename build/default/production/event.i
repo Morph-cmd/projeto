@@ -51,7 +51,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 # 5 "event.c" 2
 
 # 1 "./var.h" 1
-# 13 "./var.h"
+# 15 "./var.h"
 char prot_ready;
 
 void varInit(void);
@@ -60,8 +60,8 @@ char getState(void);
 void setState(char newState);
 int getTime(void);
 void setTime(int newTime);
-int getAlarmLevel(void);
-void setAlarmLevel(int newAlarmLevel);
+int getAlarmLevel(int lh);
+void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
 void setLanguage(char newLanguage);
 unsigned char* getProt();
@@ -87,19 +87,11 @@ void eventInit(void) {
     key = 1;
 }
 
-void delay2ms(void) {
-    unsigned char j, k;
-    for (j = 0; j < 20; j++)
-        for (k = 0; k < 178; k++);
-}
 
 unsigned int eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
-    if (((key) & (1<<4))) {
-        ev = EV_B_4;
-    }
     if (key != key_ant) {
         if (((key) & (1<<0))) {
             ev = EV_B_0;
@@ -117,6 +109,9 @@ unsigned int eventRead(void) {
             ev = EV_B_3;
         }
 
+        if (((key) & (1<<4))) {
+            ev = EV_B_4;
+        }
     }
 
     key_ant = key;

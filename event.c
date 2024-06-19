@@ -22,19 +22,11 @@ void eventInit(void) {
     key = 1;
 }
 
-void delay2ms(void) {
-    unsigned char j, k;
-    for (j = 0; j < 20; j++)
-        for (k = 0; k < 178; k++);
-}
 
 unsigned int eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
-    if (BitTst(key, 4)) {
-        ev = EV_B_4;
-    }
     if (key != key_ant) {
         if (BitTst(key, 0)) {
             ev = EV_B_0;
@@ -51,7 +43,10 @@ unsigned int eventRead(void) {
         if (BitTst(key, 3)) {
             ev = EV_B_3;
         }
-
+        
+        if (BitTst(key, 4)) {
+            ev = EV_B_4;
+        }
     }
 
     key_ant = key;

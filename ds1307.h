@@ -9,6 +9,7 @@
 #define DAY     0x04
 #define MONTH   0x05
 #define YEAR    0x06
+#define SSEC    0x20
 
 	//funções do DS1307
 	void dsInit(void);

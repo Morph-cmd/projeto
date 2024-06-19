@@ -12,10 +12,11 @@
 //estados da maquina de Estados
 
 enum {
-    STATE_ALARME = 0,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
-    STATE_HORA,
+    STATE_MAIN,
     STATE_FIM
 };
 

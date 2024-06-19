@@ -8,7 +8,7 @@
 # 2 "<built-in>" 2
 # 1 "stateMachine.c" 2
 # 1 "./var.h" 1
-# 13 "./var.h"
+# 15 "./var.h"
 char prot_ready;
 
 void varInit(void);
@@ -17,8 +17,8 @@ char getState(void);
 void setState(char newState);
 int getTime(void);
 void setTime(int newTime);
-int getAlarmLevel(void);
-void setAlarmLevel(int newAlarmLevel);
+int getAlarmLevel(int lh);
+void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
 void setLanguage(char newLanguage);
 unsigned char* getProt();
@@ -29,10 +29,11 @@ void resetProt();
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME = 0,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
-    STATE_HORA,
+    STATE_MAIN,
     STATE_FIM
 };
 
@@ -80,13 +81,26 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void kpInit(void);
 # 6 "stateMachine.c" 2
 
+# 1 "./ds1307.h" 1
+# 15 "./ds1307.h"
+ void dsInit(void);
+ void dsStartClock(void);
+ void dsStopClock(void);
+ int dec2bcd(int value);
+ int bcd2dec(int value);
+ void dsWriteData(unsigned char value, int address);
+ int dsReadData(int address);
+# 7 "stateMachine.c" 2
 
-char estado_ant;
+
+char estado_ant = STATE_ALARMEL;
 
 void smInit(void) {
-    setState(STATE_ALARME);
+    varInit();
+    setState(STATE_MAIN);
     eventInit();
 }
+
 
 void smLoop(void) {
     unsigned char evento;
@@ -95,33 +109,70 @@ void smLoop(void) {
     evento = eventRead();
 
     switch (getState()) {
-        case STATE_ALARME:
+        case STATE_ALARMEL:
+            if (evento == EV_B_0) {
+                setAlarmLevel(getAlarmLevel(0) - 1, 0);
+            }
+
+            if (evento == EV_B_1) {
+                setAlarmLevel(getAlarmLevel(0) + 1, 0);
+            }
+
             if (evento == EV_B_2) {
+                setState(STATE_TEMPO);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_ALARMEH);
+            }
+
+            if(evento == EV_B_4)
+            {
+                setState(STATE_MAIN);
+                estado_ant = STATE_ALARMEL;
+            }
+            break;
+
+        case STATE_ALARMEH:
+            if (evento == EV_B_0) {
+                setAlarmLevel(getAlarmLevel(1) - 1, 1);
+            }
+
+            if (evento == EV_B_1) {
+                setAlarmLevel(getAlarmLevel(1) + 1, 1);
+            }
+
+            if (evento == EV_B_2) {
+                setState(STATE_ALARMEL);
+            }
+
+            if (evento == EV_B_3) {
                 setState(STATE_IDIOMA);
             }
 
-            if (evento == EV_B_3) {
-                setState(STATE_TEMPO);
-            }
-
             if(evento == EV_B_4)
             {
-                setState(STATE_HORA);
+                setState(STATE_MAIN);
+                estado_ant = STATE_ALARMEH;
             }
             break;
+
+
+
         case STATE_IDIOMA:
 
             if (evento == EV_B_2) {
-                setState(STATE_TEMPO);
+                setState(STATE_ALARMEH);
             }
 
             if (evento == EV_B_3) {
-                setState(STATE_ALARME);
+                setState(STATE_TEMPO);
             }
 
             if(evento == EV_B_4)
             {
-                setState(STATE_HORA);
+                setState(STATE_MAIN);
+                estado_ant = STATE_IDIOMA;
             }
 
             if (evento == EV_B_0) {
@@ -139,7 +190,7 @@ void smLoop(void) {
                 prot = getProt();
 
                 if (prot[1] == 'l') {
-                    setLanguage(prot[3]);
+                    setLanguage(prot[5 - 1]);
                 }
 
                 resetProt();
@@ -150,7 +201,7 @@ void smLoop(void) {
 
 
             if (evento == EV_B_2) {
-                setState(STATE_ALARME);
+                setState(STATE_IDIOMA);
             }
 
             if (evento == EV_B_3) {
@@ -159,13 +210,21 @@ void smLoop(void) {
 
             if(evento == EV_B_4)
             {
-                setState(STATE_HORA);
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
             }
 
             break;
-        case STATE_HORA:
-            if(evento != EV_B_4)
-                setState(STATE_ALARME);
+        case STATE_MAIN:
+            if(evento == EV_B_4)
+                setState(estado_ant);
+
+            if(evento == EV_B_0)
+                (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) + 1),0x01));
+
+            if(evento == EV_B_1){
+
+            }
             break;
     }
     outputPrint(getState(), getLanguage());

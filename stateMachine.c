@@ -32,7 +32,7 @@ void smLoop(void) {
             }
             
             if (evento == EV_B_2) {
-                setState(STATE_TEMPO);
+                setState(STATE_TEMPOM);
             }
 
             if (evento == EV_B_3) {
@@ -98,27 +98,24 @@ void smLoop(void) {
                 setLanguage(getLanguage() - 1);
             }
 
-            if (evento == EV_PROT_SERIAL) {
-                unsigned char* prot;
-                prot = getProt();
-
-                if (prot[1] == 'l') {
-                    setLanguage(prot[PROT_TAM - 1]);
-                }
-
-                resetProt();
-            }
+            
             break;
         case STATE_TEMPO:
 
             //execução de atividade
-            
+            if (evento == EV_B_0) {
+                //setAlarmLevel(getAlarmLevel() + 1);
+                setHours(getHours() - 1);
+            }
+            if (evento == EV_B_1) {
+                setHours(getHours() + 1);
+            }
             if (evento == EV_B_2) {
                 setState(STATE_IDIOMA);
             }
 
             if (evento == EV_B_3) {
-                setState(STATE_IDIOMA);
+                setState(STATE_TEMPOM);
             }
             
             if(evento == EV_B_4)
@@ -128,6 +125,33 @@ void smLoop(void) {
             }
             
             break;
+            
+        case STATE_TEMPOM:
+
+            //execução de atividade
+            if (evento == EV_B_0) {
+                //setAlarmLevel(getAlarmLevel() + 1);
+                setMinutes(getMinutes() - 1);
+            }
+            if (evento == EV_B_1) {
+                setMinutes(getMinutes() + 1);
+            }
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPO);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_ALARMEL);
+            }
+            
+            if(evento == EV_B_4)
+            {
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
+            }
+            
+            break;
+            
         case STATE_MAIN:
             if(evento == EV_B_4)
                 setState(estado_ant);
@@ -140,5 +164,19 @@ void smLoop(void) {
             }
             break;
     }
+    
+    if (evento == EV_PROT_SERIAL) {
+        unsigned char* prot;
+        prot = getProt();
+        
+        switch(prot[1])
+        {
+            
+        }
+        
+
+        resetProt();
+    }
+    
     outputPrint(getState(), getLanguage());
 }

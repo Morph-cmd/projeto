@@ -26,9 +26,11 @@
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
+    STATE_MAIN,
     STATE_FIM
 };
 
@@ -5504,28 +5506,35 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 13 "main.c" 2
 
-# 1 "./bits.h" 1
+# 1 "./serial.h" 1
+# 23 "./serial.h"
+ void serialSend(unsigned char c);
+ unsigned char serialRead(void);
+ void serialInit(void);
 # 14 "main.c" 2
+
+# 1 "./bits.h" 1
+# 15 "main.c" 2
 
 # 1 "./keypad.h" 1
 # 23 "./keypad.h"
  unsigned char kpRead(void);
  void kpDebounce(void);
  void kpInit(void);
-# 15 "main.c" 2
+# 16 "main.c" 2
 
 # 1 "./soft_i2c.h" 1
 # 14 "./soft_i2c.h"
     void i2cInit(void);
     unsigned char i2cWriteByte(unsigned char send_start, unsigned char send_stop, unsigned char byte);
     unsigned char i2cReadByte(unsigned char nack, unsigned char send_stop);
-# 16 "main.c" 2
+# 17 "main.c" 2
 
 # 1 "./ds1307.h" 1
-# 14 "./ds1307.h"
+# 15 "./ds1307.h"
  void dsInit(void);
  void dsStartClock(void);
  void dsStopClock(void);
@@ -5533,7 +5542,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  int bcd2dec(int value);
  void dsWriteData(unsigned char value, int address);
  int dsReadData(int address);
-# 17 "main.c" 2
+# 18 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
@@ -5803,7 +5812,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 18 "main.c" 2
+# 19 "main.c" 2
 
 
 
@@ -5815,13 +5824,19 @@ void main(void) {
     lcdInit();
     dsInit();
     smInit();
+    serialInit();
     TRISA = 0x00;
     LATA = 0x00;
+
+    (dsWriteData(dec2bcd(0),0x00));
+    (dsWriteData(dec2bcd(10),0x01));
+    (dsWriteData(dec2bcd(0),0x02));
+
 
     while (1) {
         kpDebounce();
 
         smLoop();
-# 82 "main.c"
+# 89 "main.c"
     }
 }

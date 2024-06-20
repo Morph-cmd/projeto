@@ -17,12 +17,13 @@
 # 1 "./event.h" 1
 # 10 "./event.h"
 enum{
-    EV_0,
-    EV_1,
-    EV_2,
-    EV_3,
-    EV_4,
-    EV_5
+    EV_B_0,
+    EV_B_1,
+    EV_B_2,
+    EV_B_3,
+    EV_B_4,
+    EV_PROT_SERIAL,
+    EV_NOEVENT
 };
 void eventInit(void);
 unsigned int eventRead(void);
@@ -39,8 +40,35 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 4 "event.c" 2
+
+# 1 "./serial.h" 1
+# 23 "./serial.h"
+ void serialSend(unsigned char c);
+ unsigned char serialRead(void);
+ void serialInit(void);
+# 5 "event.c" 2
+
+# 1 "./var.h" 1
+# 15 "./var.h"
+char prot_ready;
+
+void varInit(void);
+
+char getState(void);
+void setState(char newState);
+int getTime(void);
+void setTime(int newTime);
+int getAlarmLevel(int lh);
+void setAlarmLevel(int newAlarmLevel, char lh);
+char getLanguage(void);
+void setLanguage(char newLanguage);
+unsigned char* getProt();
+void setProt(char newLanguage);
+void resetProt();
+# 6 "event.c" 2
+
 
 
 
@@ -59,31 +87,77 @@ void eventInit(void) {
     key = 1;
 }
 
-void delay2ms(void) {
-    unsigned char j, k;
-    for (j = 0; j < 20; j++)
-        for (k = 0; k < 178; k++);
-}
 
 unsigned int eventRead(void) {
     int key;
-    int ev = EV_5;
+    int ev = EV_NOEVENT;
     key = kpRead();
     if (key != key_ant) {
         if (((key) & (1<<0))) {
-            ev = EV_0;
+            ev = EV_B_0;
         }
 
         if (((key) & (1<<1))) {
-            ev = EV_1;
+            ev = EV_B_1;
         }
 
         if (((key) & (1<<2))) {
+            ev = EV_B_2;
+        }
 
+        if (((key) & (1<<3))) {
+            ev = EV_B_3;
+        }
+
+        if (((key) & (1<<4))) {
+            ev = EV_B_4;
         }
     }
 
     key_ant = key;
+
+
+    unsigned char data = serialRead();
+    serialSend(data);
+    unsigned char* prot;
+    if (data != 0) {
+        prot = getProt();
+        if (prot[0] == 0) {
+            switch (data) {
+                case '9':
+                    ev = EV_B_0;
+                    break;
+                case '1':
+                    ev = EV_B_1;
+                    break;
+                case '2':
+                    ev = EV_B_2;
+                    break;
+                case '3':
+                    ev = EV_B_3;
+                    break;
+                case '4':
+                    ev = EV_B_4;
+                    break;
+                case 'P': case'p':
+                    ev = EV_NOEVENT;
+                    setProt('p');
+
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            setProt(data);
+
+            if (prot_ready) {
+                ev = EV_PROT_SERIAL;
+            }
+        }
+    }
+
+
     return ev;
-# 76 "event.c"
+
+
 }

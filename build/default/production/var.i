@@ -34,7 +34,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 2 "var.c" 2
 
 # 1 "./ds1307.h" 1
@@ -65,8 +65,18 @@ void varInit(void) {
     time = 1000;
 
     alarmLevelHigh = dsReadData(0x20);
-    alarmLevelLow = 35;
+    alarmLevelLow = dsReadData(0x21);
+    language = dsReadData(0x23) != 1 ? 0 : 1;
+    if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
+        setAlarmLevel(50, 0);
+        setAlarmLevel(100, 1);
+    }
+
+    (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x00)& 0x7f)) == 0 ? 0 : (bcd2dec(dsReadData(0x00)& 0x7f))),0x00));
+    (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) == 0 ? 45 : (bcd2dec(dsReadData(0x01)& 0x7f))),0x01));
+    (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) == 0 ? 15 : (bcd2dec(dsReadData(0x02)& 0x7f))),0x02));
 }
+
 
 char getState(void) {
     return state;
@@ -103,7 +113,13 @@ void setAlarmLevel(int newAlarmLevel, char lh) {
         dsWriteData(alarmLevelHigh, 0x20);
     }
     else
+    {
         alarmLevelLow = newAlarmLevel;
+
+        dsWriteData(alarmLevelLow, 0x21);
+    }
+    dsWriteData(alarmLevelHigh + alarmLevelLow, 0x22);
+
 }
 
 char getLanguage(void) {
@@ -114,6 +130,7 @@ void setLanguage(char newLanguage) {
 
 
     language = newLanguage % 2;
+    dsWriteData(language, 0x23);
 }
 
 unsigned char* getProt() {

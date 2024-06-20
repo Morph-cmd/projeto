@@ -172,7 +172,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e $U 12  ]
 {
 "62
-[; ;event.c: 62:                 case '9':
+[; ;event.c: 62:                 case '2':
 [e :U 13 ]
 "63
 [; ;event.c: 63:                     ev = EV_B_0;
@@ -181,7 +181,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;event.c: 64:                     break;
 [e $U 11  ]
 "65
-[; ;event.c: 65:                 case '1':
+[; ;event.c: 65:                 case '8':
 [e :U 14 ]
 "66
 [; ;event.c: 66:                     ev = EV_B_1;
@@ -190,7 +190,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;event.c: 67:                     break;
 [e $U 11  ]
 "68
-[; ;event.c: 68:                 case '2':
+[; ;event.c: 68:                 case '4':
 [e :U 15 ]
 "69
 [; ;event.c: 69:                     ev = EV_B_2;
@@ -199,7 +199,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;event.c: 70:                     break;
 [e $U 11  ]
 "71
-[; ;event.c: 71:                 case '3':
+[; ;event.c: 71:                 case '6':
 [e :U 16 ]
 "72
 [; ;event.c: 72:                     ev = EV_B_3;
@@ -208,7 +208,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;event.c: 73:                     break;
 [e $U 11  ]
 "74
-[; ;event.c: 74:                 case '4':
+[; ;event.c: 74:                 case '5':
 [e :U 17 ]
 "75
 [; ;event.c: 75:                     ev = EV_B_4;
@@ -240,11 +240,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 11  ]
 [e :U 12 ]
-[e [\ _data , $ -> -> 57 `ui `i 13
- , $ -> -> 49 `ui `i 14
- , $ -> -> 50 `ui `i 15
- , $ -> -> 51 `ui `i 16
- , $ -> -> 52 `ui `i 17
+[e [\ _data , $ -> -> 50 `ui `i 13
+ , $ -> -> 56 `ui `i 14
+ , $ -> -> 52 `ui `i 15
+ , $ -> -> 54 `ui `i 16
+ , $ -> -> 53 `ui `i 17
  , $ -> -> 80 `ui `i 18
  , $ -> -> 112 `ui `i 19
  20 ]

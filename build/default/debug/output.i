@@ -21,15 +21,17 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 2 "output.c" 2
 
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
 enum {
-    STATE_ALARME,
+    STATE_ALARMEL = 0,
+    STATE_ALARMEH,
     STATE_TEMPO,
     STATE_IDIOMA,
+    STATE_MAIN,
     STATE_FIM
 };
 
@@ -39,18 +41,34 @@ void smLoop(void);
 # 3 "output.c" 2
 
 # 1 "./var.h" 1
-# 11 "./var.h"
+# 15 "./var.h"
+char prot_ready;
+
 void varInit(void);
 
 char getState(void);
 void setState(char newState);
 int getTime(void);
 void setTime(int newTime);
-int getAlarmLevel(void);
-void setAlarmLevel(int newAlarmLevel);
+int getAlarmLevel(int lh);
+void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
 void setLanguage(char newLanguage);
+unsigned char* getProt();
+void setProt(char newLanguage);
+void resetProt();
 # 4 "output.c" 2
+
+# 1 "./ds1307.h" 1
+# 15 "./ds1307.h"
+ void dsInit(void);
+ void dsStartClock(void);
+ void dsStopClock(void);
+ int dec2bcd(int value);
+ int bcd2dec(int value);
+ void dsWriteData(unsigned char value, int address);
+ int dsReadData(int address);
+# 5 "output.c" 2
 
 
 
@@ -58,6 +76,7 @@ void setLanguage(char newLanguage);
 
 
 static char * msgs[STATE_FIM][2] = {
+    {"Alterar alarme ", "Change alarm   "},
     {"Alterar alarme ", "Change alarm   "},
     {"Alterar tempo  ", "Change time    "},
     {"Alterar idioma ", "Change language"}
@@ -73,14 +92,34 @@ void outputPrint(int numTela, int idioma) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getTime());
+        lcdInt(getTime(), 4);
         lcdString("           ");
     }
-    if (numTela == STATE_ALARME) {
+    if (numTela == STATE_ALARMEL) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getAlarmLevel());
+        lcdData('>');
+        lcdInt(getAlarmLevel(0), 3);
+        lcdData('L');
+        lcdString("   ");
+        lcdData(' ');
+        lcdInt(getAlarmLevel(1), 3);
+        lcdData('H');
+
+        lcdString("           ");
+    }
+    if (numTela == STATE_ALARMEH) {
+        lcdCommand(0x80);
+        lcdString(msgs[numTela][idioma]);
+        lcdCommand(0xC0);
+        lcdData(' ');
+        lcdInt(getAlarmLevel(0), 3);
+        lcdData('L');
+        lcdString("   ");
+        lcdData('>');
+        lcdInt(getAlarmLevel(1), 3);
+        lcdData('H');
         lcdString("           ");
     }
     if (numTela == STATE_IDIOMA) {
@@ -93,6 +132,23 @@ void outputPrint(int numTela, int idioma) {
         if (getLanguage() == 1) {
             lcdString("English         ");
         }
+
+    }
+
+    if (numTela == STATE_MAIN) {
+        lcdCommand(0x80);
+        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)), 2);
+        lcdData(':');
+        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)), 2);
+        lcdData(':');
+        lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)), 2);
+        lcdString("           ");
+
+
+
+
+
+
 
     }
 

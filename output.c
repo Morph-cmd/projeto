@@ -12,6 +12,7 @@ static char * msgs[STATE_FIM][NUM_IDIOMAS] = {
     {"Alterar alarme ", "Change alarm   "},
     {"Alterar alarme ", "Change alarm   "},
     {"Alterar tempo  ", "Change time    "},
+    {"Alterar tempo  ", "Change time    "},
     {"Alterar idioma ", "Change language"}
 };
 
@@ -25,21 +26,53 @@ void outputPrint(int numTela, int idioma) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getTime());
+        
+        lcdData('>');
+        lcdInt(getHours(), 2);
+        lcdData(':');
+        lcdInt(getMinutes(), 2);
+        lcdData(':');
+        lcdInt(getSeconds(), 2);
+        lcdString("           "); //para apagar os textos depois do numero
+    }
+    if (numTela == STATE_TEMPOM) {
+        lcdCommand(0x80);
+        lcdString(msgs[numTela][idioma]);
+        lcdCommand(0xC0);
+        
+        lcdInt(getHours(), 2);
+        lcdData(':');
+        lcdData('>');
+        lcdInt(getMinutes(), 2);
+        lcdData(':');
+        lcdInt(getSeconds(), 2);
         lcdString("           "); //para apagar os textos depois do numero
     }
     if (numTela == STATE_ALARMEL) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getAlarmLevel(LOW));
+        lcdData('>');
+        lcdInt(getAlarmLevel(LOW), 3);
+        lcdData('L');
+        lcdString("   ");
+        lcdData(' ');
+        lcdInt(getAlarmLevel(HIGH), 3);
+        lcdData('H');
+        
         lcdString("           "); //para apagar os textos depois do numero
     }
     if (numTela == STATE_ALARMEH) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
-        lcdInt(getAlarmLevel(HIGH));
+        lcdData(' ');
+        lcdInt(getAlarmLevel(LOW), 3);
+        lcdData('L');
+        lcdString("   ");
+        lcdData('>');
+        lcdInt(getAlarmLevel(HIGH), 3);
+        lcdData('H');
         lcdString("           "); //para apagar os textos depois do numero
     }
     if (numTela == STATE_IDIOMA) {
@@ -57,14 +90,14 @@ void outputPrint(int numTela, int idioma) {
 
     if (numTela == STATE_MAIN) {
         lcdCommand(0x80);
-        lcdData(((getHours() % 100) / 10) + 48);
-        lcdData(((getHours() % 100) % 10) + 48);
+        lcdInt(getHours(), 2);
         lcdData(':');
-        lcdData(((getMinutes() % 100) / 10) + 48);
-        lcdData(((getMinutes() % 100) % 10) + 48);
+        lcdInt(getMinutes(), 2);
+        lcdData(':');
+        lcdInt(getSeconds(), 2);
         lcdString("           ");
         
-        lcdInt(getSeconds());
+        //lcdInt(getSeconds());
         //lcdData(':');
  
         

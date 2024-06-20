@@ -16,7 +16,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 23 "lcd.c" 2
 
 # 1 "C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\\pic\\include\\proc\\pic18f4550.h" 1 3
@@ -5874,20 +5874,22 @@ void lcdInit(void) {
 }
 
 void lcdString(const char *str) {
-    while(*str) {
+    while (*str) {
         lcdData(*str++);
     }
 }
 
-void lcdInt(int val) {
+void lcdInt(int val, char digNum) {
     if (val < 0) {
         val = val * (-1);
         lcdData('-');
     }
-    lcdData((val / 10000) % 10 + 48);
-    lcdData((val / 1000) % 10 + 48);
-    lcdData((val / 100) % 10 + 48);
-    lcdData((val / 10) % 10 + 48);
-    lcdData((val / 1) % 10 + 48);
-
+# 188 "lcd.c"
+    for (int i = digNum - 1; i >= 0; i--) {
+        int divisor = 1;
+        for (int j = 0; j < i; j++) {
+            divisor *= 10;
+        }
+        lcdData((val / divisor) % 10 + 48);
+    }
 }

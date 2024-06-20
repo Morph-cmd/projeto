@@ -1,144 +1,326 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"4 var.c
-[; ;var.c: 4: static char state;
+"21 ./ds1307.h
+[; ;./ds1307.h: 21:  int dsReadData(int address);
+[v _dsReadData `(i ~T0 @X0 0 ef1`i ]
+"24 ./var.h
+[; ;./var.h: 24: void setAlarmLevel(int newAlarmLevel, char lh);
+[v _setAlarmLevel `(v ~T0 @X0 0 ef2`i`uc ]
+"20 ./ds1307.h
+[; ;./ds1307.h: 20:  void dsWriteData(unsigned char value, int address);
+[v _dsWriteData `(v ~T0 @X0 0 ef2`uc`i ]
+"15 ./var.h
+[; ;./var.h: 15: char prot_ready;
+[v _prot_ready `uc ~T0 @X0 1 e ]
+"7 var.c
+[; ;var.c: 7: static char state;
 [v _state `uc ~T0 @X0 1 s ]
-"5
-[; ;var.c: 5: static char language;
+"8
+[; ;var.c: 8: static char language;
 [v _language `uc ~T0 @X0 1 s ]
-"6
-[; ;var.c: 6: static int time;
-[v _time `i ~T0 @X0 1 s ]
-"7
-[; ;var.c: 7: static int alarmLevel;
-[v _alarmLevel `i ~T0 @X0 1 s ]
 "9
-[; ;var.c: 9: void varInit(void) {
+[; ;var.c: 9: static int time;
+[v _time `i ~T0 @X0 1 s ]
+"10
+[; ;var.c: 10: static unsigned char alarmLevelHigh;
+[v _alarmLevelHigh `uc ~T0 @X0 1 s ]
+"11
+[; ;var.c: 11: static unsigned char alarmLevelLow;
+[v _alarmLevelLow `uc ~T0 @X0 1 s ]
+"12
+[; ;var.c: 12: static char index=0;
+[v _index `uc ~T0 @X0 1 s ]
+[i _index
+-> -> 0 `i `uc
+]
+"13
+[; ;var.c: 13: static unsigned char prot[5];
+[v _prot `uc ~T0 @X0 -> 5 `i s ]
+"16
+[; ;var.c: 16: void varInit(void) {
 [v _varInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _varInit ]
 [f ]
-"10
-[; ;var.c: 10:     state = 0;
+"17
+[; ;var.c: 17:     state = 0;
 [e = _state -> -> 0 `i `uc ]
-"11
-[; ;var.c: 11:     time = 1000;
+"18
+[; ;var.c: 18:     time = 1000;
 [e = _time -> 1000 `i ]
-"12
-[; ;var.c: 12:     alarmLevel = 512;
-[e = _alarmLevel -> 512 `i ]
-"13
-[; ;var.c: 13: }
+"20
+[; ;var.c: 20:     alarmLevelHigh = dsReadData(0x20);
+[e = _alarmLevelHigh -> ( _dsReadData (1 -> 32 `i `uc ]
+"21
+[; ;var.c: 21:     alarmLevelLow = dsReadData(0x21);
+[e = _alarmLevelLow -> ( _dsReadData (1 -> 33 `i `uc ]
+"22
+[; ;var.c: 22:     language = dsReadData(0x23);
+[e = _language -> ( _dsReadData (1 -> 35 `i `uc ]
+"23
+[; ;var.c: 23:     if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
+[e $ ! != + -> _alarmLevelHigh `i -> _alarmLevelLow `i ( _dsReadData (1 -> 34 `i 2  ]
+{
+"24
+[; ;var.c: 24:         setAlarmLevel(50, 0);
+[e ( _setAlarmLevel (2 , -> 50 `i -> -> 0 `i `uc ]
+"25
+[; ;var.c: 25:         setAlarmLevel(100, 1);
+[e ( _setAlarmLevel (2 , -> 100 `i -> -> 1 `i `uc ]
+"26
+[; ;var.c: 26:     }
+}
+[e :U 2 ]
+"27
+[; ;var.c: 27: }
 [e :UE 1 ]
 }
-"16
-[; ;var.c: 16: char getState(void) {
+"30
+[; ;var.c: 30: char getState(void) {
 [v _getState `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getState ]
 [f ]
-"17
-[; ;var.c: 17:     return state;
+"31
+[; ;var.c: 31:     return state;
 [e ) _state ]
-[e $UE 2  ]
-"18
-[; ;var.c: 18: }
-[e :UE 2 ]
+[e $UE 3  ]
+"32
+[; ;var.c: 32: }
+[e :UE 3 ]
 }
-"19
-[; ;var.c: 19: void setState(char newState) {
+"34
+[; ;var.c: 34: void setState(char newState) {
 [v _setState `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setState ]
 [v _newState `uc ~T0 @X0 1 r1 ]
 [f ]
-"20
-[; ;var.c: 20:     state = newState;
+"35
+[; ;var.c: 35:     state = newState;
 [e = _state _newState ]
-"21
-[; ;var.c: 21: }
-[e :UE 3 ]
+"36
+[; ;var.c: 36: }
+[e :UE 4 ]
 }
-"24
-[; ;var.c: 24: int getTime(void) {
+"38
+[; ;var.c: 38: int getTime(void) {
 [v _getTime `(i ~T0 @X0 1 ef ]
 {
 [e :U _getTime ]
 [f ]
-"25
-[; ;var.c: 25:     return time;
+"39
+[; ;var.c: 39:     return time;
 [e ) _time ]
-[e $UE 4  ]
-"26
-[; ;var.c: 26: }
-[e :UE 4 ]
+[e $UE 5  ]
+"40
+[; ;var.c: 40: }
+[e :UE 5 ]
 }
-"27
-[; ;var.c: 27: void setTime(int newTime) {
+"42
+[; ;var.c: 42: void setTime(int newTime) {
 [v _setTime `(v ~T0 @X0 1 ef1`i ]
 {
 [e :U _setTime ]
 [v _newTime `i ~T0 @X0 1 r1 ]
 [f ]
-"28
-[; ;var.c: 28:     time = newTime;
+"43
+[; ;var.c: 43:     time = newTime;
 [e = _time _newTime ]
-"29
-[; ;var.c: 29: }
-[e :UE 5 ]
-}
-"32
-[; ;var.c: 32: int getAlarmLevel(void) {
-[v _getAlarmLevel `(i ~T0 @X0 1 ef ]
-{
-[e :U _getAlarmLevel ]
-[f ]
-"33
-[; ;var.c: 33:     return alarmLevel;
-[e ) _alarmLevel ]
-[e $UE 6  ]
-"34
-[; ;var.c: 34: }
+"44
+[; ;var.c: 44: }
 [e :UE 6 ]
 }
-"35
-[; ;var.c: 35: void setAlarmLevel(int newAlarmLevel) {
-[v _setAlarmLevel `(v ~T0 @X0 1 ef1`i ]
+"46
+[; ;var.c: 46: int getAlarmLevel(int lh) {
+[v _getAlarmLevel `(i ~T0 @X0 1 ef1`i ]
+{
+[e :U _getAlarmLevel ]
+[v _lh `i ~T0 @X0 1 r1 ]
+[f ]
+"47
+[; ;var.c: 47:     int l;
+[v _l `i ~T0 @X0 1 a ]
+"48
+[; ;var.c: 48:     if(lh == 0){
+[e $ ! == _lh -> 0 `i 8  ]
+{
+"49
+[; ;var.c: 49:         l = alarmLevelLow;
+[e = _l -> _alarmLevelLow `i ]
+"50
+[; ;var.c: 50:     }
+}
+[e $U 9  ]
+"51
+[; ;var.c: 51:     else
+[e :U 8 ]
+"52
+[; ;var.c: 52:     {
+{
+"53
+[; ;var.c: 53:         l = alarmLevelHigh;
+[e = _l -> _alarmLevelHigh `i ]
+"54
+[; ;var.c: 54:     }
+}
+[e :U 9 ]
+"55
+[; ;var.c: 55:     return l;
+[e ) _l ]
+[e $UE 7  ]
+"56
+[; ;var.c: 56: }
+[e :UE 7 ]
+}
+"58
+[; ;var.c: 58: void setAlarmLevel(int newAlarmLevel, char lh) {
+[v _setAlarmLevel `(v ~T0 @X0 1 ef2`i`uc ]
 {
 [e :U _setAlarmLevel ]
 [v _newAlarmLevel `i ~T0 @X0 1 r1 ]
+[v _lh `uc ~T0 @X0 1 r2 ]
 [f ]
-"36
-[; ;var.c: 36:     alarmLevel = newAlarmLevel;
-[e = _alarmLevel _newAlarmLevel ]
-"37
-[; ;var.c: 37: }
-[e :UE 7 ]
+"59
+[; ;var.c: 59:     if(lh == 1){
+[e $ ! == -> _lh `i -> 1 `i 11  ]
+{
+"60
+[; ;var.c: 60:         alarmLevelHigh = newAlarmLevel;
+[e = _alarmLevelHigh -> _newAlarmLevel `uc ]
+"62
+[; ;var.c: 62:         dsWriteData(alarmLevelHigh, 0x20);
+[e ( _dsWriteData (2 , _alarmLevelHigh -> 32 `i ]
+"63
+[; ;var.c: 63:     }
 }
-"40
-[; ;var.c: 40: char getLanguage(void){
+[e $U 12  ]
+"64
+[; ;var.c: 64:     else
+[e :U 11 ]
+"65
+[; ;var.c: 65:     {
+{
+"66
+[; ;var.c: 66:         alarmLevelLow = newAlarmLevel;
+[e = _alarmLevelLow -> _newAlarmLevel `uc ]
+"68
+[; ;var.c: 68:         dsWriteData(alarmLevelLow, 0x21);
+[e ( _dsWriteData (2 , _alarmLevelLow -> 33 `i ]
+"69
+[; ;var.c: 69:     }
+}
+[e :U 12 ]
+"70
+[; ;var.c: 70:     dsWriteData(alarmLevelHigh + alarmLevelLow, 0x22);
+[e ( _dsWriteData (2 , -> + -> _alarmLevelHigh `i -> _alarmLevelLow `i `uc -> 34 `i ]
+"72
+[; ;var.c: 72: }
+[e :UE 10 ]
+}
+"74
+[; ;var.c: 74: char getLanguage(void) {
 [v _getLanguage `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getLanguage ]
 [f ]
-"41
-[; ;var.c: 41:     return language;
+"75
+[; ;var.c: 75:     return language;
 [e ) _language ]
-[e $UE 8  ]
-"42
-[; ;var.c: 42: }
-[e :UE 8 ]
+[e $UE 13  ]
+"76
+[; ;var.c: 76: }
+[e :UE 13 ]
 }
-"43
-[; ;var.c: 43: void setLanguage(char newLanguage){
+"78
+[; ;var.c: 78: void setLanguage(char newLanguage) {
 [v _setLanguage `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setLanguage ]
 [v _newLanguage `uc ~T0 @X0 1 r1 ]
 [f ]
-"46
-[; ;var.c: 46:     language = newLanguage%2;
+"81
+[; ;var.c: 81:     language = newLanguage % 2;
 [e = _language -> % -> _newLanguage `i -> 2 `i `uc ]
-"47
-[; ;var.c: 47: }
-[e :UE 9 ]
+"82
+[; ;var.c: 82:     dsWriteData(language, 0x23);
+[e ( _dsWriteData (2 , -> _language `uc -> 35 `i ]
+"83
+[; ;var.c: 83: }
+[e :UE 14 ]
+}
+"85
+[; ;var.c: 85: unsigned char* getProt() {
+[v _getProt `(*uc ~T0 @X0 1 ef ]
+{
+[e :U _getProt ]
+[f ]
+"87
+[; ;var.c: 87:     return prot;
+[e ) &U _prot ]
+[e $UE 15  ]
+"88
+[; ;var.c: 88: }
+[e :UE 15 ]
+}
+"90
+[; ;var.c: 90: void setProt(char newChar) {
+[v _setProt `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _setProt ]
+[v _newChar `uc ~T0 @X0 1 r1 ]
+[f ]
+"92
+[; ;var.c: 92:     prot[index++] = newChar;
+[e = *U + &U _prot * -> ++ _index -> -> 1 `i `uc `ux -> -> # *U &U _prot `ui `ux -> _newChar `uc ]
+"94
+[; ;var.c: 94:     if(index == 5) prot_ready = 1;
+[e $ ! == -> _index `i -> 5 `i 17  ]
+[e = _prot_ready -> -> 1 `i `uc ]
+[e :U 17 ]
+"95
+[; ;var.c: 95: }
+[e :UE 16 ]
+}
+"97
+[; ;var.c: 97: void resetProt()
+[v _resetProt `(v ~T0 @X0 1 ef ]
+"98
+[; ;var.c: 98: {
+{
+[e :U _resetProt ]
+[f ]
+"99
+[; ;var.c: 99:     char i = 0;
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+"100
+[; ;var.c: 100:     while (i < 5)
+[e $U 19  ]
+[e :U 20 ]
+"101
+[; ;var.c: 101:     {
+{
+"102
+[; ;var.c: 102:         prot[i] = 0;
+[e = *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux -> -> 0 `i `uc ]
+"103
+[; ;var.c: 103:         i++;
+[e ++ _i -> -> 1 `i `uc ]
+"104
+[; ;var.c: 104:     }
+}
+[e :U 19 ]
+"100
+[; ;var.c: 100:     while (i < 5)
+[e $ < -> _i `i -> 5 `i 20  ]
+[e :U 21 ]
+"105
+[; ;var.c: 105:     prot_ready = 0;
+[e = _prot_ready -> -> 0 `i `uc ]
+"106
+[; ;var.c: 106:     index = 0;
+[e = _index -> -> 0 `i `uc ]
+"107
+[; ;var.c: 107: }
+[e :UE 18 ]
 }

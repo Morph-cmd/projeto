@@ -9,8 +9,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15 ./ds1307.h
 [; ;./ds1307.h: 15:  void dsInit(void);
 [v _dsInit `(v ~T0 @X0 0 ef ]
-"24 ./stateMachine.h
-[; ;./stateMachine.h: 24: void smInit(void);
+"25 ./stateMachine.h
+[; ;./stateMachine.h: 25: void smInit(void);
 [v _smInit `(v ~T0 @X0 0 ef ]
 "25 ./serial.h
 [; ;./serial.h: 25:  void serialInit(void);
@@ -24,8 +24,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24 ./keypad.h
 [; ;./keypad.h: 24:  void kpDebounce(void);
 [v _kpDebounce `(v ~T0 @X0 0 ef ]
-"25 ./stateMachine.h
-[; ;./stateMachine.h: 25: void smLoop(void);
+"26 ./stateMachine.h
+[; ;./stateMachine.h: 26: void smLoop(void);
 [v _smLoop `(v ~T0 @X0 0 ef ]
 "31 ./config.h
 [p x MCLRE=ON                 ]
@@ -573,23 +573,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32
 [; ;main.c: 32:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
-"39
-[; ;main.c: 39:     while (1) {
+"37
+[; ;main.c: 37:     while (1) {
 [e :U 369 ]
 {
-"40
-[; ;main.c: 40:         kpDebounce();
+"38
+[; ;main.c: 38:         kpDebounce();
 [e ( _kpDebounce ..  ]
-"42
-[; ;main.c: 42:         smLoop();
+"40
+[; ;main.c: 40:         smLoop();
 [e ( _smLoop ..  ]
-"89
-[; ;main.c: 89:     }
+"87
+[; ;main.c: 87:     }
 }
 [e :U 368 ]
 [e $U 369  ]
 [e :U 370 ]
-"90
-[; ;main.c: 90: }
+"88
+[; ;main.c: 88: }
 [e :UE 367 ]
 }

@@ -3,4 +3,6 @@ event.c  \
 keypad.h  \
 event.h  \
 pic18f4520.h  \
-lcd.h 
+lcd.h  \
+serial.h  \
+var.h 

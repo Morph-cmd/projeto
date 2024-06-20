@@ -32,6 +32,7 @@ enum {
     STATE_ALARMEL = 0,
     STATE_ALARMEH,
     STATE_TEMPO,
+    STATE_TEMPOM,
     STATE_IDIOMA,
     STATE_MAIN,
     STATE_FIM
@@ -71,7 +72,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 5 "stateMachine.c" 2
 
 # 1 "./keypad.h" 1
@@ -119,7 +120,7 @@ void smLoop(void) {
             }
 
             if (evento == EV_B_2) {
-                setState(STATE_TEMPO);
+                setState(STATE_TEMPOM);
             }
 
             if (evento == EV_B_3) {
@@ -185,27 +186,24 @@ void smLoop(void) {
                 setLanguage(getLanguage() - 1);
             }
 
-            if (evento == EV_PROT_SERIAL) {
-                unsigned char* prot;
-                prot = getProt();
 
-                if (prot[1] == 'l') {
-                    setLanguage(prot[5 - 1]);
-                }
-
-                resetProt();
-            }
             break;
         case STATE_TEMPO:
 
 
+            if (evento == EV_B_0) {
 
+                (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) - 1),0x02));
+            }
+            if (evento == EV_B_1) {
+                (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) + 1),0x02));
+            }
             if (evento == EV_B_2) {
                 setState(STATE_IDIOMA);
             }
 
             if (evento == EV_B_3) {
-                setState(STATE_IDIOMA);
+                setState(STATE_TEMPOM);
             }
 
             if(evento == EV_B_4)
@@ -215,6 +213,33 @@ void smLoop(void) {
             }
 
             break;
+
+        case STATE_TEMPOM:
+
+
+            if (evento == EV_B_0) {
+
+                (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) - 1),0x01));
+            }
+            if (evento == EV_B_1) {
+                (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) + 1),0x01));
+            }
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPO);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_ALARMEL);
+            }
+
+            if(evento == EV_B_4)
+            {
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
+            }
+
+            break;
+
         case STATE_MAIN:
             if(evento == EV_B_4)
                 setState(estado_ant);
@@ -227,5 +252,19 @@ void smLoop(void) {
             }
             break;
     }
+
+    if (evento == EV_PROT_SERIAL) {
+        unsigned char* prot;
+        prot = getProt();
+
+        switch(prot[1])
+        {
+
+        }
+
+
+        resetProt();
+    }
+
     outputPrint(getState(), getLanguage());
 }

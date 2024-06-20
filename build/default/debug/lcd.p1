@@ -852,7 +852,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _str `*Cuc ~T0 @X0 1 r1 ]
 [f ]
 "169
-[; ;lcd.c: 169:     while(*str) {
+[; ;lcd.c: 169:     while (*str) {
 [e $U 399  ]
 [e :U 400 ]
 {
@@ -864,7 +864,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 399 ]
 "169
-[; ;lcd.c: 169:     while(*str) {
+[; ;lcd.c: 169:     while (*str) {
 [e $ != -> *U _str `i -> 0 `i 400  ]
 [e :U 401 ]
 "172
@@ -872,11 +872,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 398 ]
 }
 "174
-[; ;lcd.c: 174: void lcdInt(int val) {
-[v _lcdInt `(v ~T0 @X0 1 ef1`i ]
+[; ;lcd.c: 174: void lcdInt(int val, char digNum) {
+[v _lcdInt `(v ~T0 @X0 1 ef2`i`uc ]
 {
 [e :U _lcdInt ]
 [v _val `i ~T0 @X0 1 r1 ]
+[v _digNum `uc ~T0 @X0 1 r2 ]
 [f ]
 "175
 [; ;lcd.c: 175:     if (val < 0) {
@@ -892,22 +893,49 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 178:     }
 }
 [e :U 403 ]
-"179
-[; ;lcd.c: 179:     lcdData((val / 10000) % 10 + 48);
-[e ( _lcdData (1 -> + % / _val -> 10000 `i -> 10 `i -> 48 `i `uc ]
-"180
-[; ;lcd.c: 180:     lcdData((val / 1000) % 10 + 48);
-[e ( _lcdData (1 -> + % / _val -> 1000 `i -> 10 `i -> 48 `i `uc ]
-"181
-[; ;lcd.c: 181:     lcdData((val / 100) % 10 + 48);
-[e ( _lcdData (1 -> + % / _val -> 100 `i -> 10 `i -> 48 `i `uc ]
-"182
-[; ;lcd.c: 182:     lcdData((val / 10) % 10 + 48);
-[e ( _lcdData (1 -> + % / _val -> 10 `i -> 10 `i -> 48 `i `uc ]
-"183
-[; ;lcd.c: 183:     lcdData((val / 1) % 10 + 48);
-[e ( _lcdData (1 -> + % / _val -> 1 `i -> 10 `i -> 48 `i `uc ]
-"185
-[; ;lcd.c: 185: }
+"188
+[; ;lcd.c: 188:     for (int i = digNum - 1; i >= 0; i--) {
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i - -> _digNum `i -> 1 `i ]
+[e $ >= _i -> 0 `i 404  ]
+[e $U 405  ]
+[e :U 404 ]
+{
+"189
+[; ;lcd.c: 189:         int divisor = 1;
+[v _divisor `i ~T0 @X0 1 a ]
+[e = _divisor -> 1 `i ]
+"190
+[; ;lcd.c: 190:         for (int j = 0; j < i; j++) {
+{
+[v _j `i ~T0 @X0 1 a ]
+[e = _j -> 0 `i ]
+[e $U 410  ]
+[e :U 407 ]
+{
+"191
+[; ;lcd.c: 191:             divisor *= 10;
+[e =* _divisor -> 10 `i ]
+"192
+[; ;lcd.c: 192:         }
+}
+[e ++ _j -> 1 `i ]
+[e :U 410 ]
+[e $ < _j _i 407  ]
+[e :U 408 ]
+}
+"193
+[; ;lcd.c: 193:         lcdData((val / divisor) % 10 + 48);
+[e ( _lcdData (1 -> + % / _val _divisor -> 10 `i -> 48 `i `uc ]
+"194
+[; ;lcd.c: 194:     }
+}
+[e -- _i -> 1 `i ]
+[e $ >= _i -> 0 `i 404  ]
+[e :U 405 ]
+}
+"195
+[; ;lcd.c: 195: }
 [e :UE 402 ]
 }

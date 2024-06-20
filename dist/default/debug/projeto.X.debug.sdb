@@ -46,37 +46,43 @@ PIN_E5 37
 PIN_E6 38
 PIN_E7 39
 ]
-"30 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+"28 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
 [e E5 . `uc
-EV_0 0
-EV_1 1
-EV_2 2
-EV_3 3
-EV_4 4
-EV_5 5
+EV_B_0 0
+EV_B_1 1
+EV_B_2 2
+EV_B_3 3
+EV_B_4 4
+EV_PROT_SERIAL 5
+EV_NOEVENT 6
 ]
-"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
-[e E18 . `uc
-STATE_ALARME 0
-STATE_TEMPO 1
-STATE_IDIOMA 2
-STATE_FIM 3
+"24 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+[e E19 . `uc
+STATE_ALARMEL 0
+STATE_ALARMEH 1
+STATE_TEMPO 2
+STATE_IDIOMA 3
+STATE_MAIN 4
+STATE_FIM 5
 ]
 "9 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
-[e E15 . `uc
-STATE_ALARME 0
-STATE_TEMPO 1
-STATE_IDIOMA 2
-STATE_FIM 3
-]
-"22
 [e E22 . `uc
-EV_0 0
-EV_1 1
-EV_2 2
-EV_3 3
-EV_4 4
-EV_5 5
+STATE_ALARMEL 0
+STATE_ALARMEH 1
+STATE_TEMPO 2
+STATE_IDIOMA 3
+STATE_MAIN 4
+STATE_FIM 5
+]
+"26
+[e E31 . `uc
+EV_B_0 0
+EV_B_1 1
+EV_B_2 2
+EV_B_3 3
+EV_B_4 4
+EV_PROT_SERIAL 5
+EV_NOEVENT 6
 ]
 "7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\aldiv.c
 [v ___aldiv __aldiv `(l  1 e 4 0 ]
@@ -112,15 +118,19 @@ EV_5 5
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"17 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+"9 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+[v _dec2bcd dec2bcd `(i  1 e 2 0 ]
+"14
+[v _bcd2dec bcd2dec `(i  1 e 2 0 ]
+"17
 [v _dsInit dsInit `(v  1 e 1 0 ]
 "26
 [v _dsWriteData dsWriteData `(v  1 e 1 0 ]
 "31
 [v _dsReadData dsReadData `(i  1 e 2 0 ]
-"15 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+"18 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
 [v _eventInit eventInit `(v  1 e 1 0 ]
-"28
+"26
 [v _eventRead eventRead `(ui  1 e 2 0 ]
 "14 C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
 [v _digitalWrite digitalWrite `(v  1 e 1 0 ]
@@ -152,9 +162,9 @@ EV_5 5
 [v _lcdString lcdString `(v  1 e 1 0 ]
 "174
 [v _lcdInt lcdInt `(v  1 e 1 0 ]
-"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+"23 C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"20 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
 [v _outputPrint outputPrint `(v  1 e 1 0 ]
 "63 C:\Users\Pessoal\MPLABXProjects\projeto.X\rtc.c
 [v _writeByte writeByte `(v  1 e 1 0 ]
@@ -168,6 +178,12 @@ EV_5 5
 [v _rtcGetSeconds rtcGetSeconds `(uc  1 e 1 0 ]
 "206
 [v _rtcPutSeconds rtcPutSeconds `(v  1 e 1 0 ]
+"25 C:\Users\Pessoal\MPLABXProjects\projeto.X\serial.c
+[v _serialSend serialSend `(v  1 e 1 0 ]
+"30
+[v _serialRead serialRead `(uc  1 e 1 0 ]
+"48
+[v _serialInit serialInit `(v  1 e 1 0 ]
 "14 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
 [v _i2cInit i2cInit `(v  1 e 1 0 ]
 "22
@@ -192,22 +208,34 @@ EV_5 5
 [v _i2cWriteByte i2cWriteByte `(uc  1 e 1 0 ]
 "131
 [v _i2cReadByte i2cReadByte `(uc  1 e 1 0 ]
-"8 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+"11 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
 [v _smInit smInit `(v  1 e 1 0 ]
-"13
+"18
 [v _smLoop smLoop `(v  1 e 1 0 ]
 "16 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _varInit varInit `(v  1 e 1 0 ]
+"30
 [v _getState getState `(uc  1 e 1 0 ]
-"19
+"34
 [v _setState setState `(v  1 e 1 0 ]
-"24
+"38
 [v _getTime getTime `(i  1 e 2 0 ]
-"32
+"46
 [v _getAlarmLevel getAlarmLevel `(i  1 e 2 0 ]
-"40
+"58
+[v _setAlarmLevel setAlarmLevel `(v  1 e 1 0 ]
+"74
 [v _getLanguage getLanguage `(uc  1 e 1 0 ]
-"43
+"78
 [v _setLanguage setLanguage `(v  1 e 1 0 ]
+"85
+[v _getProt getProt `(*.30uc  1 e 2 0 ]
+"90
+[v _setProt setProt `(v  1 e 1 0 ]
+"97
+[v _resetProt resetProt `(v  1 e 1 0 ]
+"15 C:\Users\Pessoal\MPLABXProjects\projeto.X/var.h
+[v _prot_ready prot_ready `uc  1 e 1 0 ]
 "52 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
 [v _PORTA PORTA `VEuc  1 e 1 @3968 ]
 "271
@@ -230,22 +258,22 @@ EV_5 5
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
 "2973 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
-"8 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+"11 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
 [v _ev_ant ev_ant `ui  1 s 2 ev_ant ]
-"9
+"12
 [v _key_ant key_ant `ui  1 s 2 key_ant ]
-"10
+"13
 [v _key key `ui  1 s 2 key ]
 "26 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
 [v _valor valor `uc  1 s 1 valor ]
-"10 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
-[v _msgs msgs `[3][2]*.32uc  1 s 12 msgs ]
+"11 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+[v _msgs msgs `[5][2]*.32uc  1 s 20 msgs ]
 "23 C:\Users\Pessoal\MPLABXProjects\projeto.X\rtc.c
 [v _de de `uc  1 e 1 0 ]
 "51 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
 [v _started started `uc  1 e 1 0 ]
 "27 C:\Users\Pessoal\MPLABXProjects\projeto.X\ssd.c
-[v _valor@ssd$F308 valor `C[16]uc  1 s 16 valor ]
+[v _valor@ssd$F319 valor `C[16]uc  1 s 16 valor ]
 "29
 [v _display display `uc  1 s 1 display ]
 "31
@@ -253,41 +281,58 @@ EV_5 5
 [v _v1 v1 `uc  1 s 1 v1 ]
 [v _v2 v2 `uc  1 s 1 v2 ]
 [v _v3 v3 `uc  1 s 1 v3 ]
-"4 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+"9 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+[v _estado_ant estado_ant `uc  1 e 1 0 ]
+"7 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
 [v _state state `uc  1 s 1 state ]
-"5
+"8
 [v _language language `uc  1 s 1 language ]
-"6
+"9
 [v _time time `i  1 s 2 time ]
-"7
-[v _alarmLevel alarmLevel `i  1 s 2 alarmLevel ]
-"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
+"10
+[v _alarmLevelHigh alarmLevelHigh `uc  1 s 1 alarmLevelHigh ]
+"11
+[v _alarmLevelLow alarmLevelLow `uc  1 s 1 alarmLevelLow ]
+"12
+[v _index index `uc  1 s 1 index ]
+"13
+[v _prot prot `[5]uc  1 s 5 prot ]
+"23 C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"83
+"90
 } 0
-"13 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+"18 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
 [v _smLoop smLoop `(v  1 e 1 0 ]
 {
-"14
-[v smLoop@evento evento `uc  1 a 1 24 ]
-"72
+"102
+[v smLoop@prot prot `*.30uc  1 a 1 40 ]
+"19
+[v smLoop@evento evento `uc  1 a 1 41 ]
+"144
 } 0
-"43 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+"78 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
 [v _setLanguage setLanguage `(v  1 e 1 0 ]
 {
 [v setLanguage@newLanguage newLanguage `uc  1 a 1 wreg ]
 [v setLanguage@newLanguage newLanguage `uc  1 a 1 wreg ]
-"46
-[v setLanguage@newLanguage newLanguage `uc  1 a 1 0 ]
-"47
+"81
+[v setLanguage@newLanguage newLanguage `uc  1 a 1 31 ]
+"83
 } 0
-"20 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
+"97
+[v _resetProt resetProt `(v  1 e 1 0 ]
+{
+"99
+[v resetProt@i i `uc  1 a 1 0 ]
+"107
+} 0
+"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
 [v _outputPrint outputPrint `(v  1 e 1 0 ]
 {
-[v outputPrint@numTela numTela `i  1 p 2 16 ]
-[v outputPrint@idioma idioma `i  1 p 2 18 ]
-"49
+[v outputPrint@numTela numTela `i  1 p 2 32 ]
+[v outputPrint@idioma idioma `i  1 p 2 34 ]
+"88
 } 0
 "168 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
 [v _lcdString lcdString `(v  1 e 1 0 ]
@@ -298,8 +343,16 @@ EV_5 5
 "174
 [v _lcdInt lcdInt `(v  1 e 1 0 ]
 {
-[v lcdInt@val val `i  1 p 2 14 ]
-"185
+"190
+[v lcdInt@j j `i  1 a 2 26 ]
+"189
+[v lcdInt@divisor divisor `i  1 a 2 28 ]
+"188
+[v lcdInt@i i `i  1 a 2 30 ]
+"174
+[v lcdInt@val val `i  1 p 2 22 ]
+[v lcdInt@digNum digNum `uc  1 p 1 24 ]
+"195
 } 0
 "108
 [v _lcdData lcdData `(v  1 e 1 0 ]
@@ -308,6 +361,99 @@ EV_5 5
 [v lcdData@valor valor `uc  1 a 1 wreg ]
 [v lcdData@valor valor `uc  1 a 1 2 ]
 "115
+} 0
+"38 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _getTime getTime `(i  1 e 2 0 ]
+{
+"40
+} 0
+"74
+[v _getLanguage getLanguage `(uc  1 e 1 0 ]
+{
+"76
+} 0
+"46
+[v _getAlarmLevel getAlarmLevel `(i  1 e 2 0 ]
+{
+"47
+[v getAlarmLevel@l l `i  1 a 2 2 ]
+"46
+[v getAlarmLevel@lh lh `i  1 p 2 0 ]
+"56
+} 0
+"14 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+[v _bcd2dec bcd2dec `(i  1 e 2 0 ]
+{
+[v bcd2dec@value value `i  1 p 2 18 ]
+"16
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 12 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 8 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 10 ]
+"53
+} 0
+"30 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _getState getState `(uc  1 e 1 0 ]
+{
+"32
+} 0
+"26 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+[v _eventRead eventRead `(ui  1 e 2 0 ]
+{
+"27
+[v eventRead@key key `i  1 a 2 9 ]
+"28
+[v eventRead@ev ev `i  1 a 2 6 ]
+"55
+[v eventRead@data data `uc  1 a 1 8 ]
+"57
+[v eventRead@prot prot `*.30uc  1 a 1 5 ]
+"98
+} 0
+"90 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _setProt setProt `(v  1 e 1 0 ]
+{
+[v setProt@newChar newChar `uc  1 a 1 wreg ]
+[v setProt@newChar newChar `uc  1 a 1 wreg ]
+"92
+[v setProt@newChar newChar `uc  1 a 1 0 ]
+"95
+} 0
+"25 C:\Users\Pessoal\MPLABXProjects\projeto.X\serial.c
+[v _serialSend serialSend `(v  1 e 1 0 ]
+{
+[v serialSend@c c `uc  1 a 1 wreg ]
+[v serialSend@c c `uc  1 a 1 wreg ]
+[v serialSend@c c `uc  1 a 1 0 ]
+"28
+} 0
+"30
+[v _serialRead serialRead `(uc  1 e 1 0 ]
+{
+"31
+[v serialRead@resp resp `uc  1 a 1 0 ]
+"46
+} 0
+"29 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
+[v _kpRead kpRead `(uc  1 e 1 0 ]
+{
+"31
+} 0
+"85 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _getProt getProt `(*.30uc  1 e 2 0 ]
+{
+"88
+} 0
+"9 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+[v _dec2bcd dec2bcd `(i  1 e 2 0 ]
+{
+[v dec2bcd@value value `i  1 p 2 22 ]
+"13
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -333,62 +479,154 @@ EV_5 5
 [v ___awdiv@divisor divisor `i  1 p 2 2 ]
 "41
 } 0
-"24 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
-[v _getTime getTime `(i  1 e 2 0 ]
-{
-"26
-} 0
-"40
-[v _getLanguage getLanguage `(uc  1 e 1 0 ]
-{
-"42
-} 0
-"32
-[v _getAlarmLevel getAlarmLevel `(i  1 e 2 0 ]
-{
-"34
-} 0
-"16
-[v _getState getState `(uc  1 e 1 0 ]
-{
-"18
-} 0
-"28 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
-[v _eventRead eventRead `(ui  1 e 2 0 ]
-{
-"29
-[v eventRead@key key `i  1 a 2 5 ]
-"30
-[v eventRead@ev ev `i  1 a 2 3 ]
-"76
-} 0
-"29 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
-[v _kpRead kpRead `(uc  1 e 1 0 ]
-{
-"31
-} 0
-"8 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
+"11 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
 [v _smInit smInit `(v  1 e 1 0 ]
 {
-"11
+"15
 } 0
-"19 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+"16 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
+[v _varInit varInit `(v  1 e 1 0 ]
+{
+"27
+} 0
+"58
+[v _setAlarmLevel setAlarmLevel `(v  1 e 1 0 ]
+{
+[v setAlarmLevel@newAlarmLevel newAlarmLevel `i  1 p 2 31 ]
+[v setAlarmLevel@lh lh `uc  1 p 1 33 ]
+"72
+} 0
+"26 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+[v _dsWriteData dsWriteData `(v  1 e 1 0 ]
+{
+[v dsWriteData@value value `uc  1 a 1 wreg ]
+[v dsWriteData@value value `uc  1 a 1 wreg ]
+[v dsWriteData@address address `i  1 p 2 28 ]
+[v dsWriteData@value value `uc  1 a 1 30 ]
+"30
+} 0
+"31
+[v _dsReadData dsReadData `(i  1 e 2 0 ]
+{
+"32
+[v dsReadData@result result `i  1 a 2 16 ]
+"31
+[v dsReadData@address address `i  1 p 2 13 ]
+"38
+} 0
+"113 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+[v _i2cWriteByte i2cWriteByte `(uc  1 e 1 0 ]
+{
+[v i2cWriteByte@send_start send_start `uc  1 a 1 wreg ]
+"114
+[v i2cWriteByte@bit bit `uc  1 a 1 10 ]
+"113
+[v i2cWriteByte@send_start send_start `uc  1 a 1 wreg ]
+[v i2cWriteByte@send_stop send_stop `uc  1 p 1 7 ]
+[v i2cWriteByte@byte byte `uc  1 p 1 8 ]
+"116
+[v i2cWriteByte@send_start send_start `uc  1 a 1 9 ]
+"128
+} 0
+"52
+[v _i2c_start i2c_start `(v  1 e 1 0 ]
+{
+"69
+} 0
+"131
+[v _i2cReadByte i2cReadByte `(uc  1 e 1 0 ]
+{
+[v i2cReadByte@nack nack `uc  1 a 1 wreg ]
+"133
+[v i2cReadByte@bit bit `ui  1 a 2 10 ]
+"132
+[v i2cReadByte@byte byte `uc  1 a 1 12 ]
+"131
+[v i2cReadByte@nack nack `uc  1 a 1 wreg ]
+[v i2cReadByte@send_stop send_stop `uc  1 p 1 7 ]
+[v i2cReadByte@nack nack `uc  1 a 1 9 ]
+"142
+} 0
+"84
+[v _i2c_write_bit i2c_write_bit `(v  1 e 1 0 ]
+{
+[v i2c_write_bit@bit bit `uc  1 a 1 wreg ]
+[v i2c_write_bit@bit bit `uc  1 a 1 wreg ]
+[v i2c_write_bit@bit bit `uc  1 a 1 6 ]
+"98
+} 0
+"71
+[v _i2c_stop i2c_stop `(v  1 e 1 0 ]
+{
+"82
+} 0
+"45
+[v _clear_SDA clear_SDA `(v  1 e 1 0 ]
+{
+"49
+} 0
+"100
+[v _i2c_read_bit i2c_read_bit `(uc  1 e 1 0 ]
+{
+"101
+[v i2c_read_bit@bit bit `uc  1 a 1 6 ]
+"110
+} 0
+"34
+[v _read_SDA read_SDA `(uc  1 e 1 0 ]
+{
+"38
+} 0
+"29
+[v _read_SCL read_SCL `(uc  1 e 1 0 ]
+{
+"33
+} 0
+"39 C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+[v _digitalRead digitalRead `(i  1 e 2 0 ]
+{
+[v digitalRead@pin pin `i  1 p 2 0 ]
+"52
+} 0
+"39 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+[v _clear_SCL clear_SCL `(v  1 e 1 0 ]
+{
+"43
+} 0
+"14 C:\Users\Pessoal\MPLABXProjects\projeto.X\io.c
+[v _digitalWrite digitalWrite `(v  1 e 1 0 ]
+{
+[v digitalWrite@pin pin `i  1 p 2 0 ]
+[v digitalWrite@value value `i  1 p 2 2 ]
+"38
+} 0
+"22 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
+[v _I2C_delay I2C_delay `(v  1 e 1 0 ]
+{
+"27
+} 0
+"34 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
 [v _setState setState `(v  1 e 1 0 ]
 {
 [v setState@newState newState `uc  1 a 1 wreg ]
 [v setState@newState newState `uc  1 a 1 wreg ]
 [v setState@newState newState `uc  1 a 1 0 ]
-"21
+"36
 } 0
-"15 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
+"18 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
 [v _eventInit eventInit `(v  1 e 1 0 ]
 {
-"20
+"23
 } 0
 "81 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
 [v _kpInit kpInit `(v  1 e 1 0 ]
 {
 "89
+} 0
+"48 C:\Users\Pessoal\MPLABXProjects\projeto.X\serial.c
+[v _serialInit serialInit `(v  1 e 1 0 ]
+{
+"56
 } 0
 "117 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
 [v _lcdInit lcdInit `(v  1 e 1 0 ]

@@ -29,6 +29,7 @@ enum {
     STATE_ALARMEL = 0,
     STATE_ALARMEH,
     STATE_TEMPO,
+    STATE_TEMPOM,
     STATE_IDIOMA,
     STATE_MAIN,
     STATE_FIM
@@ -5506,7 +5507,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 13 "main.c" 2
 
 # 1 "./serial.h" 1
@@ -5831,12 +5832,10 @@ void main(void) {
 
 
 
-
-
     while (1) {
         kpDebounce();
 
         smLoop();
-# 89 "main.c"
+# 87 "main.c"
     }
 }

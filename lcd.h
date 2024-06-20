@@ -26,5 +26,5 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 	void lcdData(unsigned char valor);
 	void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);    
+    void lcdInt(int val, char digNum);    
 #endif

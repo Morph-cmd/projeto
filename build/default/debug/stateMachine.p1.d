@@ -5,4 +5,5 @@ stateMachine.h  \
 event.h  \
 output.h  \
 lcd.h  \
-keypad.h 
+keypad.h  \
+ds1307.h 

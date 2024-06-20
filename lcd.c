@@ -2,11 +2,11 @@
 //   Copyright (C) Rodrigo Almeida 2010
 // -----------------------------------------------------------------------
 //   Arquivo: lcd.c
-//            Biblioteca de manipulação do LCD
+//            Biblioteca de manipulaï¿½ï¿½o do LCD
 //   Autor:   Rodrigo Maximiano Antunes de Almeida
 //            rodrigomax at unifei.edu.br
-//   Licença: GNU GPL 2
-//   Modificações: Placa PICGenius por Décio Rennó de M. Faria
+//   Licenï¿½a: GNU GPL 2
+//   Modificaï¿½ï¿½es: Placa PICGenius por Dï¿½cio Rennï¿½ de M. Faria
 // -----------------------------------------------------------------------
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License as published by
@@ -101,7 +101,7 @@ void lcdCommand(unsigned char cmd) {
         //__delay_ms(2);
     } else {
         Delay40us();
-       //__delay_us(40);
+        //__delay_us(40);
     }
 }
 
@@ -131,7 +131,7 @@ void lcdInit(void) {
     // garante inicializa??o do LCD (+-15ms)
     for (i = 0; i < 7; i++)
         Delay2ms();
-        //__delay_ms(2);
+    //__delay_ms(2);
 
     //precisa enviar 4x pra garantir 8 bits
     lcdCommand4bits(0x30, 0); //8bits, 2 linhas, 5x8
@@ -149,7 +149,7 @@ void lcdInit(void) {
     lcdCommand4bits(0x20, 0); //4bits
     Delay2ms();
     //__delay_ms(2);
-    
+
     lcdCommand(0x28); //4bits
     lcdCommand(0x06); //modo incremental
     //lcdCommand(0x0F); //display e cursor on, com blink
@@ -166,20 +166,30 @@ void lcdInit(void) {
 }
 
 void lcdString(const char *str) {//envia uma string pro lcd
-    while(*str) {
+    while (*str) {
         lcdData(*str++);
     }
 }
 
-void lcdInt(int val) {//envia um int pro lcd
+void lcdInt(int val, char digNum) {//envia um int pro lcd
     if (val < 0) {
         val = val * (-1);
         lcdData('-');
     }
-    lcdData((val / 10000) % 10 + 48);
-    lcdData((val / 1000) % 10 + 48);
-    lcdData((val / 100) % 10 + 48);
-    lcdData((val / 10) % 10 + 48);
-    lcdData((val / 1) % 10 + 48);
+    /*for (int i = digNum - 1; i >= 0; i--) {
+        //lcdData((val / 10000) % 10 + 48);
+        //lcdData((val / 1000) % 10 + 48);
+        //lcdData((val / 100) % 10 + 48);
+        //lcdData((val / 10) % 10 + 48);
+        lcdData(((val / ()) % 10) + 48);
+    }*/
 
+
+    for (int i = digNum - 1; i >= 0; i--) {
+        int divisor = 1;
+        for (int j = 0; j < i; j++) {
+            divisor *= 10;
+        }
+        lcdData((val / divisor) % 10 + 48);
+    }
 }

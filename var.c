@@ -18,8 +18,18 @@ void varInit(void) {
     time = 1000;
     //dsWriteData(50, 0x20);
     alarmLevelHigh = dsReadData(0x20);
-    alarmLevelLow = 35;
+    alarmLevelLow = dsReadData(0x21);
+    language = dsReadData(0x23) != 1 ? 0 : 1;
+    if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
+        setAlarmLevel(50, LOW); 
+        setAlarmLevel(100, HIGH);
+    }
+    
+    setSeconds(getSeconds() == 0 ? 0 : getSeconds());
+    setMinutes(getMinutes() == 0 ? 45 : getMinutes());
+    setHours(getHours() == 0 ? 15 : getHours());
 }
+
 
 char getState(void) {
     return state;
@@ -56,7 +66,13 @@ void setAlarmLevel(int newAlarmLevel, char lh) {
         dsWriteData(alarmLevelHigh, 0x20);
     }
     else
+    {
         alarmLevelLow = newAlarmLevel;
+        
+        dsWriteData(alarmLevelLow, 0x21);
+    }
+    dsWriteData(alarmLevelHigh + alarmLevelLow, 0x22);
+    
 }
 
 char getLanguage(void) {
@@ -67,6 +83,7 @@ void setLanguage(char newLanguage) {
     //só tem 2 linguas
     //usando resto pra evitar colocar valor errado
     language = newLanguage % 2;
+    dsWriteData(language, 0x23);
 }
 
 unsigned char* getProt() {

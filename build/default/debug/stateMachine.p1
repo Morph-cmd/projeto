@@ -1,102 +1,418 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"14 ./var.h
-[; ;./var.h: 14: void setState(char newState);
-[v _setState `(v ~T0 @X0 0 ef1`uc ]
 "9 stateMachine.c
-[; ;stateMachine.c: 9:     setState(STATE_ALARME);
-[c E15 0 1 2 3 .. ]
-[n E15 . STATE_ALARME STATE_TEMPO STATE_IDIOMA STATE_FIM  ]
-"18 ./event.h
-[; ;./event.h: 18: void eventInit(void);
-[v _eventInit `(v ~T0 @X0 0 ef ]
-"19
-[; ;./event.h: 19: unsigned int eventRead(void);
-[v _eventRead `(ui ~T0 @X0 0 ef ]
-"22 stateMachine.c
-[; ;stateMachine.c: 22:             if (evento == EV_0) {
+[; ;stateMachine.c: 9: char estado_ant = STATE_ALARMEL;
 [c E22 0 1 2 3 4 5 .. ]
-[n E22 . EV_0 EV_1 EV_2 EV_3 EV_4 EV_5  ]
-"20 ./var.h
-[; ;./var.h: 20: void setLanguage(char newLanguage);
+[n E22 . STATE_ALARMEL STATE_ALARMEH STATE_TEMPO STATE_IDIOMA STATE_MAIN STATE_FIM  ]
+"17 ./var.h
+[; ;./var.h: 17: void varInit(void);
+[v _varInit `(v ~T0 @X0 0 ef ]
+"20
+[; ;./var.h: 20: void setState(char newState);
+[v _setState `(v ~T0 @X0 0 ef1`uc ]
+"19 ./event.h
+[; ;./event.h: 19: void eventInit(void);
+[v _eventInit `(v ~T0 @X0 0 ef ]
+"20
+[; ;./event.h: 20: unsigned int eventRead(void);
+[v _eventRead `(ui ~T0 @X0 0 ef ]
+"26 stateMachine.c
+[; ;stateMachine.c: 26:             if (evento == EV_B_0) {
+[c E31 0 1 2 3 4 5 6 .. ]
+[n E31 . EV_B_0 EV_B_1 EV_B_2 EV_B_3 EV_B_4 EV_PROT_SERIAL EV_NOEVENT  ]
+"24 ./var.h
+[; ;./var.h: 24: void setAlarmLevel(int newAlarmLevel, char lh);
+[v _setAlarmLevel `(v ~T0 @X0 0 ef2`i`uc ]
+"23
+[; ;./var.h: 23: int getAlarmLevel(int lh);
+[v _getAlarmLevel `(i ~T0 @X0 0 ef1`i ]
+"26
+[; ;./var.h: 26: void setLanguage(char newLanguage);
 [v _setLanguage `(v ~T0 @X0 0 ef1`uc ]
-"19
-[; ;./var.h: 19: char getLanguage(void);
+"25
+[; ;./var.h: 25: char getLanguage(void);
 [v _getLanguage `(uc ~T0 @X0 0 ef ]
-"13
-[; ;./var.h: 13: char getState(void);
+"27
+[; ;./var.h: 27: unsigned char* getProt();
+[v _getProt `(*uc ~T0 @X0 0 e? ]
+"29
+[; ;./var.h: 29: void resetProt();
+[v _resetProt `(v ~T0 @X0 0 e? ]
+"20 ./ds1307.h
+[; ;./ds1307.h: 20:  void dsWriteData(unsigned char value, int address);
+[v _dsWriteData `(v ~T0 @X0 0 ef2`uc`i ]
+"18
+[; ;./ds1307.h: 18:  int dec2bcd(int value);
+[v _dec2bcd `(i ~T0 @X0 0 ef1`i ]
+"19
+[; ;./ds1307.h: 19:  int bcd2dec(int value);
+[v _bcd2dec `(i ~T0 @X0 0 ef1`i ]
+"21
+[; ;./ds1307.h: 21:  int dsReadData(int address);
+[v _dsReadData `(i ~T0 @X0 0 ef1`i ]
+"19 ./var.h
+[; ;./var.h: 19: char getState(void);
 [v _getState `(uc ~T0 @X0 0 ef ]
 "11 ./output.h
 [; ;./output.h: 11: void outputPrint(int numTela, int idioma);
 [v _outputPrint `(v ~T0 @X0 0 ef2`i`i ]
-"8 stateMachine.c
-[; ;stateMachine.c: 8: void smInit(void) {
+"15 ./var.h
+[; ;./var.h: 15: char prot_ready;
+[v _prot_ready `uc ~T0 @X0 1 e ]
+"9 stateMachine.c
+[; ;stateMachine.c: 9: char estado_ant = STATE_ALARMEL;
+[v _estado_ant `uc ~T0 @X0 1 e ]
+[i _estado_ant
+-> . `E22 0 `uc
+]
+"11
+[; ;stateMachine.c: 11: void smInit(void) {
 [v _smInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _smInit ]
 [f ]
-"9
-[; ;stateMachine.c: 9:     setState(STATE_ALARME);
-[e ( _setState (1 -> . `E15 0 `uc ]
-"10
-[; ;stateMachine.c: 10:     eventInit();
+"12
+[; ;stateMachine.c: 12:     varInit();
+[e ( _varInit ..  ]
+"13
+[; ;stateMachine.c: 13:     setState(STATE_MAIN);
+[e ( _setState (1 -> . `E22 4 `uc ]
+"14
+[; ;stateMachine.c: 14:     eventInit();
 [e ( _eventInit ..  ]
-"11
-[; ;stateMachine.c: 11: }
+"15
+[; ;stateMachine.c: 15: }
 [e :UE 1 ]
 }
-"13
-[; ;stateMachine.c: 13: void smLoop(void) {
+"18
+[; ;stateMachine.c: 18: void smLoop(void) {
 [v _smLoop `(v ~T0 @X0 1 ef ]
 {
 [e :U _smLoop ]
 [f ]
-"14
-[; ;stateMachine.c: 14:     unsigned char evento;
-[v _evento `uc ~T0 @X0 1 a ]
-"17
-[; ;stateMachine.c: 17:     evento = eventRead();
-[e = _evento -> ( _eventRead ..  `uc ]
 "19
-[; ;stateMachine.c: 19:     switch (getState()) {
+[; ;stateMachine.c: 19:     unsigned char evento;
+[v _evento `uc ~T0 @X0 1 a ]
+"22
+[; ;stateMachine.c: 22:     evento = eventRead();
+[e = _evento -> ( _eventRead ..  `uc ]
+"24
+[; ;stateMachine.c: 24:     switch (getState()) {
 [e $U 4  ]
 {
-"20
-[; ;stateMachine.c: 20:         case STATE_ALARME:
+"25
+[; ;stateMachine.c: 25:         case STATE_ALARMEL:
 [e :U 5 ]
-"22
-[; ;stateMachine.c: 22:             if (evento == EV_0) {
-[e $ ! == -> _evento `i -> . `E22 0 `i 6  ]
-{
-"24
-[; ;stateMachine.c: 24:                 setLanguage(getLanguage() + 1);
-[e ( _setLanguage (1 -> + -> ( _getLanguage ..  `i -> 1 `i `uc ]
 "26
-[; ;stateMachine.c: 26:             }
+[; ;stateMachine.c: 26:             if (evento == EV_B_0) {
+[e $ ! == -> _evento `i -> . `E31 0 `i 6  ]
+{
+"27
+[; ;stateMachine.c: 27:                 setAlarmLevel(getAlarmLevel(0) - 1, 0);
+[e ( _setAlarmLevel (2 , - ( _getAlarmLevel (1 -> 0 `i -> 1 `i -> -> 0 `i `uc ]
+"28
+[; ;stateMachine.c: 28:             }
 }
 [e :U 6 ]
-"28
-[; ;stateMachine.c: 28:             if (evento == EV_1) {
-[e $ ! == -> _evento `i -> . `E22 1 `i 7  ]
-{
-"29
-[; ;stateMachine.c: 29:                 setLanguage(getLanguage() - 1);
-[e ( _setLanguage (1 -> - -> ( _getLanguage ..  `i -> 1 `i `uc ]
 "30
-[; ;stateMachine.c: 30:             }
+[; ;stateMachine.c: 30:             if (evento == EV_B_1) {
+[e $ ! == -> _evento `i -> . `E31 1 `i 7  ]
+{
+"31
+[; ;stateMachine.c: 31:                 setAlarmLevel(getAlarmLevel(0) + 1, 0);
+[e ( _setAlarmLevel (2 , + ( _getAlarmLevel (1 -> 0 `i -> 1 `i -> -> 0 `i `uc ]
+"32
+[; ;stateMachine.c: 32:             }
 }
 [e :U 7 ]
+"34
+[; ;stateMachine.c: 34:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E31 2 `i 8  ]
+{
+"35
+[; ;stateMachine.c: 35:                 setState(STATE_TEMPO);
+[e ( _setState (1 -> . `E22 2 `uc ]
+"36
+[; ;stateMachine.c: 36:             }
+}
+[e :U 8 ]
+"38
+[; ;stateMachine.c: 38:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E31 3 `i 9  ]
+{
+"39
+[; ;stateMachine.c: 39:                 setState(STATE_ALARMEH);
+[e ( _setState (1 -> . `E22 1 `uc ]
+"40
+[; ;stateMachine.c: 40:             }
+}
+[e :U 9 ]
+"42
+[; ;stateMachine.c: 42:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E31 4 `i 10  ]
+"43
+[; ;stateMachine.c: 43:             {
+{
+"44
+[; ;stateMachine.c: 44:                 setState(STATE_MAIN);
+[e ( _setState (1 -> . `E22 4 `uc ]
+"45
+[; ;stateMachine.c: 45:                 estado_ant = STATE_ALARMEL;
+[e = _estado_ant -> . `E22 0 `uc ]
+"46
+[; ;stateMachine.c: 46:             }
+}
+[e :U 10 ]
+"47
+[; ;stateMachine.c: 47:             break;
+[e $U 3  ]
+"49
+[; ;stateMachine.c: 49:         case STATE_ALARMEH:
+[e :U 11 ]
+"50
+[; ;stateMachine.c: 50:             if (evento == EV_B_0) {
+[e $ ! == -> _evento `i -> . `E31 0 `i 12  ]
+{
+"51
+[; ;stateMachine.c: 51:                 setAlarmLevel(getAlarmLevel(1) - 1, 1);
+[e ( _setAlarmLevel (2 , - ( _getAlarmLevel (1 -> 1 `i -> 1 `i -> -> 1 `i `uc ]
+"52
+[; ;stateMachine.c: 52:             }
+}
+[e :U 12 ]
+"54
+[; ;stateMachine.c: 54:             if (evento == EV_B_1) {
+[e $ ! == -> _evento `i -> . `E31 1 `i 13  ]
+{
+"55
+[; ;stateMachine.c: 55:                 setAlarmLevel(getAlarmLevel(1) + 1, 1);
+[e ( _setAlarmLevel (2 , + ( _getAlarmLevel (1 -> 1 `i -> 1 `i -> -> 1 `i `uc ]
+"56
+[; ;stateMachine.c: 56:             }
+}
+[e :U 13 ]
+"58
+[; ;stateMachine.c: 58:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E31 2 `i 14  ]
+{
+"59
+[; ;stateMachine.c: 59:                 setState(STATE_ALARMEL);
+[e ( _setState (1 -> . `E22 0 `uc ]
+"60
+[; ;stateMachine.c: 60:             }
+}
+[e :U 14 ]
+"62
+[; ;stateMachine.c: 62:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E31 3 `i 15  ]
+{
+"63
+[; ;stateMachine.c: 63:                 setState(STATE_IDIOMA);
+[e ( _setState (1 -> . `E22 3 `uc ]
+"64
+[; ;stateMachine.c: 64:             }
+}
+[e :U 15 ]
+"66
+[; ;stateMachine.c: 66:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E31 4 `i 16  ]
+"67
+[; ;stateMachine.c: 67:             {
+{
+"68
+[; ;stateMachine.c: 68:                 setState(STATE_MAIN);
+[e ( _setState (1 -> . `E22 4 `uc ]
+"69
+[; ;stateMachine.c: 69:                 estado_ant = STATE_ALARMEH;
+[e = _estado_ant -> . `E22 1 `uc ]
 "70
-[; ;stateMachine.c: 70:     }
+[; ;stateMachine.c: 70:             }
+}
+[e :U 16 ]
+"71
+[; ;stateMachine.c: 71:             break;
+[e $U 3  ]
+"75
+[; ;stateMachine.c: 75:         case STATE_IDIOMA:
+[e :U 17 ]
+"77
+[; ;stateMachine.c: 77:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E31 2 `i 18  ]
+{
+"78
+[; ;stateMachine.c: 78:                 setState(STATE_ALARMEH);
+[e ( _setState (1 -> . `E22 1 `uc ]
+"79
+[; ;stateMachine.c: 79:             }
+}
+[e :U 18 ]
+"81
+[; ;stateMachine.c: 81:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E31 3 `i 19  ]
+{
+"82
+[; ;stateMachine.c: 82:                 setState(STATE_TEMPO);
+[e ( _setState (1 -> . `E22 2 `uc ]
+"83
+[; ;stateMachine.c: 83:             }
+}
+[e :U 19 ]
+"85
+[; ;stateMachine.c: 85:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E31 4 `i 20  ]
+"86
+[; ;stateMachine.c: 86:             {
+{
+"87
+[; ;stateMachine.c: 87:                 setState(STATE_MAIN);
+[e ( _setState (1 -> . `E22 4 `uc ]
+"88
+[; ;stateMachine.c: 88:                 estado_ant = STATE_IDIOMA;
+[e = _estado_ant -> . `E22 3 `uc ]
+"89
+[; ;stateMachine.c: 89:             }
+}
+[e :U 20 ]
+"91
+[; ;stateMachine.c: 91:             if (evento == EV_B_0) {
+[e $ ! == -> _evento `i -> . `E31 0 `i 21  ]
+{
+"93
+[; ;stateMachine.c: 93:                 setLanguage(getLanguage() + 1);
+[e ( _setLanguage (1 -> + -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"95
+[; ;stateMachine.c: 95:             }
+}
+[e :U 21 ]
+"97
+[; ;stateMachine.c: 97:             if (evento == EV_B_1) {
+[e $ ! == -> _evento `i -> . `E31 1 `i 22  ]
+{
+"98
+[; ;stateMachine.c: 98:                 setLanguage(getLanguage() - 1);
+[e ( _setLanguage (1 -> - -> ( _getLanguage ..  `i -> 1 `i `uc ]
+"99
+[; ;stateMachine.c: 99:             }
+}
+[e :U 22 ]
+"101
+[; ;stateMachine.c: 101:             if (evento == EV_PROT_SERIAL) {
+[e $ ! == -> _evento `i -> . `E31 5 `i 23  ]
+{
+"102
+[; ;stateMachine.c: 102:                 unsigned char* prot;
+[v _prot `*uc ~T0 @X0 1 a ]
+"103
+[; ;stateMachine.c: 103:                 prot = getProt();
+[e = _prot ( _getProt ..  ]
+"105
+[; ;stateMachine.c: 105:                 if (prot[1] == 'l') {
+[e $ ! == -> *U + _prot * -> -> 1 `i `x -> -> # *U _prot `i `x `ui -> 108 `ui 24  ]
+{
+"106
+[; ;stateMachine.c: 106:                     setLanguage(prot[5 - 1]);
+[e ( _setLanguage (1 -> *U + _prot * -> - -> 5 `i -> 1 `i `x -> -> # *U _prot `i `x `uc ]
+"107
+[; ;stateMachine.c: 107:                 }
+}
+[e :U 24 ]
+"109
+[; ;stateMachine.c: 109:                 resetProt();
+[e ( _resetProt ..  ]
+"110
+[; ;stateMachine.c: 110:             }
+}
+[e :U 23 ]
+"111
+[; ;stateMachine.c: 111:             break;
+[e $U 3  ]
+"112
+[; ;stateMachine.c: 112:         case STATE_TEMPO:
+[e :U 25 ]
+"116
+[; ;stateMachine.c: 116:             if (evento == EV_B_2) {
+[e $ ! == -> _evento `i -> . `E31 2 `i 26  ]
+{
+"117
+[; ;stateMachine.c: 117:                 setState(STATE_IDIOMA);
+[e ( _setState (1 -> . `E22 3 `uc ]
+"118
+[; ;stateMachine.c: 118:             }
+}
+[e :U 26 ]
+"120
+[; ;stateMachine.c: 120:             if (evento == EV_B_3) {
+[e $ ! == -> _evento `i -> . `E31 3 `i 27  ]
+{
+"121
+[; ;stateMachine.c: 121:                 setState(STATE_ALARMEL);
+[e ( _setState (1 -> . `E22 0 `uc ]
+"122
+[; ;stateMachine.c: 122:             }
+}
+[e :U 27 ]
+"124
+[; ;stateMachine.c: 124:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E31 4 `i 28  ]
+"125
+[; ;stateMachine.c: 125:             {
+{
+"126
+[; ;stateMachine.c: 126:                 setState(STATE_MAIN);
+[e ( _setState (1 -> . `E22 4 `uc ]
+"127
+[; ;stateMachine.c: 127:                 estado_ant = STATE_TEMPO;
+[e = _estado_ant -> . `E22 2 `uc ]
+"128
+[; ;stateMachine.c: 128:             }
+}
+[e :U 28 ]
+"130
+[; ;stateMachine.c: 130:             break;
+[e $U 3  ]
+"131
+[; ;stateMachine.c: 131:         case STATE_MAIN:
+[e :U 29 ]
+"132
+[; ;stateMachine.c: 132:             if(evento == EV_B_4)
+[e $ ! == -> _evento `i -> . `E31 4 `i 30  ]
+"133
+[; ;stateMachine.c: 133:                 setState(estado_ant);
+[e ( _setState (1 _estado_ant ]
+[e :U 30 ]
+"135
+[; ;stateMachine.c: 135:             if(evento == EV_B_0)
+[e $ ! == -> _evento `i -> . `E31 0 `i 31  ]
+"136
+[; ;stateMachine.c: 136:                 (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) + 1),0x01));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 + ( _bcd2dec (1 & ( _dsReadData (1 -> 1 `i -> 127 `i -> 1 `i `uc -> 1 `i ]
+[e :U 31 ]
+"138
+[; ;stateMachine.c: 138:             if(evento == EV_B_1){
+[e $ ! == -> _evento `i -> . `E31 1 `i 32  ]
+{
+"140
+[; ;stateMachine.c: 140:             }
+}
+[e :U 32 ]
+"141
+[; ;stateMachine.c: 141:             break;
+[e $U 3  ]
+"142
+[; ;stateMachine.c: 142:     }
 }
 [e $U 3  ]
 [e :U 4 ]
-[e [\ ( _getState ..  , $ . `E15 0 5
+[e [\ ( _getState ..  , $ . `E22 0 5
+ , $ . `E22 1 11
+ , $ . `E22 3 17
+ , $ . `E22 2 25
+ , $ . `E22 4 29
  3 ]
 [e :U 3 ]
-"71
-[; ;stateMachine.c: 71:     outputPrint(getState(), getLanguage());
+"143
+[; ;stateMachine.c: 143:     outputPrint(getState(), getLanguage());
 [e ( _outputPrint (2 , -> ( _getState ..  `i -> ( _getLanguage ..  `i ]
-"72
-[; ;stateMachine.c: 72: }
+"144
+[; ;stateMachine.c: 144: }
 [e :UE 2 ]
 }

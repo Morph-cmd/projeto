@@ -40,7 +40,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdData(unsigned char valor);
  void lcdInit(void);
     void lcdString(const char *str);
-    void lcdInt(int val);
+    void lcdInt(int val, char digNum);
 # 4 "event.c" 2
 
 # 1 "./serial.h" 1
@@ -124,19 +124,19 @@ unsigned int eventRead(void) {
         prot = getProt();
         if (prot[0] == 0) {
             switch (data) {
-                case '9':
+                case '2':
                     ev = EV_B_0;
                     break;
-                case '1':
+                case '8':
                     ev = EV_B_1;
                     break;
-                case '2':
+                case '4':
                     ev = EV_B_2;
                     break;
-                case '3':
+                case '6':
                     ev = EV_B_3;
                     break;
-                case '4':
+                case '5':
                     ev = EV_B_4;
                     break;
                 case 'P': case'p':

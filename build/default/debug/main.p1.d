@@ -4,6 +4,7 @@ config.h  \
 stateMachine.h  \
 pic18f4520.h  \
 lcd.h  \
+serial.h  \
 bits.h  \
 keypad.h  \
 soft_i2c.h  \

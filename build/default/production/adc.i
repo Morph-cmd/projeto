@@ -22,7 +22,7 @@
 {
  (((*(volatile __near unsigned char*)0xF92)) |= (1<<0));
 
- (*(volatile __near unsigned char*)0xFC2) = 0b00000001;
+ (*(volatile __near unsigned char*)0xFC2) = 0b00000101;
  (*(volatile __near unsigned char*)0xFC1) = 0b00001110;
  (*(volatile __near unsigned char*)0xFC0) = 0b10101010;
 }

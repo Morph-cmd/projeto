@@ -57,7 +57,7 @@ static int time;
 static unsigned char alarmLevelHigh;
 static unsigned char alarmLevelLow;
 static char index=0;
-static unsigned char prot[5];
+static unsigned char prot[6];
 
 
 void varInit(void) {
@@ -84,6 +84,7 @@ char getState(void) {
 
 void setState(char newState) {
     state = newState;
+    lcdCommand(0x01);
 }
 
 int getTime(void) {
@@ -142,13 +143,13 @@ void setProt(char newChar) {
 
     prot[index++] = newChar;
 
-    if(index == 5) prot_ready = 1;
+    if(index == 6) prot_ready = 1;
 }
 
 void resetProt()
 {
     char i = 0;
-    while (i < 5)
+    while (i < 6)
     {
         prot[i] = 0;
         i++;

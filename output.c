@@ -96,6 +96,7 @@ void outputPrint(int numTela, int idioma) {
         lcdData(':');
         lcdInt(getSeconds(), 2);
         lcdString("           ");
+    
         
         //lcdInt(getSeconds());
         //lcdData(':');

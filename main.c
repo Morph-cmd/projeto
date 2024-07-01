@@ -6,6 +6,7 @@
  */
 
 
+#include "adc.h"
 #include "config.h"
 #include "stateMachine.h"
 #include "pic18f4520.h"
@@ -21,6 +22,7 @@
 //inicio do programa
 
 void main(void) {
+    
     //char slot;
     //inicializações
     kpInit();
@@ -28,6 +30,7 @@ void main(void) {
     dsInit();
     smInit();
     serialInit();
+    adcInit();
     TRISA = 0x00;
     LATA = 0x00;
     
@@ -36,7 +39,7 @@ void main(void) {
     //dsWriteData(0x80,SEC);
     while (1) {
         kpDebounce();
-        
+        adcRead();
         smLoop();
         
         //Tecla 1 (SW1)

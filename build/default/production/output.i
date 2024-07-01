@@ -164,13 +164,7 @@ void outputPrint(int numTela, int idioma) {
         lcdData(':');
         lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)), 2);
         lcdString("           ");
-
-
-
-
-
-
-
+# 107 "output.c"
     }
 
 }

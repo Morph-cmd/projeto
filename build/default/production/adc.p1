@@ -11,8 +11,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;adc.c: 29:  (((*(volatile __near unsigned char*)0xF92)) |= (1<<0));
 [e =| *U -> -> 3986 `i `*VNuc -> << -> 1 `i -> 0 `i `uc ]
 "31
-[; ;adc.c: 31:  (*(volatile __near unsigned char*)0xFC2) = 0b00000001;
-[e = *U -> -> 4034 `i `*VNuc -> -> 1 `i `uc ]
+[; ;adc.c: 31:  (*(volatile __near unsigned char*)0xFC2) = 0b00000101;
+[e = *U -> -> 4034 `i `*VNuc -> -> 5 `i `uc ]
 "32
 [; ;adc.c: 32:  (*(volatile __near unsigned char*)0xFC1) = 0b00001110;
 [e = *U -> -> 4033 `i `*VNuc -> -> 14 `i `uc ]

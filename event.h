@@ -17,7 +17,7 @@ enum{
     EV_NOEVENT //NOEVENT
 };
 void eventInit(void);
-unsigned int eventRead(void);
+unsigned char eventRead(void);
 
 #endif	/* EVENT_H */
 

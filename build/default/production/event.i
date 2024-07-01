@@ -26,7 +26,7 @@ enum{
     EV_NOEVENT
 };
 void eventInit(void);
-unsigned int eventRead(void);
+unsigned char eventRead(void);
 # 2 "event.c" 2
 
 # 1 "./pic18f4520.h" 1
@@ -87,8 +87,7 @@ void eventInit(void) {
     key = 1;
 }
 
-
-unsigned int eventRead(void) {
+unsigned char eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
@@ -142,7 +141,10 @@ unsigned int eventRead(void) {
                 case 'P': case'p':
                     ev = EV_NOEVENT;
                     setProt('p');
-
+                    break;
+                case 'l': case 'L':
+                    ev = EV_NOEVENT;
+                    setLanguage(getLanguage() + 1);
                     break;
                 default:
                     break;

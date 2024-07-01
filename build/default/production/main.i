@@ -15,13 +15,19 @@
 
 
 
+# 1 "./adc.h" 1
+# 22 "./adc.h"
+ void adcInit(void);
+ int adcRead(void);
+# 9 "main.c" 2
+
 # 1 "./config.h" 1
 # 31 "./config.h"
 #pragma config MCLRE=ON
 #pragma config FOSC=HS
 #pragma config WDT=OFF
 #pragma config LVP=OFF
-# 9 "main.c" 2
+# 10 "main.c" 2
 
 # 1 "./stateMachine.h" 1
 # 14 "./stateMachine.h"
@@ -38,10 +44,10 @@ enum {
 
 void smInit(void);
 void smLoop(void);
-# 10 "main.c" 2
+# 11 "main.c" 2
 
 # 1 "./pic18f4520.h" 1
-# 11 "main.c" 2
+# 12 "main.c" 2
 
 # 1 "C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\\pic\\include\\proc\\pic18f4550.h" 1 3
 # 44 "C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\\pic\\include\\proc\\pic18f4550.h" 3
@@ -5497,7 +5503,7 @@ extern volatile __bit nW __attribute__((address(0x7E3A)));
 
 
 extern volatile __bit nWRITE __attribute__((address(0x7E3A)));
-# 12 "main.c" 2
+# 13 "main.c" 2
 
 # 1 "./lcd.h" 1
 # 23 "./lcd.h"
@@ -5508,31 +5514,31 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  void lcdInit(void);
     void lcdString(const char *str);
     void lcdInt(int val, char digNum);
-# 13 "main.c" 2
+# 14 "main.c" 2
 
 # 1 "./serial.h" 1
 # 23 "./serial.h"
  void serialSend(unsigned char c);
  unsigned char serialRead(void);
  void serialInit(void);
-# 14 "main.c" 2
+# 15 "main.c" 2
 
 # 1 "./bits.h" 1
-# 15 "main.c" 2
+# 16 "main.c" 2
 
 # 1 "./keypad.h" 1
 # 23 "./keypad.h"
  unsigned char kpRead(void);
  void kpDebounce(void);
  void kpInit(void);
-# 16 "main.c" 2
+# 17 "main.c" 2
 
 # 1 "./soft_i2c.h" 1
 # 14 "./soft_i2c.h"
     void i2cInit(void);
     unsigned char i2cWriteByte(unsigned char send_start, unsigned char send_stop, unsigned char byte);
     unsigned char i2cReadByte(unsigned char nack, unsigned char send_stop);
-# 17 "main.c" 2
+# 18 "main.c" 2
 
 # 1 "./ds1307.h" 1
 # 15 "./ds1307.h"
@@ -5543,7 +5549,7 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
  int bcd2dec(int value);
  void dsWriteData(unsigned char value, int address);
  int dsReadData(int address);
-# 18 "main.c" 2
+# 19 "main.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 3
@@ -5813,7 +5819,7 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.46\\pic\\include\\xc.h" 2 3
-# 19 "main.c" 2
+# 20 "main.c" 2
 
 
 
@@ -5821,11 +5827,13 @@ unsigned char __t3rd16on(void);
 void main(void) {
 
 
+
     kpInit();
     lcdInit();
     dsInit();
     smInit();
     serialInit();
+    adcInit();
     TRISA = 0x00;
     LATA = 0x00;
 
@@ -5834,8 +5842,8 @@ void main(void) {
 
     while (1) {
         kpDebounce();
-
+        adcRead();
         smLoop();
-# 87 "main.c"
+# 90 "main.c"
     }
 }

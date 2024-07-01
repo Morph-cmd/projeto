@@ -8,7 +8,7 @@
 #ifndef VAR_H
 #define	VAR_H
 
-#define PROT_TAM 5
+#define PROT_TAM 6
 #define LOW 0
 #define HIGH 1
 

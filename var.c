@@ -37,6 +37,7 @@ char getState(void) {
 
 void setState(char newState) {
     state = newState;
+    lcdCommand(0x01);
 }
 
 int getTime(void) {

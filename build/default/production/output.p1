@@ -304,12 +304,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "98
 [; ;output.c: 98:         lcdString("           ");
 [e ( _lcdString (1 :s 19C ]
-"106
-[; ;output.c: 106:     }
+"107
+[; ;output.c: 107:     }
 }
 [e :U 10 ]
-"108
-[; ;output.c: 108: }
+"109
+[; ;output.c: 109: }
 [e :UE 2 ]
 }
 [a 10C 67 104 97 110 103 101 32 108 97 110 103 117 97 103 101 0 ]

@@ -22,8 +22,7 @@ void eventInit(void) {
     key = 1;
 }
 
-
-unsigned int eventRead(void) {
+unsigned char eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
@@ -43,7 +42,7 @@ unsigned int eventRead(void) {
         if (BitTst(key, 3)) {
             ev = EV_B_3;
         }
-        
+
         if (BitTst(key, 4)) {
             ev = EV_B_4;
         }
@@ -77,7 +76,10 @@ unsigned int eventRead(void) {
                 case 'P': case'p':
                     ev = EV_NOEVENT;
                     setProt('p');
-
+                    break;
+                case 'l': case 'L':
+                    ev = EV_NOEVENT;
+                    setLanguage(getLanguage() + 1);
                     break;
                 default:
                     break;

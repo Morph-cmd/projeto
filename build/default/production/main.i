@@ -5829,21 +5829,24 @@ void main(void) {
 
 
     kpInit();
-    lcdInit();
+
     dsInit();
     smInit();
     serialInit();
-    adcInit();
     TRISA = 0x00;
+    PORTA = 0x00;
     LATA = 0x00;
-
-
+    adcInit();
+    lcdInit();
 
 
     while (1) {
-        kpDebounce();
-        adcRead();
-        smLoop();
-# 90 "main.c"
+
+
+        unsigned int v = adcRead();
+
+        lcdCommand(0x80);
+        lcdInt(v, 5);
+# 93 "main.c"
     }
 }

@@ -146,8 +146,6 @@ EV_NOEVENT 6
 [v _pinMode pinMode `(v  1 e 1 0 ]
 "29 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
 [v _kpRead kpRead `(uc  1 e 1 0 ]
-"33
-[v _kpDebounce kpDebounce `(v  1 e 1 0 ]
 "81
 [v _kpInit kpInit `(v  1 e 1 0 ]
 "36 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
@@ -216,8 +214,6 @@ EV_NOEVENT 6
 [v _i2cReadByte i2cReadByte `(uc  1 e 1 0 ]
 "12 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
 [v _smInit smInit `(v  1 e 1 0 ]
-"19
-[v _smLoop smLoop `(v  1 e 1 0 ]
 "16 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
 [v _varInit varInit `(v  1 e 1 0 ]
 "34
@@ -277,7 +273,7 @@ EV_NOEVENT 6
 "51 C:\Users\Pessoal\MPLABXProjects\projeto.X\soft_i2c.c
 [v _started started `uc  1 e 1 0 ]
 "27 C:\Users\Pessoal\MPLABXProjects\projeto.X\ssd.c
-[v _valor@ssd$F320 valor `C[16]uc  1 s 16 valor ]
+[v _valor@ssd$F319 valor `C[16]uc  1 s 16 valor ]
 "29
 [v _display display `uc  1 s 1 display ]
 "31
@@ -306,141 +302,9 @@ EV_NOEVENT 6
 "24 C:\Users\Pessoal\MPLABXProjects\projeto.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"91
-} 0
-"19 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
-[v _smLoop smLoop `(v  1 e 1 0 ]
-{
-"190
-[v smLoop@h h `i  1 a 2 46 ]
-"183
-[v smLoop@l l `i  1 a 2 44 ]
-"205
-[v smLoop@m m `i  1 a 2 50 ]
-"199
-[v smLoop@h_500 h `i  1 a 2 48 ]
-"175
-[v smLoop@prot prot `*.30uc  1 a 1 52 ]
-"20
-[v smLoop@evento evento `uc  1 a 1 53 ]
-"221
-} 0
-"102 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
-[v _resetProt resetProt `(v  1 e 1 0 ]
-{
-"104
-[v resetProt@i i `uc  1 a 1 0 ]
-"112
-} 0
-"23 C:\Users\Pessoal\MPLABXProjects\projeto.X\output.c
-[v _outputPrint outputPrint `(v  1 e 1 0 ]
-{
-[v outputPrint@numTela numTela `i  1 p 2 32 ]
-[v outputPrint@idioma idioma `i  1 p 2 34 ]
-"109
-} 0
-"168 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
-[v _lcdString lcdString `(v  1 e 1 0 ]
-{
-[v lcdString@str str `*.31Cuc  1 p 1 3 ]
-"172
-} 0
-"174
-[v _lcdInt lcdInt `(v  1 e 1 0 ]
-{
-"190
-[v lcdInt@j j `i  1 a 2 26 ]
-"189
-[v lcdInt@divisor divisor `i  1 a 2 28 ]
-"188
-[v lcdInt@i i `i  1 a 2 30 ]
-"174
-[v lcdInt@val val `i  1 p 2 22 ]
-[v lcdInt@digNum digNum `uc  1 p 1 24 ]
-"195
-} 0
-"108
-[v _lcdData lcdData `(v  1 e 1 0 ]
-{
-[v lcdData@valor valor `uc  1 a 1 wreg ]
-[v lcdData@valor valor `uc  1 a 1 wreg ]
-[v lcdData@valor valor `uc  1 a 1 2 ]
-"115
-} 0
-"51 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
-[v _getAlarmLevel getAlarmLevel `(i  1 e 2 0 ]
-{
-"52
-[v getAlarmLevel@l l `i  1 a 2 2 ]
-"51
-[v getAlarmLevel@lh lh `i  1 p 2 0 ]
-"61
-} 0
-"34
-[v _getState getState `(uc  1 e 1 0 ]
-{
-"36
-} 0
-"25 C:\Users\Pessoal\MPLABXProjects\projeto.X\event.c
-[v _eventRead eventRead `(uc  1 e 1 0 ]
-{
-"26
-[v eventRead@key key `i  1 a 2 37 ]
-"27
-[v eventRead@ev ev `i  1 a 2 34 ]
-"54
-[v eventRead@data data `uc  1 a 1 36 ]
-"56
-[v eventRead@prot prot `*.30uc  1 a 1 33 ]
-"100
-} 0
-"95 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
-[v _setProt setProt `(v  1 e 1 0 ]
-{
-[v setProt@newChar newChar `uc  1 a 1 wreg ]
-[v setProt@newChar newChar `uc  1 a 1 wreg ]
-"97
-[v setProt@newChar newChar `uc  1 a 1 0 ]
-"100
-} 0
-"83
-[v _setLanguage setLanguage `(v  1 e 1 0 ]
-{
-[v setLanguage@newLanguage newLanguage `uc  1 a 1 wreg ]
-[v setLanguage@newLanguage newLanguage `uc  1 a 1 wreg ]
-"86
-[v setLanguage@newLanguage newLanguage `uc  1 a 1 31 ]
-"88
-} 0
-"25 C:\Users\Pessoal\MPLABXProjects\projeto.X\serial.c
-[v _serialSend serialSend `(v  1 e 1 0 ]
-{
-[v serialSend@c c `uc  1 a 1 wreg ]
-[v serialSend@c c `uc  1 a 1 wreg ]
-[v serialSend@c c `uc  1 a 1 0 ]
-"28
-} 0
-"30
-[v _serialRead serialRead `(uc  1 e 1 0 ]
-{
-"31
-[v serialRead@resp resp `uc  1 a 1 0 ]
-"46
-} 0
-"29 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
-[v _kpRead kpRead `(uc  1 e 1 0 ]
-{
-"31
-} 0
-"90 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
-[v _getProt getProt `(*.30uc  1 e 2 0 ]
-{
-"93
-} 0
-"79
-[v _getLanguage getLanguage `(uc  1 e 1 0 ]
-{
-"81
+"43
+[v main@v v `ui  1 a 2 34 ]
+"94
 } 0
 "12 C:\Users\Pessoal\MPLABXProjects\projeto.X\stateMachine.c
 [v _smInit smInit `(v  1 e 1 0 ]
@@ -455,8 +319,8 @@ EV_NOEVENT 6
 "63
 [v _setAlarmLevel setAlarmLevel `(v  1 e 1 0 ]
 {
-[v setAlarmLevel@newAlarmLevel newAlarmLevel `i  1 p 2 31 ]
-[v setAlarmLevel@lh lh `uc  1 p 1 33 ]
+[v setAlarmLevel@newAlarmLevel newAlarmLevel `i  1 p 2 23 ]
+[v setAlarmLevel@lh lh `uc  1 p 1 25 ]
 "77
 } 0
 "26 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
@@ -464,8 +328,8 @@ EV_NOEVENT 6
 {
 [v dsWriteData@value value `uc  1 a 1 wreg ]
 [v dsWriteData@value value `uc  1 a 1 wreg ]
-[v dsWriteData@address address `i  1 p 2 28 ]
-[v dsWriteData@value value `uc  1 a 1 30 ]
+[v dsWriteData@address address `i  1 p 2 20 ]
+[v dsWriteData@value value `uc  1 a 1 22 ]
 "30
 } 0
 "31
@@ -571,48 +435,14 @@ EV_NOEVENT 6
 "9 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
 [v _dec2bcd dec2bcd `(i  1 e 2 0 ]
 {
-[v dec2bcd@value value `i  1 p 2 22 ]
+[v dec2bcd@value value `i  1 p 2 14 ]
 "13
 } 0
-"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"10
-[v ___awmod@sign sign `uc  1 a 1 13 ]
-[v ___awmod@counter counter `uc  1 a 1 12 ]
-"7
-[v ___awmod@dividend dividend `i  1 p 2 8 ]
-[v ___awmod@divisor divisor `i  1 p 2 10 ]
-"34
-} 0
-"14 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
+"14
 [v _bcd2dec bcd2dec `(i  1 e 2 0 ]
 {
 [v bcd2dec@value value `i  1 p 2 18 ]
 "16
-} 0
-"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
-{
-"17
-[v ___wmul@product product `ui  1 a 2 12 ]
-"15
-[v ___wmul@multiplier multiplier `ui  1 p 2 8 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 10 ]
-"53
-} 0
-"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"10
-[v ___awdiv@quotient quotient `i  1 a 2 6 ]
-"11
-[v ___awdiv@sign sign `uc  1 a 1 5 ]
-[v ___awdiv@counter counter `uc  1 a 1 4 ]
-"7
-[v ___awdiv@dividend dividend `i  1 p 2 0 ]
-[v ___awdiv@divisor divisor `i  1 p 2 2 ]
-"41
 } 0
 "38 C:\Users\Pessoal\MPLABXProjects\projeto.X\var.c
 [v _setState setState `(v  1 e 1 0 ]
@@ -636,6 +466,62 @@ EV_NOEVENT 6
 [v _serialInit serialInit `(v  1 e 1 0 ]
 {
 "56
+} 0
+"174 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
+[v _lcdInt lcdInt `(v  1 e 1 0 ]
+{
+"190
+[v lcdInt@j j `i  1 a 2 18 ]
+"189
+[v lcdInt@divisor divisor `i  1 a 2 20 ]
+"188
+[v lcdInt@i i `i  1 a 2 22 ]
+"174
+[v lcdInt@val val `i  1 p 2 14 ]
+[v lcdInt@digNum digNum `uc  1 p 1 16 ]
+"195
+} 0
+"108
+[v _lcdData lcdData `(v  1 e 1 0 ]
+{
+[v lcdData@valor valor `uc  1 a 1 wreg ]
+[v lcdData@valor valor `uc  1 a 1 wreg ]
+[v lcdData@valor valor `uc  1 a 1 2 ]
+"115
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 12 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 8 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 10 ]
+"53
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 13 ]
+[v ___awmod@counter counter `uc  1 a 1 12 ]
+"7
+[v ___awmod@dividend dividend `i  1 p 2 8 ]
+[v ___awmod@divisor divisor `i  1 p 2 10 ]
+"34
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.46\pic\sources\c99\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+"41
 } 0
 "117 C:\Users\Pessoal\MPLABXProjects\projeto.X\lcd.c
 [v _lcdInit lcdInit `(v  1 e 1 0 ]
@@ -683,25 +569,6 @@ EV_NOEVENT 6
 [v Delay2ms@j j `uc  1 a 1 0 ]
 "45
 } 0
-"33 C:\Users\Pessoal\MPLABXProjects\projeto.X\keypad.c
-[v _kpDebounce kpDebounce `(v  1 e 1 0 ]
-{
-"46
-[v kpDebounce@portes portes `[5]uc  1 a 5 8 ]
-"47
-[v kpDebounce@bits bits `[5]uc  1 a 5 3 ]
-"42
-[v kpDebounce@j j `uc  1 a 1 13 ]
-"43
-[v kpDebounce@tempo tempo `uc  1 s 1 tempo ]
-"44
-[v kpDebounce@valorNovo valorNovo `uc  1 s 1 valorNovo ]
-"45
-[v kpDebounce@valorAntigo valorAntigo `uc  1 s 1 valorAntigo ]
-"46
-[v kpDebounce@F15 F15 `[5]uc  1 s 5 F15 ]
-"79
-} 0
 "17 C:\Users\Pessoal\MPLABXProjects\projeto.X\ds1307.c
 [v _dsInit dsInit `(v  1 e 1 0 ]
 {
@@ -723,8 +590,8 @@ EV_NOEVENT 6
 [v _adcRead adcRead `(i  1 e 2 0 ]
 {
 "38
-[v adcRead@ADvalor ADvalor `ui  1 a 2 0 ]
-"47
+[v adcRead@ADvalor ADvalor `ui  1 a 2 2 ]
+"49
 } 0
 "27
 [v _adcInit adcInit `(v  1 e 1 0 ]

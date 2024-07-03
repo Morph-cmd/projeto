@@ -26,25 +26,28 @@ void main(void) {
     //char slot;
     //inicializações
     kpInit();
-    lcdInit();
+    
     dsInit();
     smInit();
     serialInit();
-    adcInit();
     TRISA = 0x00;
+    PORTA = 0x00;
     LATA = 0x00;
-    
-    
+    adcInit();
+    lcdInit();
     
     //dsWriteData(0x80,SEC);
     while (1) {
-        kpDebounce();
-        adcRead();
-        smLoop();
+        /*kpDebounce();
+        smLoop();*/
+        unsigned int v = adcRead();
+        
+        lcdCommand(0x80);
+        lcdInt(v, 5);
         
         //Tecla 1 (SW1)
         /*if (!BitTst(PORTB, 2)) 
-            BitSet(LATA, 0);
+            BitSet(PORTA, 0);
         else{
             BitClr (LATA, 0);
         }

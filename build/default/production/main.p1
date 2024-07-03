@@ -3,9 +3,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./keypad.h
 [; ;./keypad.h: 25:  void kpInit(void);
 [v _kpInit `(v ~T0 @X0 0 ef ]
-"27 ./lcd.h
-[; ;./lcd.h: 27:  void lcdInit(void);
-[v _lcdInit `(v ~T0 @X0 0 ef ]
 "15 ./ds1307.h
 [; ;./ds1307.h: 15:  void dsInit(void);
 [v _dsInit `(v ~T0 @X0 0 ef ]
@@ -15,24 +12,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 "25 ./serial.h
 [; ;./serial.h: 25:  void serialInit(void);
 [v _serialInit `(v ~T0 @X0 0 ef ]
-"22 ./adc.h
-[; ;./adc.h: 22:  void adcInit(void);
-[v _adcInit `(v ~T0 @X0 0 ef ]
 "3427 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3427: extern volatile unsigned char TRISA __attribute__((address(0xF92)));
 [v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"2314
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 2314: extern volatile unsigned char PORTA __attribute__((address(0xF80)));
+[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
 "2973
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 2973: extern volatile unsigned char LATA __attribute__((address(0xF89)));
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"24 ./keypad.h
-[; ;./keypad.h: 24:  void kpDebounce(void);
-[v _kpDebounce `(v ~T0 @X0 0 ef ]
+"22 ./adc.h
+[; ;./adc.h: 22:  void adcInit(void);
+[v _adcInit `(v ~T0 @X0 0 ef ]
+"27 ./lcd.h
+[; ;./lcd.h: 27:  void lcdInit(void);
+[v _lcdInit `(v ~T0 @X0 0 ef ]
 "23 ./adc.h
 [; ;./adc.h: 23:  int adcRead(void);
 [v _adcRead `(i ~T0 @X0 0 ef ]
-"26 ./stateMachine.h
-[; ;./stateMachine.h: 26: void smLoop(void);
-[v _smLoop `(v ~T0 @X0 0 ef ]
+"23 ./lcd.h
+[; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
+[v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
+"29
+[; ;./lcd.h: 29:     void lcdInt(int val, char digNum);
+[v _lcdInt `(v ~T0 @X0 0 ef2`i`uc ]
 "31 ./config.h
 [p x MCLRE=ON                 ]
 "32
@@ -561,9 +564,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "28
 [; ;main.c: 28:     kpInit();
 [e ( _kpInit ..  ]
-"29
-[; ;main.c: 29:     lcdInit();
-[e ( _lcdInit ..  ]
 "30
 [; ;main.c: 30:     dsInit();
 [e ( _dsInit ..  ]
@@ -574,34 +574,41 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 32:     serialInit();
 [e ( _serialInit ..  ]
 "33
-[; ;main.c: 33:     adcInit();
-[e ( _adcInit ..  ]
-"34
-[; ;main.c: 34:     TRISA = 0x00;
+[; ;main.c: 33:     TRISA = 0x00;
 [e = _TRISA -> -> 0 `i `uc ]
+"34
+[; ;main.c: 34:     PORTA = 0x00;
+[e = _PORTA -> -> 0 `i `uc ]
 "35
 [; ;main.c: 35:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
+"36
+[; ;main.c: 36:     adcInit();
+[e ( _adcInit ..  ]
+"37
+[; ;main.c: 37:     lcdInit();
+[e ( _lcdInit ..  ]
 "40
 [; ;main.c: 40:     while (1) {
 [e :U 369 ]
 {
-"41
-[; ;main.c: 41:         kpDebounce();
-[e ( _kpDebounce ..  ]
-"42
-[; ;main.c: 42:         adcRead();
-[e ( _adcRead ..  ]
 "43
-[; ;main.c: 43:         smLoop();
-[e ( _smLoop ..  ]
-"90
-[; ;main.c: 90:     }
+[; ;main.c: 43:         unsigned int v = adcRead();
+[v _v `ui ~T0 @X0 1 a ]
+[e = _v -> ( _adcRead ..  `ui ]
+"45
+[; ;main.c: 45:         lcdCommand(0x80);
+[e ( _lcdCommand (1 -> -> 128 `i `uc ]
+"46
+[; ;main.c: 46:         lcdInt(v, 5);
+[e ( _lcdInt (2 , -> _v `i -> -> 5 `i `uc ]
+"93
+[; ;main.c: 93:     }
 }
 [e :U 368 ]
 [e $U 369  ]
 [e :U 370 ]
-"91
-[; ;main.c: 91: }
+"94
+[; ;main.c: 94: }
 [e :UE 367 ]
 }

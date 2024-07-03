@@ -26,16 +26,17 @@
 
  void adcInit(void)
 {
-	BitSet(TRISA,0); //seta o bit 0 como entrada USAR A PORTA CERTA
+	BitSet(TRISE,0); //seta o bit 0 como entrada USAR A PORTA CERTA
 	
-	ADCON0 = 0b00000101; //seleciona o canal 0 e liga o ad                          PROCURAR O VALOR CERTO
-	ADCON1 = 0b00001110; //apenas AN0 é analogico, a referencia é baseada na fonte
+	ADCON0 = 0b00010101; //seleciona o canal 0 e liga o ad                          PROCURAR O VALOR CERTO
+	ADCON1 = 0b00001111; //apenas AN0 é analogico, a referencia é baseada na fonte
 	ADCON2 = 0b10101010; //FOSC /32, Alinhamento à direita e tempo de conv = 12 TAD
 }
 
 int adcRead(void)
 {
 	unsigned int ADvalor;
+    ADCON1 = 0b00001001;
 	ADCON0 |= 0b00000010;	 //inicia conversao
 
 	while(BitTst(ADCON0,1)); // espera terminar a conversão;
@@ -43,5 +44,6 @@ int adcRead(void)
 	ADvalor = ADRESH ; // le o resultado
 	ADvalor <<= 8;
 	ADvalor += ADRESL;
+    ADCON1 = 0b00001111;
 	return ADvalor;
 }

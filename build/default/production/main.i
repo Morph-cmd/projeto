@@ -36,8 +36,12 @@ enum {
     STATE_ALARMEH,
     STATE_TEMPO,
     STATE_TEMPOM,
+    STATE_TEMPOD,
+    STATE_TEMPOMO,
+    STATE_TEMPOY,
     STATE_IDIOMA,
     STATE_MAIN,
+    STATE_ALERTA,
     STATE_FIM
 };
 
@@ -5834,19 +5838,16 @@ void main(void) {
     smInit();
     serialInit();
     TRISA = 0x00;
-    PORTA = 0x00;
     LATA = 0x00;
     adcInit();
     lcdInit();
 
+    unsigned int c = 0;
+
 
     while (1) {
-
-
-        unsigned int v = adcRead();
-
-        lcdCommand(0x80);
-        lcdInt(v, 5);
-# 93 "main.c"
+        kpDebounce();
+        smLoop();
+# 116 "main.c"
     }
 }

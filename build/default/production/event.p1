@@ -15,20 +15,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;./serial.h: 23:  void serialSend(unsigned char c);
 [v _serialSend `(v ~T0 @X0 0 ef1`uc ]
-"27 ./var.h
-[; ;./var.h: 27: unsigned char* getProt();
+"37 ./var.h
+[; ;./var.h: 37: unsigned char* getProt();
 [v _getProt `(*uc ~T0 @X0 0 e? ]
-"28
-[; ;./var.h: 28: void setProt(char newLanguage);
+"38
+[; ;./var.h: 38: void setProt(char newLanguage);
 [v _setProt `(v ~T0 @X0 0 ef1`uc ]
-"26
-[; ;./var.h: 26: void setLanguage(char newLanguage);
+"36
+[; ;./var.h: 36: void setLanguage(char newLanguage);
 [v _setLanguage `(v ~T0 @X0 0 ef1`uc ]
-"25
-[; ;./var.h: 25: char getLanguage(void);
+"35
+[; ;./var.h: 35: char getLanguage(void);
 [v _getLanguage `(uc ~T0 @X0 0 ef ]
-"15 ./var.h
-[; ;./var.h: 15: char prot_ready;
+"25 ./var.h
+[; ;./var.h: 25: char prot_ready;
 [v _prot_ready `uc ~T0 @X0 1 e ]
 "11 event.c
 [; ;event.c: 11: static unsigned int ev_ant;

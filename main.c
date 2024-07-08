@@ -31,20 +31,43 @@ void main(void) {
     smInit();
     serialInit();
     TRISA = 0x00;
-    PORTA = 0x00;
     LATA = 0x00;
     adcInit();
     lcdInit();
     
+    unsigned int c = 0;
+    
     //dsWriteData(0x80,SEC);
     while (1) {
-        /*kpDebounce();
-        smLoop();*/
-        unsigned int v = adcRead();
+        kpDebounce();
+        smLoop();
         
-        lcdCommand(0x80);
-        lcdInt(v, 5);
+        /*lcdCommand(0x80);
+        lcdInt(v, 7);
         
+        if(c%500 < 100)
+            BitSet(LATA, 0);
+        else
+            BitClr(LATA, 0);
+        
+        if(c%500 > 100 && c%500 < 200)
+            BitSet(LATA, 1);
+        else
+            BitClr(LATA, 1);
+        
+        if(c%500 > 200 && c%500 < 300)
+            BitSet(LATA, 2);
+        else
+            BitClr(LATA, 2);
+        
+        if(c%500 > 300)
+            BitSet(LATA, 3);
+        else
+            BitClr(LATA, 3);
+        
+        c++;
+        lcdData(' ');
+        lcdInt(c, 5);  */      
         //Tecla 1 (SW1)
         /*if (!BitTst(PORTB, 2)) 
             BitSet(PORTA, 0);

@@ -4,10 +4,11 @@
 #include "output.h"
 #include "lcd.h"
 #include "keypad.h"
-#include "ds1307.h"
+#include "pic18f4520.h"
+#include <pic18f4550.h>
 
 char estado_ant = STATE_ALARMEL;
-long int t;
+unsigned long int t;
 
 void smInit(void) {
     varInit();
@@ -18,8 +19,9 @@ void smInit(void) {
 
 void smLoop(void) {
     unsigned char evento;
-
-
+    readTemp();
+    
+    
     //máquina de estados
     evento = eventRead();
     if (evento == EV_NOEVENT) {
@@ -113,10 +115,10 @@ void smLoop(void) {
             //execução de atividade
             if (evento == EV_B_0) {
                 //setAlarmLevel(getAlarmLevel() + 1);
-                setHours(getHours() - 1);
+                setTime(getTime(HOU) - 1, HOU);
             }
             if (evento == EV_B_1) {
-                setHours(getHours() + 1);
+                setTime(getTime(HOU) + 1, HOU);
             }
             if (evento == EV_B_2) {
                 setState(STATE_IDIOMA);
@@ -138,13 +140,101 @@ void smLoop(void) {
             //execução de atividade
             if (evento == EV_B_0) {
                 //setAlarmLevel(getAlarmLevel() + 1);
-                setMinutes(getMinutes() - 1);
+                setTime(getTime(MIN) - 1, MIN);
             }
             if (evento == EV_B_1) {
-                setMinutes(getMinutes() + 1);
+                setTime(getTime(MIN) + 1, MIN);
             }
             if (evento == EV_B_2) {
                 setState(STATE_TEMPO);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_TEMPOD);
+            }
+
+            if (evento == EV_B_4) {
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
+            }
+
+            break;
+            
+            case STATE_TEMPOD:
+
+            //execução de atividade
+            if (evento == EV_B_0) {
+                //setAlarmLevel(getAlarmLevel() + 1);
+                char* date = getDate();
+                date[1]--;
+                if(date[1] < 0)
+                {
+                    date[1] = 9;
+                    date[0]--;
+                }
+                setDate(date);
+            }
+            if (evento == EV_B_1) {
+                char* date = getDate();
+                date[1]++;
+                if(date[1] > 9)
+                {
+                    date[1] = 0;
+                    date[0]++;
+                }
+                setDate(date);
+            }
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPOM);
+                
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_TEMPOMO);
+            }
+
+            if (evento == EV_B_4) {
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
+            }
+            
+            break;
+            case STATE_TEMPOMO:
+
+            //execução de atividade
+            if (evento == EV_B_0) {
+                //setAlarmLevel(getAlarmLevel() + 1);
+                setTime(getTime(MON) - 1, MON);
+            }
+            if (evento == EV_B_1) {
+                setTime(getTime(MON) + 1, MON);
+            }
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPOD);
+            }
+
+            if (evento == EV_B_3) {
+                setState(STATE_ALARMEL);
+            }
+
+            if (evento == EV_B_4) {
+                setState(STATE_MAIN);
+                estado_ant = STATE_TEMPO;
+            }
+            break;
+            /*
+            case STATE_TEMPOY:
+
+            //execução de atividade
+            if (evento == EV_B_0) {
+                //setAlarmLevel(getAlarmLevel() + 1);
+                setTime(getTime(YEA) - 1, YEA);
+            }
+            if (evento == EV_B_1) {
+                setTime(getTime(YEA) + 1, YEA);
+            }
+            if (evento == EV_B_2) {
+                setState(STATE_TEMPOMO);
             }
 
             if (evento == EV_B_3) {
@@ -157,18 +247,27 @@ void smLoop(void) {
             }
 
             break;
-
+            */
         case STATE_MAIN:
             if (evento == EV_B_4)
                 setState(estado_ant);
 
             if (evento == EV_B_0)
-                setMinutes(getMinutes() + 1);
+                setTime(getTime(MIN) + 1, MIN);
 
             if (evento == EV_B_1) {
 
             }
             break;
+        
+        case STATE_ALERTA:
+            if(t%300 < 150)
+                LATA = 0xff;
+            else
+                LATA = 0x00;
+            
+            break;
+            
     }
 
     if (evento == EV_PROT_SERIAL) {
@@ -200,13 +299,13 @@ void smLoop(void) {
                 h += (prot[3] - '0') * 1;
 
                 if (h <= 23)
-                    setHours(h);
+                    setTime(h, HOU);
 
                 int m = (prot[4] - '0') * 10;
                 m += (prot[5] - '0') * 1;
 
                 if (m <= 59)
-                    setMinutes(m);
+                    setTime(m, MIN);
             }
                 break;
         }
@@ -215,6 +314,13 @@ void smLoop(void) {
         resetProt();
     }
 
+    //Controle da temperatura
+    int temp = getTemp();
+    
+    if(getState() != STATE_ALERTA && (temp < getAlarmLevel(LOW) || temp > getAlarmLevel(HIGH)))
+    {
+        setState(STATE_ALERTA);
+    }
 
 
     outputPrint(getState(), getLanguage());

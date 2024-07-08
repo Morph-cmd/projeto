@@ -31,8 +31,12 @@ enum {
     STATE_ALARMEH,
     STATE_TEMPO,
     STATE_TEMPOM,
+    STATE_TEMPOD,
+    STATE_TEMPOMO,
+    STATE_TEMPOY,
     STATE_IDIOMA,
     STATE_MAIN,
+    STATE_ALERTA,
     STATE_FIM
 };
 
@@ -43,14 +47,24 @@ void smLoop(void);
 
 # 1 "./var.h" 1
 # 15 "./var.h"
+enum
+{
+    SEC = 0,
+    MIN,
+    HOU,
+    DAY,
+    MON,
+    YEA
+};
+
 char prot_ready;
 
 void varInit(void);
 
 char getState(void);
 void setState(char newState);
-int getTime(void);
-void setTime(int newTime);
+int getTime(char index);
+void setTime(int newTime, char index);
 int getAlarmLevel(int lh);
 void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
@@ -58,6 +72,10 @@ void setLanguage(char newLanguage);
 unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
+int getTemp(void);
+void readTemp();
+void setDate(char* date);
+char* getDate(void);
 # 4 "output.c" 2
 
 # 1 "./ds1307.h" 1
@@ -74,6 +92,8 @@ void resetProt();
 
 
 
+long int m;
+
 
 
 static char * msgs[STATE_FIM][2] = {
@@ -83,6 +103,9 @@ static char * msgs[STATE_FIM][2] = {
     {"Alterar tempo  ", "Change time    "},
     {"Alterar idioma ", "Change language"}
 };
+
+
+
 
 void outputInit(void) {
     lcdInit();
@@ -96,11 +119,11 @@ void outputPrint(int numTela, int idioma) {
         lcdCommand(0xC0);
 
         lcdData('>');
-        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)), 2);
+        lcdInt(getTime(HOU), 2);
         lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)), 2);
+        lcdInt(getTime(0x01), 2);
         lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)), 2);
+        lcdInt(getTime(0x00), 2);
         lcdString("           ");
     }
     if (numTela == STATE_TEMPOM) {
@@ -108,14 +131,49 @@ void outputPrint(int numTela, int idioma) {
         lcdString(msgs[numTela][idioma]);
         lcdCommand(0xC0);
 
-        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)), 2);
+        lcdInt(getTime(HOU), 2);
         lcdData(':');
         lcdData('>');
-        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)), 2);
+        lcdInt(getTime(0x01), 2);
         lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)), 2);
+        lcdInt(getTime(0x00), 2);
         lcdString("           ");
     }
+
+    if (numTela == STATE_TEMPOD) {
+        lcdCommand(0x80);
+        lcdString(msgs[3][idioma]);
+        lcdCommand(0xC0);
+
+        lcdData('>');
+        int d = (bcd2dec(dsReadData(0x04)& 0xff));
+        if (d == 0)
+            lcdInt(d + 1, 2);
+        else
+            lcdInt(d, 2);
+        lcdData('/');
+
+        lcdInt((bcd2dec(dsReadData(0x05)& 0xff)), 2);
+        lcdData('/');
+        lcdInt((bcd2dec(dsReadData(0x06)& 0xff)), 2);
+        lcdString("           ");
+    }
+
+    if (numTela == STATE_TEMPOMO) {
+        lcdCommand(0x80);
+        lcdString(msgs[3][idioma]);
+        lcdCommand(0xC0);
+
+        lcdInt((bcd2dec(dsReadData(0x04)& 0xff)), 2);
+        lcdData('/');
+
+        lcdData('>');
+        lcdInt((bcd2dec(dsReadData(0x05)& 0xff)), 2);
+        lcdData('/');
+        lcdInt((bcd2dec(dsReadData(0x06)& 0xff)), 2);
+        lcdString("           ");
+    }
+
     if (numTela == STATE_ALARMEL) {
         lcdCommand(0x80);
         lcdString(msgs[numTela][idioma]);
@@ -145,7 +203,7 @@ void outputPrint(int numTela, int idioma) {
     }
     if (numTela == STATE_IDIOMA) {
         lcdCommand(0x80);
-        lcdString(msgs[numTela][idioma]);
+        lcdString(msgs[4][idioma]);
         lcdCommand(0xC0);
         if (getLanguage() == 0) {
             lcdString("Portugues       ");
@@ -158,13 +216,41 @@ void outputPrint(int numTela, int idioma) {
 
     if (numTela == STATE_MAIN) {
         lcdCommand(0x80);
-        lcdInt((bcd2dec(dsReadData(0x02)& 0x7f)), 2);
+        lcdInt(getTime(HOU), 2);
         lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x01)& 0x7f)), 2);
-        lcdData(':');
-        lcdInt((bcd2dec(dsReadData(0x00)& 0x7f)), 2);
-        lcdString("           ");
-# 107 "output.c"
-    }
+        lcdInt(getTime(0x01), 2);
 
+
+        lcdString("   ");
+        int d = (bcd2dec(dsReadData(0x04)& 0xff));
+        if (d == 0)
+            lcdInt(d + 1, 2);
+        else
+            lcdInt(d, 2);
+        lcdData('/');
+        lcdInt((bcd2dec(dsReadData(0x05)& 0xff)), 2);
+        lcdData('/');
+        lcdInt((bcd2dec(dsReadData(0x06)& 0xff)), 2);
+
+        lcdCommand(0xC0);
+        lcdData('L');
+        lcdInt(getAlarmLevel(0), 3);
+        lcdData(' ');
+        lcdData(' ');
+
+        lcdData('H');
+        lcdInt(getAlarmLevel(1), 3);
+        lcdData(' ');
+        lcdData(' ');
+
+        lcdData('T');
+        lcdInt(getTemp(), 3);
+
+    }
+    if (numTela == STATE_ALERTA) {
+        lcdCommand(0x80);
+        lcdString("TEMPERATURA!!!!");
+        lcdCommand(0xC0);
+        lcdString("TEMPERATURA!!!!");
+    }
 }

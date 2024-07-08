@@ -6,8 +6,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15 ./ds1307.h
 [; ;./ds1307.h: 15:  void dsInit(void);
 [v _dsInit `(v ~T0 @X0 0 ef ]
-"25 ./stateMachine.h
-[; ;./stateMachine.h: 25: void smInit(void);
+"29 ./stateMachine.h
+[; ;./stateMachine.h: 29: void smInit(void);
 [v _smInit `(v ~T0 @X0 0 ef ]
 "25 ./serial.h
 [; ;./serial.h: 25:  void serialInit(void);
@@ -15,9 +15,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3427 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3427: extern volatile unsigned char TRISA __attribute__((address(0xF92)));
 [v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"2314
-[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 2314: extern volatile unsigned char PORTA __attribute__((address(0xF80)));
-[v _PORTA `Vuc ~T0 @X0 0 e@3968 ]
 "2973
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 2973: extern volatile unsigned char LATA __attribute__((address(0xF89)));
 [v _LATA `Vuc ~T0 @X0 0 e@3977 ]
@@ -27,15 +24,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "27 ./lcd.h
 [; ;./lcd.h: 27:  void lcdInit(void);
 [v _lcdInit `(v ~T0 @X0 0 ef ]
-"23 ./adc.h
-[; ;./adc.h: 23:  int adcRead(void);
-[v _adcRead `(i ~T0 @X0 0 ef ]
-"23 ./lcd.h
-[; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
-[v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
-"29
-[; ;./lcd.h: 29:     void lcdInt(int val, char digNum);
-[v _lcdInt `(v ~T0 @X0 0 ef2`i`uc ]
+"24 ./keypad.h
+[; ;./keypad.h: 24:  void kpDebounce(void);
+[v _kpDebounce `(v ~T0 @X0 0 ef ]
+"30 ./stateMachine.h
+[; ;./stateMachine.h: 30: void smLoop(void);
+[v _smLoop `(v ~T0 @X0 0 ef ]
 "31 ./config.h
 [p x MCLRE=ON                 ]
 "32
@@ -577,38 +571,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 33:     TRISA = 0x00;
 [e = _TRISA -> -> 0 `i `uc ]
 "34
-[; ;main.c: 34:     PORTA = 0x00;
-[e = _PORTA -> -> 0 `i `uc ]
-"35
-[; ;main.c: 35:     LATA = 0x00;
+[; ;main.c: 34:     LATA = 0x00;
 [e = _LATA -> -> 0 `i `uc ]
-"36
-[; ;main.c: 36:     adcInit();
+"35
+[; ;main.c: 35:     adcInit();
 [e ( _adcInit ..  ]
-"37
-[; ;main.c: 37:     lcdInit();
+"36
+[; ;main.c: 36:     lcdInit();
 [e ( _lcdInit ..  ]
-"40
-[; ;main.c: 40:     while (1) {
+"38
+[; ;main.c: 38:     unsigned int c = 0;
+[v _c `ui ~T0 @X0 1 a ]
+[e = _c -> -> 0 `i `ui ]
+"41
+[; ;main.c: 41:     while (1) {
 [e :U 369 ]
 {
+"42
+[; ;main.c: 42:         kpDebounce();
+[e ( _kpDebounce ..  ]
 "43
-[; ;main.c: 43:         unsigned int v = adcRead();
-[v _v `ui ~T0 @X0 1 a ]
-[e = _v -> ( _adcRead ..  `ui ]
-"45
-[; ;main.c: 45:         lcdCommand(0x80);
-[e ( _lcdCommand (1 -> -> 128 `i `uc ]
-"46
-[; ;main.c: 46:         lcdInt(v, 5);
-[e ( _lcdInt (2 , -> _v `i -> -> 5 `i `uc ]
-"93
-[; ;main.c: 93:     }
+[; ;main.c: 43:         smLoop();
+[e ( _smLoop ..  ]
+"116
+[; ;main.c: 116:     }
 }
 [e :U 368 ]
 [e $U 369  ]
 [e :U 370 ]
-"94
-[; ;main.c: 94: }
+"117
+[; ;main.c: 117: }
 [e :UE 367 ]
 }

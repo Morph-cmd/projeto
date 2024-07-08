@@ -26,7 +26,7 @@ enum{
     EV_NOEVENT
 };
 void eventInit(void);
-unsigned int eventRead(void);
+unsigned char eventRead(void);
 # 2 "event.c" 2
 
 # 1 "./pic18f4520.h" 1
@@ -52,14 +52,24 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 
 # 1 "./var.h" 1
 # 15 "./var.h"
+enum
+{
+    SEC,
+    MIN,
+    HOU,
+    DAY,
+    MON,
+    YEA
+};
+
 char prot_ready;
 
 void varInit(void);
 
 char getState(void);
 void setState(char newState);
-int getTime(void);
-void setTime(int newTime);
+int getTime(char index);
+void setTime(int newTime, char index);
 int getAlarmLevel(int lh);
 void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
@@ -67,6 +77,8 @@ void setLanguage(char newLanguage);
 unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
+int getTemp(void);
+void readTemp();
 # 6 "event.c" 2
 
 
@@ -87,8 +99,7 @@ void eventInit(void) {
     key = 1;
 }
 
-
-unsigned int eventRead(void) {
+unsigned char eventRead(void) {
     int key;
     int ev = EV_NOEVENT;
     key = kpRead();
@@ -124,25 +135,28 @@ unsigned int eventRead(void) {
         prot = getProt();
         if (prot[0] == 0) {
             switch (data) {
-                case '9':
+                case '2':
                     ev = EV_B_0;
                     break;
-                case '1':
+                case '8':
                     ev = EV_B_1;
                     break;
-                case '2':
+                case '4':
                     ev = EV_B_2;
                     break;
-                case '3':
+                case '6':
                     ev = EV_B_3;
                     break;
-                case '4':
+                case '5':
                     ev = EV_B_4;
                     break;
                 case 'P': case'p':
                     ev = EV_NOEVENT;
                     setProt('p');
-
+                    break;
+                case 'l': case 'L':
+                    ev = EV_NOEVENT;
+                    setLanguage(getLanguage() + 1);
                     break;
                 default:
                     break;

@@ -26,9 +26,9 @@
 
  void adcInit(void)
 {
-	BitSet(TRISE,0); //seta o bit 0 como entrada USAR A PORTA CERTA
+	BitSet(TRISE,0); //seta o bit 0 como entrada
 	
-	ADCON0 = 0b00010101; //seleciona o canal 0 e liga o ad                          PROCURAR O VALOR CERTO
+	ADCON0 = 0b00010101; //seleciona o canal 0 e liga o ad no AN5
 	ADCON1 = 0b00001111; //apenas AN0 é analogico, a referencia é baseada na fonte
 	ADCON2 = 0b10101010; //FOSC /32, Alinhamento à direita e tempo de conv = 12 TAD
 }

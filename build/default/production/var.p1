@@ -2,8 +2,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "21 ./ds1307.h
 [; ;./ds1307.h: 21:  int dsReadData(int address);
 [v _dsReadData `(i ~T0 @X0 0 ef1`i ]
-"24 ./var.h
-[; ;./var.h: 24: void setAlarmLevel(int newAlarmLevel, char lh);
+"34 ./var.h
+[; ;./var.h: 34: void setAlarmLevel(int newAlarmLevel, char lh);
 [v _setAlarmLevel `(v ~T0 @X0 0 ef2`i`uc ]
 "20 ./ds1307.h
 [; ;./ds1307.h: 20:  void dsWriteData(unsigned char value, int address);
@@ -17,8 +17,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./lcd.h
 [; ;./lcd.h: 23:  void lcdCommand(unsigned char cmd);
 [v _lcdCommand `(v ~T0 @X0 0 ef1`uc ]
-"15 ./var.h
-[; ;./var.h: 15: char prot_ready;
+"158 var.c
+[; ;var.c: 158:     t[i++] = (adcRead() - 230) * ((float)100/77);
+[v _adcRead `(i ~T0 @X0 0 e? ]
+"219
+[; ;var.c: 219:     setTime(date[2] * 10 + date[3], MON);
+[c E2 0 1 2 3 4 5 .. ]
+[n E2 . SEC MIN HOU DAY MON YEA  ]
+"25 ./var.h
+[; ;./var.h: 25: char prot_ready;
 [v _prot_ready `uc ~T0 @X0 1 e ]
 "7 var.c
 [; ;var.c: 7: static char state;
@@ -44,304 +51,548 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13
 [; ;var.c: 13: static unsigned char prot[6];
 [v _prot `uc ~T0 @X0 -> 6 `i s ]
+"14
+[; ;var.c: 14: unsigned int temp;
+[v _temp `ui ~T0 @X0 1 e ]
+"15
+[; ;var.c: 15: char *date;
+[v _date `*uc ~T0 @X0 1 e ]
 "16
-[; ;var.c: 16: void varInit(void) {
+[; ;var.c: 16: char volt;
+[v _volt `uc ~T0 @X0 1 e ]
+"17
+[; ;var.c: 17: char voltMin;
+[v _voltMin `uc ~T0 @X0 1 e ]
+"18
+[; ;var.c: 18: int maxTemp;
+[v _maxTemp `i ~T0 @X0 1 e ]
+"19
+[; ;var.c: 19: int t[33];
+[v _t `i ~T0 @X0 -> 33 `i e ]
+"20
+[; ;var.c: 20: char i;
+[v _i `uc ~T0 @X0 1 e ]
+"22
+[; ;var.c: 22: void varInit(void) {
 [v _varInit `(v ~T0 @X0 1 ef ]
 {
 [e :U _varInit ]
 [f ]
-"17
-[; ;var.c: 17:     state = 0;
-[e = _state -> -> 0 `i `uc ]
-"18
-[; ;var.c: 18:     time = 1000;
-[e = _time -> 1000 `i ]
-"20
-[; ;var.c: 20:     alarmLevelHigh = dsReadData(0x20);
-[e = _alarmLevelHigh -> ( _dsReadData (1 -> 32 `i `uc ]
-"21
-[; ;var.c: 21:     alarmLevelLow = dsReadData(0x21);
-[e = _alarmLevelLow -> ( _dsReadData (1 -> 33 `i `uc ]
-"22
-[; ;var.c: 22:     language = dsReadData(0x23) != 1 ? 0 : 1;
-[e = _language -> ? != ( _dsReadData (1 -> 35 `i -> 1 `i : -> 0 `i -> 1 `i `uc ]
 "23
-[; ;var.c: 23:     if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
+[; ;var.c: 23:     maxTemp = 100;
+[e = _maxTemp -> 100 `i ]
+"24
+[; ;var.c: 24:     volt = 50;
+[e = _volt -> -> 50 `i `uc ]
+"25
+[; ;var.c: 25:     voltMin = 33;
+[e = _voltMin -> -> 33 `i `uc ]
+"26
+[; ;var.c: 26:     state = 0;
+[e = _state -> -> 0 `i `uc ]
+"27
+[; ;var.c: 27:     time = 1000;
+[e = _time -> 1000 `i ]
+"29
+[; ;var.c: 29:     alarmLevelHigh = dsReadData(0x20);
+[e = _alarmLevelHigh -> ( _dsReadData (1 -> 32 `i `uc ]
+"30
+[; ;var.c: 30:     alarmLevelLow = dsReadData(0x21);
+[e = _alarmLevelLow -> ( _dsReadData (1 -> 33 `i `uc ]
+"31
+[; ;var.c: 31:     language = dsReadData(0x23) != 1 ? 0 : 1;
+[e = _language -> ? != ( _dsReadData (1 -> 35 `i -> 1 `i : -> 0 `i -> 1 `i `uc ]
+"32
+[; ;var.c: 32:     if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
 [e $ ! != + -> _alarmLevelHigh `i -> _alarmLevelLow `i ( _dsReadData (1 -> 34 `i 2  ]
 {
-"24
-[; ;var.c: 24:         setAlarmLevel(50, 0);
-[e ( _setAlarmLevel (2 , -> 50 `i -> -> 0 `i `uc ]
-"25
-[; ;var.c: 25:         setAlarmLevel(100, 1);
-[e ( _setAlarmLevel (2 , -> 100 `i -> -> 1 `i `uc ]
-"26
-[; ;var.c: 26:     }
+"33
+[; ;var.c: 33:         setAlarmLevel(0, 0);
+[e ( _setAlarmLevel (2 , -> 0 `i -> -> 0 `i `uc ]
+"34
+[; ;var.c: 34:         setAlarmLevel(120, 1);
+[e ( _setAlarmLevel (2 , -> 120 `i -> -> 1 `i `uc ]
+"35
+[; ;var.c: 35:     }
 }
 [e :U 2 ]
-"28
-[; ;var.c: 28:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x00)& 0x7f)) == 0 ? 0 : (bcd2dec(dsReadData(0x00)& 0x7f))),0x00));
+"37
+[; ;var.c: 37:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x00)& 0x7f)) == 0 ? 0 : (bcd2dec(dsReadData(0x00)& 0x7f))),0x00));
 [e ( _dsWriteData (2 , -> ( _dec2bcd (1 ? == ( _bcd2dec (1 & ( _dsReadData (1 -> 0 `i -> 127 `i -> 0 `i : -> 0 `i ( _bcd2dec (1 & ( _dsReadData (1 -> 0 `i -> 127 `i `uc -> 0 `i ]
-"29
-[; ;var.c: 29:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) == 0 ? 45 : (bcd2dec(dsReadData(0x01)& 0x7f))),0x01));
+"38
+[; ;var.c: 38:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) == 0 ? 45 : (bcd2dec(dsReadData(0x01)& 0x7f))),0x01));
 [e ( _dsWriteData (2 , -> ( _dec2bcd (1 ? == ( _bcd2dec (1 & ( _dsReadData (1 -> 1 `i -> 127 `i -> 0 `i : -> 45 `i ( _bcd2dec (1 & ( _dsReadData (1 -> 1 `i -> 127 `i `uc -> 1 `i ]
-"30
-[; ;var.c: 30:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) == 0 ? 15 : (bcd2dec(dsReadData(0x02)& 0x7f))),0x02));
+"39
+[; ;var.c: 39:     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) == 0 ? 15 : (bcd2dec(dsReadData(0x02)& 0x7f))),0x02));
 [e ( _dsWriteData (2 , -> ( _dec2bcd (1 ? == ( _bcd2dec (1 & ( _dsReadData (1 -> 2 `i -> 127 `i -> 0 `i : -> 15 `i ( _bcd2dec (1 & ( _dsReadData (1 -> 2 `i -> 127 `i `uc -> 2 `i ]
-"31
-[; ;var.c: 31: }
+"42
+[; ;var.c: 42:     (dsWriteData(dec2bcd(18),0x04));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 -> 18 `i `uc -> 4 `i ]
+"43
+[; ;var.c: 43:     (dsWriteData(dec2bcd(10),0x05));
+[e ( _dsWriteData (2 , -> ( _dec2bcd (1 -> 10 `i `uc -> 5 `i ]
+"53
+[; ;var.c: 53: }
 [e :UE 1 ]
 }
-"34
-[; ;var.c: 34: char getState(void) {
+"56
+[; ;var.c: 56: char getState(void) {
 [v _getState `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getState ]
 [f ]
-"35
-[; ;var.c: 35:     return state;
+"57
+[; ;var.c: 57:     return state;
 [e ) _state ]
 [e $UE 3  ]
-"36
-[; ;var.c: 36: }
+"58
+[; ;var.c: 58: }
 [e :UE 3 ]
 }
-"38
-[; ;var.c: 38: void setState(char newState) {
+"60
+[; ;var.c: 60: void setState(char newState) {
 [v _setState `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setState ]
 [v _newState `uc ~T0 @X0 1 r1 ]
 [f ]
-"39
-[; ;var.c: 39:     state = newState;
+"61
+[; ;var.c: 61:     state = newState;
 [e = _state _newState ]
-"40
-[; ;var.c: 40:     lcdCommand(0x01);
+"62
+[; ;var.c: 62:     lcdCommand(0x01);
 [e ( _lcdCommand (1 -> -> 1 `i `uc ]
-"41
-[; ;var.c: 41: }
+"63
+[; ;var.c: 63: }
 [e :UE 4 ]
 }
-"43
-[; ;var.c: 43: int getTime(void) {
-[v _getTime `(i ~T0 @X0 1 ef ]
+"65
+[; ;var.c: 65: int getTime(char index) {
+[v _getTime `(i ~T0 @X0 1 ef1`uc ]
 {
 [e :U _getTime ]
+[v _index `uc ~T0 @X0 1 r1 ]
 [f ]
-"44
-[; ;var.c: 44:     return time;
-[e ) _time ]
+"66
+[; ;var.c: 66:     switch(index)
+[e $U 7  ]
+"67
+[; ;var.c: 67:     {
+{
+"68
+[; ;var.c: 68:         case 0: return (bcd2dec(dsReadData(0x00)& 0x7f));
+[e :U 8 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 0 `i -> 127 `i ]
 [e $UE 5  ]
-"45
-[; ;var.c: 45: }
+"69
+[; ;var.c: 69:         case 1: return (bcd2dec(dsReadData(0x01)& 0x7f));
+[e :U 9 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 1 `i -> 127 `i ]
+[e $UE 5  ]
+"70
+[; ;var.c: 70:         case 2: return (bcd2dec(dsReadData(0x02)& 0x7f));
+[e :U 10 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 2 `i -> 127 `i ]
+[e $UE 5  ]
+"71
+[; ;var.c: 71:         case 3: return (bcd2dec(dsReadData(0x04)& 0xff));
+[e :U 11 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 4 `i -> 255 `i ]
+[e $UE 5  ]
+"72
+[; ;var.c: 72:         case 4: return (bcd2dec(dsReadData(0x05)& 0xff));
+[e :U 12 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 5 `i -> 255 `i ]
+[e $UE 5  ]
+"73
+[; ;var.c: 73:         case 5: return (bcd2dec(dsReadData(0x06)& 0xff));
+[e :U 13 ]
+[e ) ( _bcd2dec (1 & ( _dsReadData (1 -> 6 `i -> 255 `i ]
+[e $UE 5  ]
+"74
+[; ;var.c: 74:     }
+}
+[e $U 6  ]
+[e :U 7 ]
+[e [\ _index , $ -> 0 `i 8
+ , $ -> 1 `i 9
+ , $ -> 2 `i 10
+ , $ -> 3 `i 11
+ , $ -> 4 `i 12
+ , $ -> 5 `i 13
+ 6 ]
+[e :U 6 ]
+"75
+[; ;var.c: 75: }
 [e :UE 5 ]
 }
-"47
-[; ;var.c: 47: void setTime(int newTime) {
-[v _setTime `(v ~T0 @X0 1 ef1`i ]
+"77
+[; ;var.c: 77: void setTime(int newTime, char index) {
+[v _setTime `(v ~T0 @X0 1 ef2`i`uc ]
 {
 [e :U _setTime ]
 [v _newTime `i ~T0 @X0 1 r1 ]
+[v _index `uc ~T0 @X0 1 r2 ]
 [f ]
-"48
-[; ;var.c: 48:     time = newTime;
-[e = _time _newTime ]
-"49
-[; ;var.c: 49: }
-[e :UE 6 ]
+"78
+[; ;var.c: 78:     switch(index)
+[e $U 16  ]
+"79
+[; ;var.c: 79:     {
+{
+"80
+[; ;var.c: 80:         case 0: return (dsWriteData(dec2bcd(newTime),0x00));
+[e :U 17 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 0 `i ]
+[e $UE 14  ]
+"81
+[; ;var.c: 81:         case 1: return (dsWriteData(dec2bcd(newTime),0x01));
+[e :U 18 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 1 `i ]
+[e $UE 14  ]
+"82
+[; ;var.c: 82:         case 2: return (dsWriteData(dec2bcd(newTime),0x02));
+[e :U 19 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 2 `i ]
+[e $UE 14  ]
+"83
+[; ;var.c: 83:         case 3: return (dsWriteData(dec2bcd(newTime),0x04));
+[e :U 20 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 4 `i ]
+[e $UE 14  ]
+"84
+[; ;var.c: 84:         case 4: return (dsWriteData(dec2bcd(newTime),0x05));
+[e :U 21 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 5 `i ]
+[e $UE 14  ]
+"85
+[; ;var.c: 85:         case 5: return (dsWriteData(dec2bcd(newTime),0x06));
+[e :U 22 ]
+[e ) ( _dsWriteData (2 , -> ( _dec2bcd (1 _newTime `uc -> 6 `i ]
+[e $UE 14  ]
+"86
+[; ;var.c: 86:     }
 }
-"51
-[; ;var.c: 51: int getAlarmLevel(int lh) {
+[e $U 15  ]
+[e :U 16 ]
+[e [\ _index , $ -> 0 `i 17
+ , $ -> 1 `i 18
+ , $ -> 2 `i 19
+ , $ -> 3 `i 20
+ , $ -> 4 `i 21
+ , $ -> 5 `i 22
+ 15 ]
+[e :U 15 ]
+"87
+[; ;var.c: 87: }
+[e :UE 14 ]
+}
+"89
+[; ;var.c: 89: int getAlarmLevel(int lh) {
 [v _getAlarmLevel `(i ~T0 @X0 1 ef1`i ]
 {
 [e :U _getAlarmLevel ]
 [v _lh `i ~T0 @X0 1 r1 ]
 [f ]
-"52
-[; ;var.c: 52:     int l;
+"90
+[; ;var.c: 90:     int l;
 [v _l `i ~T0 @X0 1 a ]
-"53
-[; ;var.c: 53:     if(lh == 0){
-[e $ ! == _lh -> 0 `i 8  ]
+"91
+[; ;var.c: 91:     if(lh == 0){
+[e $ ! == _lh -> 0 `i 24  ]
 {
-"54
-[; ;var.c: 54:         l = alarmLevelLow;
+"92
+[; ;var.c: 92:         l = alarmLevelLow;
 [e = _l -> _alarmLevelLow `i ]
-"55
-[; ;var.c: 55:     }
+"93
+[; ;var.c: 93:     }
 }
-[e $U 9  ]
-"56
-[; ;var.c: 56:     else
-[e :U 8 ]
-"57
-[; ;var.c: 57:     {
+[e $U 25  ]
+"94
+[; ;var.c: 94:     else
+[e :U 24 ]
+"95
+[; ;var.c: 95:     {
 {
-"58
-[; ;var.c: 58:         l = alarmLevelHigh;
+"96
+[; ;var.c: 96:         l = alarmLevelHigh;
 [e = _l -> _alarmLevelHigh `i ]
-"59
-[; ;var.c: 59:     }
+"97
+[; ;var.c: 97:     }
 }
-[e :U 9 ]
-"60
-[; ;var.c: 60:     return l;
+[e :U 25 ]
+"98
+[; ;var.c: 98:     return l;
 [e ) _l ]
-[e $UE 7  ]
-"61
-[; ;var.c: 61: }
-[e :UE 7 ]
+[e $UE 23  ]
+"99
+[; ;var.c: 99: }
+[e :UE 23 ]
 }
-"63
-[; ;var.c: 63: void setAlarmLevel(int newAlarmLevel, char lh) {
+"101
+[; ;var.c: 101: void setAlarmLevel(int newAlarmLevel, char lh) {
 [v _setAlarmLevel `(v ~T0 @X0 1 ef2`i`uc ]
 {
 [e :U _setAlarmLevel ]
 [v _newAlarmLevel `i ~T0 @X0 1 r1 ]
 [v _lh `uc ~T0 @X0 1 r2 ]
 [f ]
-"64
-[; ;var.c: 64:     if(lh == 1){
-[e $ ! == -> _lh `i -> 1 `i 11  ]
+"102
+[; ;var.c: 102:     if(lh == 1){
+[e $ ! == -> _lh `i -> 1 `i 27  ]
 {
-"65
-[; ;var.c: 65:         alarmLevelHigh = newAlarmLevel;
+"103
+[; ;var.c: 103:         alarmLevelHigh = newAlarmLevel;
 [e = _alarmLevelHigh -> _newAlarmLevel `uc ]
-"67
-[; ;var.c: 67:         dsWriteData(alarmLevelHigh, 0x20);
+"105
+[; ;var.c: 105:         dsWriteData(alarmLevelHigh, 0x20);
 [e ( _dsWriteData (2 , _alarmLevelHigh -> 32 `i ]
-"68
-[; ;var.c: 68:     }
+"106
+[; ;var.c: 106:     }
 }
-[e $U 12  ]
-"69
-[; ;var.c: 69:     else
-[e :U 11 ]
-"70
-[; ;var.c: 70:     {
+[e $U 28  ]
+"107
+[; ;var.c: 107:     else
+[e :U 27 ]
+"108
+[; ;var.c: 108:     {
 {
-"71
-[; ;var.c: 71:         alarmLevelLow = newAlarmLevel;
+"109
+[; ;var.c: 109:         alarmLevelLow = newAlarmLevel;
 [e = _alarmLevelLow -> _newAlarmLevel `uc ]
-"73
-[; ;var.c: 73:         dsWriteData(alarmLevelLow, 0x21);
+"111
+[; ;var.c: 111:         dsWriteData(alarmLevelLow, 0x21);
 [e ( _dsWriteData (2 , _alarmLevelLow -> 33 `i ]
-"74
-[; ;var.c: 74:     }
+"112
+[; ;var.c: 112:     }
 }
-[e :U 12 ]
-"75
-[; ;var.c: 75:     dsWriteData(alarmLevelHigh + alarmLevelLow, 0x22);
+[e :U 28 ]
+"113
+[; ;var.c: 113:     dsWriteData(alarmLevelHigh + alarmLevelLow, 0x22);
 [e ( _dsWriteData (2 , -> + -> _alarmLevelHigh `i -> _alarmLevelLow `i `uc -> 34 `i ]
-"77
-[; ;var.c: 77: }
-[e :UE 10 ]
+"115
+[; ;var.c: 115: }
+[e :UE 26 ]
 }
-"79
-[; ;var.c: 79: char getLanguage(void) {
+"117
+[; ;var.c: 117: char getLanguage(void) {
 [v _getLanguage `(uc ~T0 @X0 1 ef ]
 {
 [e :U _getLanguage ]
 [f ]
-"80
-[; ;var.c: 80:     return language;
+"118
+[; ;var.c: 118:     return language;
 [e ) _language ]
-[e $UE 13  ]
-"81
-[; ;var.c: 81: }
-[e :UE 13 ]
+[e $UE 29  ]
+"119
+[; ;var.c: 119: }
+[e :UE 29 ]
 }
-"83
-[; ;var.c: 83: void setLanguage(char newLanguage) {
+"121
+[; ;var.c: 121: void setLanguage(char newLanguage) {
 [v _setLanguage `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setLanguage ]
 [v _newLanguage `uc ~T0 @X0 1 r1 ]
 [f ]
-"86
-[; ;var.c: 86:     language = newLanguage % 2;
+"124
+[; ;var.c: 124:     language = newLanguage % 2;
 [e = _language -> % -> _newLanguage `i -> 2 `i `uc ]
-"87
-[; ;var.c: 87:     dsWriteData(language, 0x23);
+"125
+[; ;var.c: 125:     dsWriteData(language, 0x23);
 [e ( _dsWriteData (2 , -> _language `uc -> 35 `i ]
-"88
-[; ;var.c: 88: }
-[e :UE 14 ]
+"126
+[; ;var.c: 126: }
+[e :UE 30 ]
 }
-"90
-[; ;var.c: 90: unsigned char* getProt() {
+"128
+[; ;var.c: 128: unsigned char* getProt() {
 [v _getProt `(*uc ~T0 @X0 1 ef ]
 {
 [e :U _getProt ]
 [f ]
-"92
-[; ;var.c: 92:     return prot;
+"130
+[; ;var.c: 130:     return prot;
 [e ) &U _prot ]
-[e $UE 15  ]
-"93
-[; ;var.c: 93: }
-[e :UE 15 ]
+[e $UE 31  ]
+"131
+[; ;var.c: 131: }
+[e :UE 31 ]
 }
-"95
-[; ;var.c: 95: void setProt(char newChar) {
+"133
+[; ;var.c: 133: void setProt(char newChar) {
 [v _setProt `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _setProt ]
 [v _newChar `uc ~T0 @X0 1 r1 ]
 [f ]
-"97
-[; ;var.c: 97:     prot[index++] = newChar;
+"135
+[; ;var.c: 135:     prot[index++] = newChar;
 [e = *U + &U _prot * -> ++ _index -> -> 1 `i `uc `ux -> -> # *U &U _prot `ui `ux -> _newChar `uc ]
-"99
-[; ;var.c: 99:     if(index == 6) prot_ready = 1;
-[e $ ! == -> _index `i -> 6 `i 17  ]
+"137
+[; ;var.c: 137:     if(index == 6) prot_ready = 1;
+[e $ ! == -> _index `i -> 6 `i 33  ]
 [e = _prot_ready -> -> 1 `i `uc ]
-[e :U 17 ]
-"100
-[; ;var.c: 100: }
-[e :UE 16 ]
+[e :U 33 ]
+"138
+[; ;var.c: 138: }
+[e :UE 32 ]
 }
-"102
-[; ;var.c: 102: void resetProt()
+"140
+[; ;var.c: 140: void resetProt()
 [v _resetProt `(v ~T0 @X0 1 ef ]
-"103
-[; ;var.c: 103: {
+"141
+[; ;var.c: 141: {
 {
 [e :U _resetProt ]
 [f ]
-"104
-[; ;var.c: 104:     char i = 0;
+"142
+[; ;var.c: 142:     char i = 0;
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-"105
-[; ;var.c: 105:     while (i < 6)
-[e $U 19  ]
-[e :U 20 ]
-"106
-[; ;var.c: 106:     {
+"143
+[; ;var.c: 143:     while (i < 6)
+[e $U 35  ]
+[e :U 36 ]
+"144
+[; ;var.c: 144:     {
 {
-"107
-[; ;var.c: 107:         prot[i] = 0;
+"145
+[; ;var.c: 145:         prot[i] = 0;
 [e = *U + &U _prot * -> _i `ux -> -> # *U &U _prot `ui `ux -> -> 0 `i `uc ]
-"108
-[; ;var.c: 108:         i++;
+"146
+[; ;var.c: 146:         i++;
 [e ++ _i -> -> 1 `i `uc ]
-"109
-[; ;var.c: 109:     }
+"147
+[; ;var.c: 147:     }
 }
-[e :U 19 ]
-"105
-[; ;var.c: 105:     while (i < 6)
-[e $ < -> _i `i -> 6 `i 20  ]
-[e :U 21 ]
-"110
-[; ;var.c: 110:     prot_ready = 0;
+[e :U 35 ]
+"143
+[; ;var.c: 143:     while (i < 6)
+[e $ < -> _i `i -> 6 `i 36  ]
+[e :U 37 ]
+"148
+[; ;var.c: 148:     prot_ready = 0;
 [e = _prot_ready -> -> 0 `i `uc ]
-"111
-[; ;var.c: 111:     index = 0;
+"149
+[; ;var.c: 149:     index = 0;
 [e = _index -> -> 0 `i `uc ]
-"112
-[; ;var.c: 112: }
-[e :UE 18 ]
+"150
+[; ;var.c: 150: }
+[e :UE 34 ]
+}
+"152
+[; ;var.c: 152: int getTemp(void)
+[v _getTemp `(i ~T0 @X0 1 ef ]
+"153
+[; ;var.c: 153: {
+{
+[e :U _getTemp ]
+[f ]
+"154
+[; ;var.c: 154:     return temp;
+[e ) -> _temp `i ]
+[e $UE 38  ]
+"155
+[; ;var.c: 155: }
+[e :UE 38 ]
+}
+"156
+[; ;var.c: 156: void readTemp()
+[v _readTemp `(v ~T0 @X0 1 ef ]
+"157
+[; ;var.c: 157: {
+{
+[e :U _readTemp ]
+[f ]
+"158
+[; ;var.c: 158:     t[i++] = (adcRead() - 230) * ((float)100/77);
+[e = *U + &U _t * -> ++ _i -> -> 1 `i `uc `ux -> -> # *U &U _t `ui `ux -> * -> - ( _adcRead ..  -> 230 `i `f / -> -> 100 `i `f -> -> 77 `i `f `i ]
+"160
+[; ;var.c: 160:     int tempT = 0;
+[v _tempT `i ~T0 @X0 1 a ]
+[e = _tempT -> 0 `i ]
+"161
+[; ;var.c: 161:     for(char j = 0; j < 33; j++)
+{
+[v _j `uc ~T0 @X0 1 a ]
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 33 `i 40  ]
+[e $U 41  ]
+[e :U 40 ]
+"162
+[; ;var.c: 162:     {
+{
+"163
+[; ;var.c: 163:         tempT += t[j];
+[e =+ _tempT *U + &U _t * -> _j `ux -> -> # *U &U _t `ui `ux ]
+"164
+[; ;var.c: 164:     }
+}
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 33 `i 40  ]
+[e :U 41 ]
+}
+"165
+[; ;var.c: 165:     tempT /= 33;
+[e =/ _tempT -> 33 `i ]
+"167
+[; ;var.c: 167:     if(i >= 33){
+[e $ ! >= -> _i `i -> 33 `i 43  ]
+{
+"168
+[; ;var.c: 168:         i = 0;
+[e = _i -> -> 0 `i `uc ]
+"169
+[; ;var.c: 169:         temp = tempT;
+[e = _temp -> _tempT `ui ]
+"170
+[; ;var.c: 170:     }
+}
+[e :U 43 ]
+"171
+[; ;var.c: 171: }
+[e :UE 39 ]
+}
+"173
+[; ;var.c: 173: void setDate(char* date)
+[v _setDate `(v ~T0 @X0 1 ef1`*uc ]
+"174
+[; ;var.c: 174: {
+{
+[e :U _setDate ]
+"173
+[; ;var.c: 173: void setDate(char* date)
+[v _date `*uc ~T0 @X0 1 r1 ]
+"174
+[; ;var.c: 174: {
+[f ]
+"218
+[; ;var.c: 218:     setTime(date[0] * 10 + date[1], 0x04);
+[e ( _setTime (2 , + * -> *U + _date * -> -> 0 `i `x -> -> # *U _date `i `x `i -> 10 `i -> *U + _date * -> -> 1 `i `x -> -> # *U _date `i `x `i -> -> 4 `i `uc ]
+"219
+[; ;var.c: 219:     setTime(date[2] * 10 + date[3], MON);
+[e ( _setTime (2 , + * -> *U + _date * -> -> 2 `i `x -> -> # *U _date `i `x `i -> 10 `i -> *U + _date * -> -> 3 `i `x -> -> # *U _date `i `x `i -> . `E2 4 `uc ]
+"220
+[; ;var.c: 220:     setTime(date[4] * 10 + date[5], YEA);
+[e ( _setTime (2 , + * -> *U + _date * -> -> 4 `i `x -> -> # *U _date `i `x `i -> 10 `i -> *U + _date * -> -> 5 `i `x -> -> # *U _date `i `x `i -> . `E2 5 `uc ]
+"222
+[; ;var.c: 222: }
+[e :UE 44 ]
+}
+"223
+[; ;var.c: 223: char* getDate(void)
+[v _getDate `(*uc ~T0 @X0 1 ef ]
+"224
+[; ;var.c: 224: {
+{
+[e :U _getDate ]
+[f ]
+"225
+[; ;var.c: 225:     return date;
+[e ) _date ]
+[e $UE 45  ]
+"226
+[; ;var.c: 226: }
+[e :UE 45 ]
 }

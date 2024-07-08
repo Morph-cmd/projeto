@@ -52,14 +52,24 @@ void lcdCommand4bits(unsigned char cmd, unsigned char data);
 
 # 1 "./var.h" 1
 # 15 "./var.h"
+enum
+{
+    SEC = 0,
+    MIN,
+    HOU,
+    DAY,
+    MON,
+    YEA
+};
+
 char prot_ready;
 
 void varInit(void);
 
 char getState(void);
 void setState(char newState);
-int getTime(void);
-void setTime(int newTime);
+int getTime(char index);
+void setTime(int newTime, char index);
 int getAlarmLevel(int lh);
 void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
@@ -67,6 +77,10 @@ void setLanguage(char newLanguage);
 unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
+int getTemp(void);
+void readTemp();
+void setDate(char* date);
+char* getDate(void);
 # 6 "event.c" 2
 
 

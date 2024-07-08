@@ -1,5 +1,6 @@
 build/default/debug/main.p1:  \
 main.c  \
+adc.h  \
 config.h  \
 stateMachine.h  \
 pic18f4520.h  \

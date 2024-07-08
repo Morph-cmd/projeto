@@ -20,16 +20,17 @@
 
  void adcInit(void)
 {
- (((*(volatile __near unsigned char*)0xF92)) |= (1<<0));
+ (((*(volatile __near unsigned char*)0xF96)) |= (1<<0));
 
- (*(volatile __near unsigned char*)0xFC2) = 0b00000001;
- (*(volatile __near unsigned char*)0xFC1) = 0b00001110;
+ (*(volatile __near unsigned char*)0xFC2) = 0b00010101;
+ (*(volatile __near unsigned char*)0xFC1) = 0b00001111;
  (*(volatile __near unsigned char*)0xFC0) = 0b10101010;
 }
 
 int adcRead(void)
 {
  unsigned int ADvalor;
+    (*(volatile __near unsigned char*)0xFC1) = 0b00001001;
  (*(volatile __near unsigned char*)0xFC2) |= 0b00000010;
 
  while((((*(volatile __near unsigned char*)0xFC2)) & (1<<1)));
@@ -37,5 +38,6 @@ int adcRead(void)
  ADvalor = (*(volatile __near unsigned char*)0xFC4) ;
  ADvalor <<= 8;
  ADvalor += (*(volatile __near unsigned char*)0xFC3);
+    (*(volatile __near unsigned char*)0xFC1) = 0b00001111;
  return ADvalor;
 }

@@ -9,14 +9,24 @@
 # 1 "var.c" 2
 # 1 "./var.h" 1
 # 15 "./var.h"
+enum
+{
+    SEC = 0,
+    MIN,
+    HOU,
+    DAY,
+    MON,
+    YEA
+};
+
 char prot_ready;
 
 void varInit(void);
 
 char getState(void);
 void setState(char newState);
-int getTime(void);
-void setTime(int newTime);
+int getTime(char index);
+void setTime(int newTime, char index);
 int getAlarmLevel(int lh);
 void setAlarmLevel(int newAlarmLevel, char lh);
 char getLanguage(void);
@@ -24,6 +34,10 @@ void setLanguage(char newLanguage);
 unsigned char* getProt();
 void setProt(char newLanguage);
 void resetProt();
+int getTemp(void);
+void readTemp();
+void setDate(char* date);
+char* getDate(void);
 # 1 "var.c" 2
 
 # 1 "./lcd.h" 1
@@ -58,9 +72,18 @@ static unsigned char alarmLevelHigh;
 static unsigned char alarmLevelLow;
 static char index=0;
 static unsigned char prot[6];
-
+unsigned int temp;
+char *date;
+char volt;
+char voltMin;
+int maxTemp;
+int t[33];
+char i;
 
 void varInit(void) {
+    maxTemp = 100;
+    volt = 50;
+    voltMin = 33;
     state = 0;
     time = 1000;
 
@@ -68,13 +91,18 @@ void varInit(void) {
     alarmLevelLow = dsReadData(0x21);
     language = dsReadData(0x23) != 1 ? 0 : 1;
     if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
-        setAlarmLevel(50, 0);
-        setAlarmLevel(100, 1);
+        setAlarmLevel(0, 0);
+        setAlarmLevel(120, 1);
     }
 
     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x00)& 0x7f)) == 0 ? 0 : (bcd2dec(dsReadData(0x00)& 0x7f))),0x00));
     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x01)& 0x7f)) == 0 ? 45 : (bcd2dec(dsReadData(0x01)& 0x7f))),0x01));
     (dsWriteData(dec2bcd((bcd2dec(dsReadData(0x02)& 0x7f)) == 0 ? 15 : (bcd2dec(dsReadData(0x02)& 0x7f))),0x02));
+
+
+    (dsWriteData(dec2bcd(18),0x04));
+    (dsWriteData(dec2bcd(10),0x05));
+# 53 "var.c"
 }
 
 
@@ -87,12 +115,28 @@ void setState(char newState) {
     lcdCommand(0x01);
 }
 
-int getTime(void) {
-    return time;
+int getTime(char index) {
+    switch(index)
+    {
+        case 0: return (bcd2dec(dsReadData(0x00)& 0x7f));
+        case 1: return (bcd2dec(dsReadData(0x01)& 0x7f));
+        case 2: return (bcd2dec(dsReadData(0x02)& 0x7f));
+        case 3: return (bcd2dec(dsReadData(0x04)& 0xff));
+        case 4: return (bcd2dec(dsReadData(0x05)& 0xff));
+        case 5: return (bcd2dec(dsReadData(0x06)& 0xff));
+    }
 }
 
-void setTime(int newTime) {
-    time = newTime;
+void setTime(int newTime, char index) {
+    switch(index)
+    {
+        case 0: return (dsWriteData(dec2bcd(newTime),0x00));
+        case 1: return (dsWriteData(dec2bcd(newTime),0x01));
+        case 2: return (dsWriteData(dec2bcd(newTime),0x02));
+        case 3: return (dsWriteData(dec2bcd(newTime),0x04));
+        case 4: return (dsWriteData(dec2bcd(newTime),0x05));
+        case 5: return (dsWriteData(dec2bcd(newTime),0x06));
+    }
 }
 
 int getAlarmLevel(int lh) {
@@ -156,4 +200,38 @@ void resetProt()
     }
     prot_ready = 0;
     index = 0;
+}
+
+int getTemp(void)
+{
+    return temp;
+}
+void readTemp()
+{
+    t[i++] = (adcRead() - 230) * ((float)100/77);
+
+    int tempT = 0;
+    for(char j = 0; j < 33; j++)
+    {
+        tempT += t[j];
+    }
+    tempT /= 33;
+
+    if(i >= 33){
+        i = 0;
+        temp = tempT;
+    }
+}
+
+void setDate(char* date)
+{
+# 218 "var.c"
+    setTime(date[0] * 10 + date[1], 0x04);
+    setTime(date[2] * 10 + date[3], MON);
+    setTime(date[4] * 10 + date[5], YEA);
+
+}
+char* getDate(void)
+{
+    return date;
 }

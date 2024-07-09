@@ -1,7 +1,6 @@
 #include "keypad.h"
 #include "event.h"
 #include "pic18f4520.h"
-#include "lcd.h"
 #include "serial.h"
 #include "var.h"
 

@@ -22,6 +22,8 @@ enum {
     STATE_IDIOMA,
     STATE_MAIN,
     STATE_ALERTA,
+    STATE_ALERTA1,
+    STATE_STANDBY,
     STATE_FIM
 };
 

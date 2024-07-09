@@ -2,7 +2,6 @@
 #include "lcd.h"
 #include "stateMachine.h"
 #include "var.h"
-#include "ds1307.h"
 
 #define NUM_IDIOMAS 2
 
@@ -60,16 +59,12 @@ void outputPrint(int numTela, int idioma) {
         lcdCommand(0xC0);
         
         lcdData('>');
-        int d = getDays();
-        if (d == 0)
-            lcdInt(d + 1, 2);
-        else
-            lcdInt(d, 2);
+            lcdInt(getTime(DAY), 2);
         lcdData('/');
         
-        lcdInt(getMonths(), 2);
+        lcdInt(getTime(MON), 2);
         lcdData('/');
-        lcdInt(getYears(), 2);
+        lcdInt(getTime(YEA), 2);
         lcdString("           "); //para apagar os textos depois do numero
     }
     
@@ -78,13 +73,29 @@ void outputPrint(int numTela, int idioma) {
         lcdString(msgs[ALT_TEMPO][idioma]);
         lcdCommand(0xC0);
         
-        lcdInt(getDays(), 2);
+        lcdInt(getTime(DAY), 2);
         lcdData('/');
         
         lcdData('>');
-        lcdInt(getMonths(), 2);
+        lcdInt(getTime(MON), 2);
         lcdData('/');
-        lcdInt(getYears(), 2);
+        lcdInt(getTime(YEA), 2);
+        lcdString("           "); //para apagar os textos depois do numero
+    }
+    
+    if (numTela == STATE_TEMPOY) {
+        lcdCommand(0x80);
+        lcdString(msgs[ALT_TEMPO][idioma]);
+        lcdCommand(0xC0);
+        
+        lcdInt(getTime(DAY), 2);
+        lcdData('/');
+        
+        
+        lcdInt(getTime(MON), 2);
+        lcdData('/');
+        lcdData('>');
+        lcdInt(getTime(YEA), 2);
         lcdString("           "); //para apagar os textos depois do numero
     }
     
@@ -136,15 +147,15 @@ void outputPrint(int numTela, int idioma) {
         /*lcdData(':');
         lcdInt(getSeconds(), 2);*/
         lcdString("   ");
-        int d = getDays();
+        int d = getTime(DAY);
         if (d == 0)
             lcdInt(d + 1, 2);
         else
             lcdInt(d, 2);
         lcdData('/');
-        lcdInt(getMonths(), 2);
+        lcdInt(getTime(MON), 2);
         lcdData('/');
-        lcdInt(getYears(), 2);
+        lcdInt(getTime(YEA), 2);
         
         lcdCommand(0xC0);
         lcdData('L');
@@ -165,7 +176,36 @@ void outputPrint(int numTela, int idioma) {
         lcdCommand(0x80);
         lcdString("TEMPERATURA!!!!");
         lcdCommand(0xC0);
-        lcdString("TEMPERATURA!!!!");
+        lcdData('>');
+        lcdInt(getAlarmLevel(LOW), 3);
+        lcdData('L');
+        lcdData(' ');
+        lcdInt(getAlarmLevel(HIGH), 3);
+        lcdData('H');
+        lcdString(" ");
+        lcdData('T');
+        lcdInt(getTemp(), 3);
+    }
+    if (numTela == STATE_ALERTA1) {
+        lcdCommand(0x80);
+        lcdString("TEMPERATURA!!!!!!");
+        lcdCommand(0xC0);
+        lcdData(' ');
+        lcdInt(getAlarmLevel(LOW), 3);
+        lcdData('L');
+        lcdData('>');
+        lcdInt(getAlarmLevel(HIGH), 3);
+        lcdData('H');
+        lcdString(" ");
+        lcdData('T');
+        lcdInt(getTemp(), 3);
+    }
+    if (numTela == STATE_STANDBY) {
+        lcdCommand(0x80);
+        lcdString("DISPOSITIVO| BT5");
+        lcdCommand(0xC0);
+        lcdString("DESLIGADOS | RST");
+
     }
 }
 

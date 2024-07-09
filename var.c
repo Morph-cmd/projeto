@@ -6,32 +6,23 @@
 //vari�veis a serem armazenadas
 static char state;
 static char language;
-static int time;
 static unsigned char alarmLevelHigh;
 static unsigned char alarmLevelLow;
 static char index=0;
 static unsigned char prot[PROT_TAM];
 unsigned int temp;
 char *date;
-char volt;
-char voltMin;
-int maxTemp;
 int t[33];
 char i;
 
 void varInit(void) {
-    maxTemp = 100;
-    volt = 50;
-    voltMin = 33;
     state = 0;
-    time = 1000;
-    //dsWriteData(50, 0x20);
     alarmLevelHigh = dsReadData(0x20);
     alarmLevelLow = dsReadData(0x21);
     language = dsReadData(0x23) != 1 ? 0 : 1;
     if(alarmLevelHigh + alarmLevelLow != dsReadData(0x22)){
         setAlarmLevel(0, LOW); 
-        setAlarmLevel(120, HIGH);
+        setAlarmLevel(150, HIGH);
     }
     
     setSeconds(getSeconds() == 0 ? 0 : getSeconds());
@@ -39,9 +30,9 @@ void varInit(void) {
     setHours(getHours() == 0 ? 15 : getHours());
     
     
-    setDays(18);
-    setMonths(10);
-    //setYears(4);
+    setDays(getDays());
+    setMonths(getMonths());
+    dsWriteData(dsReadData(0x29), 0x29);
     
     //setYears(getYears() == 1 ? 4 : getYears());
     
@@ -70,19 +61,65 @@ int getTime(char index) {
         case 2: return getHours(); 
         case 3: return getDays(); 
         case 4: return getMonths(); 
-        case 5: return getYears(); 
+        case 5: return dsReadData(0x29); 
     }
 }
 
 void setTime(int newTime, char index) {
     switch(index)
     {
-        case 0: return setSeconds(newTime); 
-        case 1: return setMinutes(newTime); 
-        case 2: return setHours(newTime); 
-        case 3: return setDays(newTime); 
-        case 4: return setMonths(newTime); 
-        case 5: return setYears(newTime); 
+        case 0:  setSeconds(newTime); break;
+        case 1:  setMinutes(newTime); break;
+        case 2:  setHours(newTime); break;
+        case 3:  
+            
+            if(newTime > 31)
+                newTime = 1;
+            
+            int m = getTime(MON);
+            if(m < 8)
+            {
+                if(m%2 == 0){
+                    if(newTime > 30)
+                        newTime = 1;
+                    else if(newTime == 0)
+                        newTime = 30;
+                }
+                else
+                {
+                    if(newTime > 31)
+                        newTime = 1;
+                    else if(newTime == 0)
+                        newTime = 31;
+                }
+            }
+            else if(m > 7)
+            {
+                if(m%2 == 0){
+                    if(newTime > 31)
+                        newTime = 1;
+                    else if(newTime == 0)
+                        newTime = 31;
+                }
+                else
+                {
+                    if(newTime > 30)
+                        newTime = 1;
+                    else if(newTime == 0)
+                        newTime = 30;
+                }
+            }
+            
+            setDays(newTime); 
+            
+            break;
+        case 4:
+            if(newTime > 12) newTime = 1;
+            else if (newTime <= 0) newTime = 12; 
+            
+            setMonths(newTime);
+            break;
+        case 5:  dsWriteData(newTime, 0x29); break;
     }
 }
 
@@ -168,59 +205,7 @@ void readTemp()
         i = 0;
         temp = tempT;
     }
+    
+    temp = 0;
 }
 
-void setDate(char* date)
-{
-    /*if(date[0] >= 3)
-    {
-        char mes = date[2] * 10 + date[3];
-        switch(mes){
-            case 1: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 2: break;
-            case 3: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 4: if(date[1] > 0){date[0] = 0; date[1] = 0;} break;
-            case 5: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 6: if(date[1] > 0){date[0] = 0; date[1] = 0;} break;
-            case 7: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 8: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 9: if(date[1] > 0){date[0] = 0; date[1] = 0;} break;
-            case 10: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-            case 11: if(date[1] > 0){date[0] = 0; date[1] = 0;} break;
-            case 12: if(date[1] > 1){date[0] = 0; date[1] = 0;} break;
-        }
-    }
-
-    if(date[0] >= 2 && date[2] == 0 && date[3] == 2)
-    {
-        if(date[1] > 8){date[0] = 0; date[1] = 0;}
-    }
-
-    if(date[2] >= 1 && date[3] >= 3)
-    {
-        date[2] = 0;
-        date[3] = 0;
-    }
-    
-    //negativos
-    if(date[1] < 0)
-    {
-        date[0] = 3;
-        date[1] = 0;
-    }
-
-    if(date[3] < 0)
-    {
-        date[2] = 1;
-        date[3] = 2;
-    }*/
-    
-    setTime(date[0] * 10 + date[1], DAY);
-    setTime(date[2] * 10 + date[3], MON);
-    setTime(date[4] * 10 + date[5], YEA);
-    
-}
-char* getDate(void)
-{
-    return date;
-}
